@@ -1,0 +1,1071 @@
+START IMPLEMENTATION — BUILD TASK #3
+
+Implement MiLAEDiA Phase 3 now.
+
+IMPORTANT:
+
+The existing approved HOME / HERO is LOCKED.
+
+Do NOT redesign, replace, simplify, crop incorrectly, remove, or visually alter the approved Home/Hero.
+
+The existing Hero must remain visually faithful to the supplied reference images and supplied Gemini MP4 video.
+
+==================================================
+
+1. HOME / HERO — PROTECTED
+
+==================================================
+
+Keep the current approved Home/Hero exactly as the visual foundation.
+
+The Hero must use the supplied Gemini-generated MP4 as the actual hero video asset.
+
+Do NOT replace the supplied video with:
+
+- a static image
+
+- a CSS animation
+
+- a generic video
+
+- a generated placeholder
+
+- a different stock video
+
+Implement:
+
+Desktop:
+
+- cinematic hero video
+
+- autoplay
+
+- muted
+
+- playsInline
+
+- looping where appropriate
+
+- smooth cinematic entrance
+
+- layered/parallax depth
+
+- subtle 3D perspective
+
+- elegant motion
+
+- correct focal positioning
+
+Mobile:
+
+- responsive video container
+
+- preserve the important visual composition
+
+- use object-position intelligently
+
+- do NOT simply shrink the desktop layout
+
+- prevent horizontal overflow
+
+- maintain the visual hierarchy of the original reference
+
+- use the supplied video when device/browser allows it
+
+- provide the supplied hero image/poster as fallback
+
+- respect prefers-reduced-motion
+
+The Hero must feel like a luxury private Persian rug gallery, not a generic ecommerce website.
+
+==================================================
+
+2. RESPONSIVE SYSTEM
+
+==================================================
+
+Make the ENTIRE website responsive.
+
+Required breakpoints:
+
+- mobile
+
+- large mobile
+
+- tablet
+
+- laptop
+
+- desktop
+
+- ultrawide
+
+Do not use fixed desktop dimensions that break on mobile.
+
+Requirements:
+
+- no horizontal page overflow
+
+- all typography scales correctly
+
+- images maintain correct aspect ratios
+
+- buttons remain accessible
+
+- navigation adapts correctly
+
+- sections recompose instead of merely shrinking
+
+- collection/product layouts become touch-friendly
+
+- preserve cinematic visual hierarchy on every screen size
+
+Test especially:
+
+- iPhone-sized viewport
+
+- Android-sized viewport
+
+- tablet
+
+- 1440px desktop
+
+- ultrawide desktop
+
+==================================================
+
+3. COLLECTION PAGE — MOBILE CAROUSEL
+
+==================================================
+
+The current mobile collection section is NOT acceptable because the rug cards are stacked vertically and become too large.
+
+Replace the mobile collection presentation with a premium horizontal/touch carousel.
+
+On mobile:
+
+- one primary rug card visible
+
+- partial next/previous card visible
+
+- swipe left/right
+
+- snap scrolling
+
+- smooth transition
+
+- pagination indicators
+
+- previous/next controls where appropriate
+
+- no horizontal page overflow
+
+- cards must remain fully readable
+
+- image ratio must remain elegant
+
+On desktop:
+
+- preserve the editorial gallery layout
+
+- allow elegant hover/perspective interaction
+
+- do not turn the desktop design into a generic ecommerce grid
+
+The collection cards should feel like gallery objects.
+
+==================================================
+
+4. 3D RUG CARD / RUG SWITCHER
+
+==================================================
+
+Make the collection/product rug presentation interactive.
+
+When the user changes the selected rug:
+
+- the rug card should smoothly rotate/flip in 3D
+
+- the old rug transitions out
+
+- the new rug transitions in
+
+- use CSS 3D perspective and/or Framer Motion
+
+- rotation must be subtle and premium
+
+- NOT a cheap spinning-card effect
+
+- maintain realistic proportions
+
+- preserve image quality
+
+Interaction should feel like physically turning a luxury rug/catalog object.
+
+Support:
+
+- swipe on mobile
+
+- drag where appropriate
+
+- arrow navigation
+
+- keyboard navigation on desktop
+
+- touch interaction
+
+Do not make the entire page rotate.
+
+Only the rug/card object should perform the 3D transition.
+
+==================================================
+
+5. RUG TEXTURE / WEAVE EXPERIENCE
+
+==================================================
+
+Create a dedicated public page:
+
+/weave
+
+Purpose:
+
+Allow visitors to inspect the rug's construction and fibers.
+
+Create a premium macro textile viewer.
+
+Features:
+
+- high-resolution rug texture image
+
+- zoom in/out
+
+- pinch-to-zoom on mobile
+
+- mouse wheel zoom on desktop
+
+- drag/pan when zoomed
+
+- reset view
+
+- fullscreen option
+
+- smooth zoom animation
+
+- optional magnifying-glass interaction
+
+- show realistic warp/weft texture when the supplied asset allows it
+
+Add an elegant explanatory interface describing:
+
+Warp
+
+Weft
+
+Knot
+
+Pile
+
+Handwoven construction
+
+Silk / wool characteristics
+
+IMPORTANT:
+
+Do not invent technical facts for a specific rug.
+
+Use generic educational descriptions unless actual product data exists.
+
+The page should feel like entering the microscopic structure of a Persian carpet.
+
+==================================================
+
+6. PERSIAN CARPET WEAVING HERITAGE
+
+==================================================
+
+Add a dedicated visual section/page explaining ancient Persian carpet weaving.
+
+Use the existing visual language:
+
+- near-black background
+
+- Cormorant Garamond
+
+- Vazirmatn for Persian
+
+- IBM Plex Mono for technical labels
+
+- thin gold/bronze borders
+
+- no generic card shadows
+
+- restrained animation
+
+- cinematic transitions
+
+Show the heritage as an editorial timeline / visual journey.
+
+Suggested structure:
+
+Ancient Persian Weaving
+
+↓
+
+Traditional Loom
+
+↓
+
+Warp & Weft
+
+↓
+
+Knotting
+
+↓
+
+Natural Dyes
+
+↓
+
+Pattern & Symbol
+
+↓
+
+Handwoven Masterpiece
+
+Do not make it look like a school website.
+
+It must feel like a luxury cultural archive.
+
+==================================================
+
+7. IRAN — BERLIN — HUNGARY VISUAL CONNECTION
+
+==================================================
+
+Introduce an elegant visual motif connecting:
+
+IRAN
+
+BERLIN
+
+HUNGARY
+
+This should NOT look like a political or tourism website.
+
+Use subtle cultural/geographical references.
+
+Iran:
+
+- Persian carpet heritage
+
+- traditional weaving motifs
+
+- Persian craftsmanship
+
+Berlin:
+
+- contemporary architecture
+
+- evening city atmosphere
+
+- the visual language already established by the Hero
+
+Hungary:
+
+- subtle Central European architectural/cultural reference
+
+- refined historical texture
+
+- connection to European collecting/interior culture
+
+Create a section showing the relationship:
+
+IRAN → CRAFT
+
+BERLIN → CONTEMPORARY GALLERY
+
+HUNGARY → EUROPEAN CULTURAL BRIDGE
+
+Keep this sophisticated and understated.
+
+Do NOT add random flags everywhere.
+
+Do NOT clutter the design with country icons.
+
+==================================================
+
+8. WORKSHOP PAGE
+
+==================================================
+
+Create /workshop as a real editorial experience.
+
+Include:
+
+- weaving process
+
+- loom
+
+- warp
+
+- weft
+
+- knotting
+
+- materials
+
+- hand craftsmanship
+
+- close-up textile details
+
+- slow cinematic animations
+
+- scroll reveal
+
+- subtle parallax
+
+Use available verified assets intelligently.
+
+Never trust filenames alone.
+
+Inspect actual image content before assigning an asset.
+
+Do NOT use:
+
+08_contact_rug_detail.png
+
+as a public website photograph.
+
+It is a brief/screenshot artifact.
+
+==================================================
+
+9. GALLERY
+
+==================================================
+
+Create /gallery.
+
+It should feel like a private luxury collection archive.
+
+Features:
+
+- asymmetric editorial gallery
+
+- large/small image rhythm
+
+- subtle hover perspective
+
+- lightbox
+
+- pinch zoom on mobile
+
+- keyboard navigation
+
+- smooth transitions
+
+- image captions
+
+- material/details metadata where available
+
+Do not create a generic masonry template.
+
+==================================================
+
+10. PRODUCTS / COLLECTIONS
+
+==================================================
+
+Implement:
+
+/collections
+
+/collections/:collectionSlug
+
+/products/:productSlug
+
+Collections include:
+
+Antique Rugs
+
+Handwoven Rugs
+
+Handwoven Silk Rugs
+
+Luxury Rugs
+
+Handmade Rugs
+
+Machine-made Luxury Rugs
+
+Persian Rugs
+
+Silk Tapestries
+
+Antique Silk Tapestries
+
+Modern Luxury Rugs
+
+Custom Rugs
+
+Personalized Rugs
+
+Product detail should include:
+
+- large editorial product imagery
+
+- dimensions
+
+- material
+
+- weaving type
+
+- origin when known
+
+- availability
+
+- price
+
+- add to cart
+
+- inquiry/custom order when unavailable
+
+- related pieces
+
+One-of-one products must support:
+
+available
+
+reserved
+
+sold
+
+made-to-order
+
+Sold pieces remain visible as archive/gallery objects.
+
+==================================================
+
+11. CUSTOM ORDER
+
+==================================================
+
+Create:
+
+/custom-order
+
+Required flow:
+
+Rug type
+
+→ Dimensions
+
+→ Color direction
+
+→ Pattern/style
+
+→ Requirements
+
+→ Reference image upload
+
+→ Review
+
+→ Submit inquiry
+
+Required CTA language:
+
+UPLOAD YOUR OWN IMAGE
+
+CREATE YOUR CUSTOM RUG
+
+Do not promise automatic pricing unless actual pricing logic exists.
+
+==================================================
+
+12. COMMERCE
+
+==================================================
+
+Implement:
+
+/cart
+
+/checkout
+
+/order-confirmation/:orderId
+
+Create a clean centralized data model.
+
+Until real payment credentials are connected:
+
+- use clearly labeled mock checkout
+
+- do NOT imply that a real payment has been processed
+
+Never decrement stock only in the browser.
+
+==================================================
+
+13. ADMIN DASHBOARD
+
+==================================================
+
+Create a completely separate protected Admin area.
+
+Public navigation must NOT expose the admin dashboard.
+
+Routes:
+
+/admin/login
+
+/admin/dashboard
+
+/admin/products
+
+/admin/orders
+
+/admin/custom-orders
+
+/admin/categories
+
+/admin/pricing
+
+/admin/inventory
+
+/admin/customers
+
+/admin/messages
+
+/admin/content
+
+/admin/gallery
+
+Admin must be capable of managing:
+
+PRODUCTS
+
+- create
+
+- edit
+
+- delete
+
+- images
+
+- name
+
+- description
+
+- category
+
+- collection
+
+- price
+
+- currency
+
+- dimensions
+
+- material
+
+- weaving type
+
+- availability
+
+- stock
+
+- featured status
+
+PRICING
+
+- edit product prices
+
+- currency
+
+- sale/optional promotional price structure
+
+ORDERS
+
+- view orders
+
+- customer information
+
+- products
+
+- totals
+
+- payment status
+
+- order status
+
+Statuses:
+
+New
+
+Pending
+
+Paid
+
+Processing
+
+Shipped
+
+Completed
+
+Cancelled
+
+CUSTOM ORDERS
+
+- view submitted requests
+
+- reference images
+
+- dimensions
+
+- color
+
+- pattern
+
+- requirements
+
+- status
+
+Statuses:
+
+New
+
+Reviewing
+
+Quoted
+
+Approved
+
+In Production
+
+Completed
+
+INVENTORY
+
+- stock
+
+- reserved
+
+- sold
+
+- availability
+
+CUSTOMERS
+
+- customer records
+
+- order history
+
+MESSAGES
+
+- contact/custom-order inquiries
+
+CONTENT
+
+- editable homepage/editorial content where architecture allows
+
+- collection content
+
+- gallery content
+
+GALLERY
+
+- upload/manage gallery images
+
+- captions
+
+- ordering
+
+- visibility
+
+==================================================
+
+14. ADMIN SECURITY
+
+==================================================
+
+Admin must be protected.
+
+Requirements:
+
+- protected routes
+
+- server-side authorization architecture
+
+- no admin secrets in frontend
+
+- no publicly indexed admin pages
+
+- protected uploads
+
+- clean separation between public and admin shell
+
+If real authentication/database credentials are not available yet, create the architecture without pretending production authentication is already configured.
+
+==================================================
+
+15. DESIGN SYSTEM
+
+==================================================
+
+Use the established tokens:
+
+--ink: #060506
+
+--panel: #0C0A07
+
+--gold: #B99763
+
+--gold-hi: #E7CA9C
+
+--bronze: #8D5E37
+
+--crimson: #7B311D
+
+--twilight: #344E7D
+
+--silver: #C9C7C3
+
+Typography:
+
+Cormorant Garamond
+
+Vazirmatn
+
+IBM Plex Mono
+
+Rules:
+
+- near-black visual environment
+
+- thin 1px borders
+
+- approximately 10px radius
+
+- no generic card shadows
+
+- no glassmorphism
+
+- minimal gradients
+
+- restrained gold
+
+- cinematic darkness
+
+- editorial spacing
+
+- luxury gallery aesthetic
+
+==================================================
+
+16. ANIMATION / 3D
+
+==================================================
+
+Animation is an essential part of this project.
+
+Do NOT remove it to simplify implementation.
+
+Use:
+
+- Framer Motion
+
+- CSS perspective
+
+- layered parallax
+
+- subtle depth movement
+
+- scroll reveal
+
+- image transitions
+
+- 3D rug-card switching
+
+- smooth page transitions
+
+- hover perspective on desktop
+
+- touch gestures on mobile
+
+Motion must be:
+
+- slow
+
+- premium
+
+- cinematic
+
+- low amplitude
+
+- smooth
+
+- interruptible
+
+Respect:
+
+prefers-reduced-motion
+
+Do NOT use:
+
+- excessive spinning
+
+- scroll-jacking
+
+- particle overload
+
+- cheap bounce animations
+
+- excessive glow
+
+- generic SaaS animations
+
+==================================================
+
+17. PERFORMANCE
+
+==================================================
+
+Optimize without destroying visual quality.
+
+- responsive image sizes
+
+- lazy loading below fold
+
+- WebP/AVIF where appropriate
+
+- preload primary hero media
+
+- video poster fallback
+
+- code splitting
+
+- separate admin/public bundles
+
+- avoid loading Three.js unless genuinely necessary
+
+- keep mobile performant
+
+==================================================
+
+18. ACCESSIBILITY
+
+==================================================
+
+Implement:
+
+- keyboard navigation
+
+- focus states
+
+- accessible labels
+
+- lightbox keyboard control
+
+- touch-friendly controls
+
+- reduced-motion support
+
+- form validation
+
+- useful error states
+
+- accessible carousel controls
+
+==================================================
+
+19. CRITICAL ASSET RULE
+
+==================================================
+
+The supplied assets are the source of truth.
+
+Do not assume a filename accurately describes an image.
+
+Inspect the actual image before assigning it.
+
+Known:
+
+08_contact_rug_detail.png is NOT a rug photograph.
+
+It is a brief/screenshot artifact and must NOT appear in the public site.
+
+Use the supplied Gemini MP4 as the actual Hero video.
+
+Do not substitute it.
+
+==================================================
+
+20. FINAL QUALITY CONTROL
+
+==================================================
+
+Before declaring completion:
+
+Test the website on:
+
+- mobile
+
+- tablet
+
+- desktop
+
+- ultrawide
+
+Verify:
+
+- no horizontal overflow
+
+- Hero remains visually correct
+
+- Hero video actually plays where supported
+
+- poster fallback works
+
+- mobile collection carousel works
+
+- rug 3D switching works
+
+- weave zoom works
+
+- touch gestures work
+
+- navigation works
+
+- product pages work
+
+- cart works
+
+- checkout works in mock mode if payment is not connected
+
+- admin routes are protected
+
+- product editing works
+
+- price editing works
+
+- order management works
+
+- custom-order management works
+
+- inventory management works
+
+Most importantly:
+
+DO NOT turn MiLAEDiA into a generic ecommerce template.
+
+It must remain a:
+
+PRIVATE LUXURY PERSIAN RUG GALLERY
+
+with cinematic visuals, Persian craftsmanship, Berlin atmosphere, European cultural references, editorial typography, refined gold detailing, subtle 3D interaction and premium motion.
+
+The supplied visual references, supplied ZIP assets and supplied Gemini video are the source of truth.
+
+START IMPLEMENTATION NOW.
