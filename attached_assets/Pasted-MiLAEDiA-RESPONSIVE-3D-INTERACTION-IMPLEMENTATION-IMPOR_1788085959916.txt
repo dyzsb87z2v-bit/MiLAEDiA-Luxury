@@ -1,0 +1,711 @@
+MiLAEDiA — RESPONSIVE + 3D INTERACTION IMPLEMENTATION
+
+IMPORTANT:
+Modify the EXISTING MiLAEDiA website.
+Do NOT rebuild the website from scratch.
+Do NOT replace the existing visual identity.
+Do NOT remove or rename the existing assets.
+Preserve the current desktop design, typography, colors, content, routes, and functionality unless a change is explicitly required below.
+
+The current mobile version is visually broken because the hero/composite image is behaving like a fixed desktop canvas and overflowing/cropping incorrectly.
+
+I need a production-quality responsive implementation that works from small mobile screens through ultrawide desktop screens.
+
+==================================================
+1. RESPONSIVE FOUNDATION
+==================================================
+
+First inspect the entire existing project and determine:
+
+- framework
+- entry point
+- routing
+- existing CSS architecture
+- component structure
+- image assets
+- current hero implementation
+- current collection/product components
+- current animation implementation
+
+Do NOT make assumptions before inspecting the code.
+
+Then implement a real responsive system.
+
+Requirements:
+
+- No horizontal page overflow at any viewport.
+- No fixed desktop canvas.
+- No hardcoded hero width that exceeds viewport.
+- No fixed positioning that causes content to disappear on mobile.
+- Use fluid sizing with:
+  clamp()
+  min()
+  max()
+  CSS container queries where useful
+  responsive aspect ratios
+  responsive image positioning
+
+Test at minimum:
+
+320px
+360px
+375px
+390px
+414px
+430px
+768px
+834px
+1024px
+1280px
+1440px
+1920px
+2560px
+
+The layout must automatically adapt.
+
+==================================================
+2. MOBILE HERO MUST BE RECOMPOSED
+==================================================
+
+DO NOT simply shrink the desktop hero.
+
+The mobile hero should have its own composition using the same visual assets.
+
+Desktop:
+- wide cinematic architectural scene
+- Berlin skyline
+- windows
+- rug
+- interior
+- weaving woman
+- MiLAEDiA branding
+- editorial typography
+
+Mobile:
+- portrait composition
+- preserve the important architectural elements
+- preserve Berlin skyline
+- preserve the rug
+- preserve the luxury atmosphere
+- preserve the woman/weaving subject when possible
+- reposition focal points rather than simply cropping the desktop image
+
+Use responsive focal points.
+
+Example concept:
+
+Desktop:
+background-position: center center
+
+Mobile:
+background-position: 58% center
+
+But determine the correct values from the actual supplied assets.
+
+Do not allow the large "M" / branding artwork or any oversized background element to push outside the viewport.
+
+==================================================
+3. HERO LAYERS
+==================================================
+
+The hero should be constructed as separate visual layers whenever the existing assets allow it.
+
+Possible structure:
+
+HeroScene
+ ├── CityLayer
+ ├── WindowLayer
+ ├── InteriorLayer
+ ├── WallRugLayer
+ ├── FloorRugLayer
+ ├── WeaverLayer
+ ├── LightLayer
+ ├── AtmosphereLayer
+ └── HeroContent
+
+Use:
+
+position: absolute
+transform
+perspective
+transform-style: preserve-3d
+
+where appropriate.
+
+The layers must remain inside:
+
+overflow: hidden;
+
+The hero itself must never create horizontal scrolling.
+
+==================================================
+4. REALISTIC 3D PARALLAX
+==================================================
+
+Add subtle 3D depth to the hero.
+
+Mouse movement on desktop:
+
+- city moves very slightly
+- interior moves slightly
+- rug moves slightly
+- foreground elements move slightly more
+- light/reflection moves subtly
+
+Example depth hierarchy:
+
+city: 0.15
+architecture: 0.25
+rug: 0.40
+weaver: 0.55
+foreground: 0.70
+
+Movement must be extremely subtle.
+
+This is a luxury fashion/gallery website.
+
+Do NOT make it look like a gaming website.
+
+No excessive shaking.
+No aggressive zoom.
+No spinning page.
+No particle explosion.
+No exaggerated 3D.
+
+Use smooth interpolation / spring physics.
+
+==================================================
+5. TOUCH / MOBILE PARALLAX
+==================================================
+
+On mobile there is no mouse.
+
+Use:
+
+device orientation when permission is available
+OR
+very subtle touch/pointer movement
+
+But the default mobile experience must remain stable even when motion sensors are unavailable.
+
+Respect:
+
+@media (prefers-reduced-motion: reduce)
+
+When reduced motion is enabled:
+
+- disable parallax
+- disable large transforms
+- keep only short opacity/fade transitions
+
+==================================================
+6. 3D RUG SELECTOR
+==================================================
+
+This is VERY IMPORTANT.
+
+The rug selection area must become a real interactive 3D object.
+
+I want a luxury 3D rug selector/card.
+
+Example:
+
+       ┌──────────────────┐
+       │                  │
+       │      RUG         │
+       │                  │
+       └──────────────────┘
+
+When the user selects another rug:
+
+The current rug should rotate around the Y axis and transition into the next rug.
+
+Use a 3D flip/carousel effect.
+
+CSS requirements:
+
+perspective
+transform-style: preserve-3d
+backface-visibility: hidden
+rotateY()
+
+The transition should feel like physically turning a framed rug/product object.
+
+NOT a basic horizontal image slider.
+
+==================================================
+7. RUG ROTATION INTERACTION
+==================================================
+
+Desktop:
+
+- click next/previous
+- optional drag interaction
+- mouse movement can create a very subtle perspective tilt
+
+Mobile:
+
+- swipe left → next rug
+- swipe right → previous rug
+- tap next/previous controls
+- tap the rug itself if appropriate
+
+The rug should rotate in 3D during the transition.
+
+Example:
+
+current:
+rotateY(0deg)
+
+transition:
+rotateY(90deg)
+
+next:
+rotateY(0deg)
+
+Use easing such as:
+
+cubic-bezier(0.22, 1, 0.36, 1)
+
+Duration approximately:
+
+700ms–1000ms
+
+Do not make it too fast.
+
+==================================================
+8. 3D RUG FRAME
+==================================================
+
+The selected rug should appear inside a luxury physical frame.
+
+The frame should have:
+
+- thin gold border
+- subtle depth
+- realistic perspective
+- dark backing
+- slight inner border
+- restrained reflection
+- no generic card shadow
+
+Do NOT use glassmorphism.
+
+Do NOT use bright neon effects.
+
+Do NOT use generic ecommerce cards.
+
+The frame should feel like a piece displayed inside a private Persian rug gallery.
+
+==================================================
+9. RUG DATA STRUCTURE
+==================================================
+
+Do not hardcode the UI for every rug.
+
+Create a reusable data structure similar to:
+
+const rugs = [
+  {
+    id: "antique-rug",
+    name: "Antique Rugs",
+    image: "...",
+    category: "Antique"
+  },
+  {
+    id: "handwoven-silk",
+    name: "Handwoven Silk Rugs",
+    image: "...",
+    category: "Silk"
+  },
+  {
+    id: "luxury-rug",
+    name: "Luxury Rugs",
+    image: "...",
+    category: "Luxury"
+  },
+  {
+    id: "antique-tapestry",
+    name: "Antique Silk Tapestries",
+    image: "...",
+    category: "Tapestry"
+  },
+  {
+    id: "luxury-tapestry",
+    name: "Luxury Silk Tapestries",
+    image: "...",
+    category: "Tapestry"
+  }
+];
+
+Use the ACTUAL existing MiLAEDiA image assets.
+
+Do not invent replacement images if an existing asset is available.
+
+==================================================
+10. 3D SELECTOR STATES
+==================================================
+
+Implement:
+
+active
+previous
+next
+hidden
+
+Only the required number of DOM elements should be active/visible.
+
+The selected rug should always remain centered.
+
+When changing rug:
+
+1. current rug rotates away
+2. next rug enters from the opposite side
+3. perspective changes slightly
+4. frame remains stable
+5. text updates smoothly
+6. active indicator updates
+
+Do not cause layout shift.
+
+==================================================
+11. PRODUCT / COLLECTION CARD ANIMATION
+==================================================
+
+Collection cards should also have restrained 3D interaction.
+
+Desktop hover:
+
+- slight rotateX
+- slight rotateY
+- slight scale
+- image moves independently from frame
+- very subtle light/reflection movement
+
+Example maximum:
+
+rotateX(2deg)
+rotateY(3deg)
+scale(1.015)
+
+Do NOT exaggerate.
+
+On mobile:
+
+disable hover behavior.
+
+Use tap/swipe instead.
+
+==================================================
+12. HERO ENTER EXPERIENCE
+==================================================
+
+Preserve the cinematic:
+
+ENTER THE EXPERIENCE
+or
+ENTER THE COLLECTION
+
+interaction if already present.
+
+Opening sequence:
+
+1. initial dark state
+2. visual scene slowly reveals
+3. logo appears
+4. typography fades/slides in
+5. CTA becomes active
+
+Keep this elegant and slow.
+
+No long loading animation.
+
+The user must be able to enter quickly.
+
+==================================================
+13. VIDEO
+==================================================
+
+Use the supplied MiLAEDiA MP4 if it already exists in the project.
+
+If it is used as hero media:
+
+- autoplay
+- muted
+- playsInline
+- loop only if appropriate
+- poster fallback
+- mobile-safe fallback
+- reduced-motion fallback
+
+Never make the website depend entirely on video.
+
+If autoplay fails, the website must still look complete using the poster/image.
+
+==================================================
+14. IMAGE PERFORMANCE
+==================================================
+
+Do not load enormous images unnecessarily.
+
+Use:
+
+loading="lazy"
+
+for below-the-fold images.
+
+Use:
+
+fetchpriority="high"
+
+only for the primary hero asset when appropriate.
+
+Use responsive image sizing.
+
+If the project already supports WebP/AVIF, use them.
+
+Do not break image quality unnecessarily.
+
+==================================================
+15. TYPOGRAPHY RESPONSIVENESS
+==================================================
+
+Do not use fixed huge typography.
+
+Use responsive typography:
+
+font-size: clamp(...)
+
+Example:
+
+Hero title:
+clamp(2rem, 6vw, 6rem)
+
+But determine appropriate values based on the current MiLAEDiA design.
+
+Preserve:
+
+Cormorant Garamond
+Vazirmatn
+IBM Plex Mono
+
+Do not substitute generic fonts unless technically necessary.
+
+==================================================
+16. NAVIGATION
+==================================================
+
+Desktop:
+
+preserve the elegant MiLAEDiA navigation.
+
+Mobile:
+
+create a proper mobile navigation.
+
+Requirements:
+
+- hamburger button
+- full-height or elegant drawer
+- accessible keyboard/focus behavior
+- smooth opening animation
+- close button
+- no overflow
+- touch targets at least approximately 44px
+
+Do not simply shrink the desktop navigation.
+
+==================================================
+17. HEADER
+==================================================
+
+The current header must remain inside the viewport.
+
+Use:
+
+width: 100%
+max-width: 100vw
+box-sizing: border-box
+
+Avoid:
+
+width: 100vw
+
+when it causes scrollbar issues.
+
+No element should exceed viewport width unintentionally.
+
+==================================================
+18. GLOBAL OVERFLOW PROTECTION
+==================================================
+
+Audit every major component for:
+
+- width > viewport
+- transform overflow
+- absolute positioning overflow
+- oversized images
+- fixed min-width
+- negative margins
+- 100vw scrollbar problems
+
+The final document must satisfy:
+
+document.documentElement.scrollWidth <= window.innerWidth
+
+at all supported viewport sizes, except intentional internal horizontal galleries.
+
+==================================================
+19. ACCESSIBILITY
+==================================================
+
+3D effects must not break accessibility.
+
+Rug selector:
+
+- buttons must have aria-label
+- keyboard arrows should work
+- Enter/Space should activate
+- visible focus state
+- screen-reader-friendly rug names
+
+Respect:
+
+prefers-reduced-motion.
+
+==================================================
+20. VISUAL STYLE — DO NOT CHANGE
+==================================================
+
+Preserve the MiLAEDiA visual system:
+
+--ink: #060506
+--panel: #0C0A07
+--gold: #B99763
+--gold-hi: #E7CA9C
+--bronze: #8D5E37
+--crimson: #7B311D
+--twilight: #344E7D
+--silver: #C9C7C3
+
+No:
+
+- neon
+- glassmorphism
+- generic SaaS cards
+- excessive gradients
+- huge rounded cards
+- generic Shopify layout
+- excessive shadows
+
+The visual language should remain:
+
+PRIVATE GALLERY
+PERSIAN CRAFT
+BERLIN
+LUXURY
+EDITORIAL
+CINEMATIC
+ARCHITECTURAL
+
+==================================================
+21. IMPORTANT ASSET RULE
+==================================================
+
+Inspect the actual contents of every existing MiLAEDiA image before assigning it.
+
+Do NOT trust filenames.
+
+Known unreliable asset naming exists in the supplied reference package.
+
+Especially:
+
+08_contact_rug_detail.png
+
+must NOT be treated as a public rug photograph if it contains the brief/screenshot artifact.
+
+Use the actual image content.
+
+==================================================
+22. DO NOT DESTROY EXISTING WORK
+==================================================
+
+Before modifying anything:
+
+1. inspect current project
+2. identify current working implementation
+3. create a safe checkpoint/commit
+4. then modify
+
+Do not delete working routes.
+
+Do not remove existing assets.
+
+Do not replace the whole application with a demo.
+
+Do not create a separate toy page.
+
+Implement the responsive/3D system INTO THE EXISTING MiLAEDiA WEBSITE.
+
+==================================================
+23. TESTING
+==================================================
+
+After implementation test:
+
+320x568
+375x667
+390x844
+414x896
+430x932
+768x1024
+1024x768
+1280x720
+1440x900
+1920x1080
+2560x1440
+
+Verify:
+
+- no horizontal overflow
+- no clipped hero text
+- no clipped CTA
+- no oversized logo
+- no broken navigation
+- no distorted images
+- no broken 3D rug selector
+- swipe works on mobile
+- click works on desktop
+- keyboard works
+- reduced motion works
+- hero remains visually balanced
+- collection cards remain usable
+- page remains performant
+
+==================================================
+24. FINAL REQUIREMENT
+==================================================
+
+Do not stop after changing CSS.
+
+Actually inspect the result at mobile and desktop sizes.
+
+If the mobile hero still looks like a cropped desktop screenshot, continue iterating.
+
+The final result must look intentionally designed for mobile, tablet, desktop and ultrawide — not like one desktop canvas squeezed into a phone.
+
+At the end report:
+
+1. files changed
+2. components changed
+3. responsive breakpoints used
+4. 3D implementation used
+5. rug selector behavior
+6. mobile behavior
+7. tests performed
+8. any remaining limitations
+
+DO NOT create fake placeholder functionality.
+
+START BY INSPECTING THE EXISTING PROJECT.
+THEN IMPLEMENT THE CHANGES.
