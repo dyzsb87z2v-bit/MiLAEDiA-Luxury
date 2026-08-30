@@ -1,0 +1,528 @@
+IMPORTANT — DO NOT REDESIGN THE WEBSITE FROM SCRATCH.
+
+The current MiLAEDiA website already exists and must be preserved.
+
+The previous implementation lost the cinematic animation and 3D interaction of the original hero. I want you to RESTORE and IMPROVE those effects, not remove or simplify them.
+
+PRIMARY GOAL:
+Make the entire website fully responsive on every device size while PRESERVING the original cinematic Hero, layered 3D depth, animations, parallax and interactive rug selector.
+
+DO NOT replace the hero with a static image.
+DO NOT remove animations to solve mobile responsiveness.
+DO NOT flatten the layered composition.
+DO NOT convert the hero into a generic responsive ecommerce section.
+
+==================================================
+1. RESPONSIVE SYSTEM
+==================================================
+
+Implement a robust responsive system for:
+
+- iPhone / small mobile
+- large mobile
+- tablet portrait
+- tablet landscape
+- laptop
+- desktop
+- ultrawide desktop
+
+Use fluid sizing with:
+
+- CSS clamp()
+- viewport units where appropriate
+- responsive aspect ratios
+- CSS Grid/Flexbox
+- container queries where useful
+- media queries only where necessary
+
+Nothing should overflow horizontally.
+
+The layout must adapt automatically rather than using fixed desktop dimensions.
+
+IMPORTANT:
+The mobile version must be a deliberately composed version of the same cinematic experience, NOT a compressed desktop screenshot.
+
+==================================================
+2. RESTORE CINEMATIC HERO
+==================================================
+
+The Hero must remain the most visually important section.
+
+Restore the layered cinematic composition:
+
+Layer 1:
+Berlin skyline / exterior
+
+Layer 2:
+large architectural windows
+
+Layer 3:
+interior environment
+
+Layer 4:
+wall rug
+
+Layer 5:
+floor rug
+
+Layer 6:
+weaving woman
+
+Layer 7:
+warm interior lighting
+
+Layer 8:
+foreground atmosphere / subtle depth
+
+Layer 9:
+brand and text interface
+
+These layers must have independent positioning so the scene has real visual depth.
+
+Use CSS perspective + transform-style: preserve-3d where appropriate.
+
+Do NOT fake the entire effect with one flat background image.
+
+==================================================
+3. 3D PARALLAX
+==================================================
+
+Implement subtle interactive parallax.
+
+Desktop:
+- mouse movement controls the scene very slightly
+- foreground moves slightly more than background
+- rug moves independently
+- architectural layers move at different speeds
+- lighting follows pointer subtly
+
+Mobile:
+- use device orientation only if permission is available
+- otherwise use touch movement / scroll position
+- keep movement subtle
+- NEVER cause horizontal overflow
+- NEVER move the important content outside the viewport
+
+Use low-amplitude movement.
+
+The effect should feel like a luxury fashion-house website, not a gaming website.
+
+==================================================
+4. HERO INTRO ANIMATION
+==================================================
+
+Restore an elegant cinematic entrance animation.
+
+On first load:
+
+1. dark screen
+2. subtle warm light appears
+3. architectural scene fades/reveals
+4. rug layers reveal
+5. weaving woman appears
+6. MiLAEDiA wordmark appears
+7. eyebrow text appears
+8. hero headline appears
+9. description appears
+10. CTA appears last
+
+Use smooth staggered animation.
+
+Animation should be approximately 1–2 seconds.
+
+No aggressive bouncing.
+
+No excessive scaling.
+
+No flashy effects.
+
+Use opacity + translate + subtle scale/3D transforms.
+
+==================================================
+5. HERO 3D DEPTH
+==================================================
+
+The Hero must visually feel three-dimensional.
+
+Implement:
+
+perspective: 1200px;
+
+and appropriate:
+
+transform-style: preserve-3d;
+
+Use multiple depth planes.
+
+Example conceptual structure:
+
+.hero
+ └── .hero-scene
+      ├── .city-layer
+      ├── .architecture-layer
+      ├── .interior-layer
+      ├── .wall-rug-layer
+      ├── .floor-rug-layer
+      ├── .weaver-layer
+      ├── .light-layer
+      └── .hero-content
+
+Do not literally copy this structure if the current code uses another architecture. Adapt it cleanly to the existing project.
+
+==================================================
+6. INTERACTIVE RUG SELECTOR
+==================================================
+
+This is VERY IMPORTANT.
+
+The rug selection interface must become a real 3D interactive component.
+
+Each rug option should appear inside a refined 3D frame/card.
+
+When the user selects another rug:
+
+- the frame rotates in 3D
+- current rug rotates away
+- selected rug rotates into view
+- image changes during/after the rotation
+- the transition feels like physically turning a luxury object
+
+Use:
+
+perspective()
+rotateY()
+translateZ()
+scale()
+
+with smooth easing.
+
+Example interaction:
+
+Rug A
+   ↓
+rotateY(90deg)
+   ↓
+Rug B
+   ↓
+rotateY(0deg)
+
+The frame itself should participate in the rotation.
+
+DO NOT simply crossfade between images.
+
+The user should feel that they are physically switching/turning a 3D rug display.
+
+==================================================
+7. RUG CARD DESIGN
+==================================================
+
+The rug selector should have:
+
+- thin gold border
+- subtle 3D perspective
+- near-black background
+- restrained gold typography
+- luxury editorial styling
+- realistic rug image
+- subtle depth
+- no generic ecommerce card shadow
+
+No excessive glow.
+
+No glassmorphism.
+
+No generic Shopify card styling.
+
+The visual language must remain MiLAEDiA.
+
+==================================================
+8. TOUCH INTERACTION
+==================================================
+
+On mobile:
+
+Users must be able to swipe the rug selector.
+
+Swipe left:
+→ next rug
+
+Swipe right:
+→ previous rug
+
+The card should rotate according to swipe direction.
+
+Add:
+
+- touchstart
+- touchmove
+- touchend
+
+or the equivalent React pointer-event implementation.
+
+Do not require hover.
+
+Desktop:
+mouse/pointer interaction.
+
+Mobile:
+touch interaction.
+
+==================================================
+9. HERO IMAGE CROPPING
+==================================================
+
+The current mobile screenshot shows that the hero image is badly cropped.
+
+Fix this without destroying the composition.
+
+Do NOT simply use:
+
+background-size: cover;
+
+and accept whatever crop happens.
+
+Use a controlled focal-point system.
+
+Each layer should have responsive focal positions.
+
+For example:
+
+desktop:
+Berlin skyline + rug + woman visible together.
+
+mobile:
+prioritize:
+- Berlin tower
+- rug
+- woman
+- MiLAEDiA branding
+- headline
+
+Do not crop the primary visual subject.
+
+Use responsive object-position / transform values.
+
+==================================================
+10. MOBILE HEADER
+==================================================
+
+The header must remain elegant and functional.
+
+Mobile:
+
+- MiLAEDiA wordmark
+- menu button
+- cart / bag indicator
+- optional compact utility controls
+
+No elements may overlap.
+
+Header height must adapt to the viewport.
+
+Do not allow the browser UI/address bar to break the layout.
+
+Use:
+
+min-height: 100svh;
+
+and modern viewport units where appropriate:
+
+svh
+lvh
+dvh
+
+when useful.
+
+==================================================
+11. MOBILE HERO
+==================================================
+
+The mobile hero must preserve:
+
+- cinematic depth
+- animation
+- 3D feeling
+- rug
+- architecture
+- woman
+- typography
+- CTA
+
+But reduce the movement amplitude.
+
+DO NOT remove:
+
+- parallax
+- 3D
+- entrance animation
+- rug interaction
+
+Only reduce their intensity for performance and usability.
+
+==================================================
+12. SCROLL ANIMATION
+==================================================
+
+Implement subtle scroll-triggered animations for sections below Hero.
+
+Elements should reveal using:
+
+opacity
+translateY
+scale
+rotateY
+
+very subtly.
+
+Use IntersectionObserver or the project's existing animation system.
+
+Do not create scroll-jacking.
+
+Do not lock the page.
+
+Do not interfere with normal browser scrolling.
+
+==================================================
+13. PERFORMANCE
+==================================================
+
+Animations must be GPU-friendly.
+
+Prefer:
+
+transform
+opacity
+
+Avoid animating:
+
+top
+left
+width
+height
+
+where possible.
+
+Use will-change only where justified.
+
+Do not load heavy 3D libraries unless absolutely necessary.
+
+If the project already uses Framer Motion, use it consistently.
+
+If React Three Fiber is already installed and genuinely useful, it may be used, but do NOT introduce unnecessary WebGL complexity.
+
+==================================================
+14. REDUCED MOTION
+==================================================
+
+Respect:
+
+@media (prefers-reduced-motion: reduce)
+
+In reduced-motion mode:
+
+- disable large parallax
+- disable continuous motion
+- simplify entrance transitions
+- preserve usability
+- keep the Hero visually rich
+
+==================================================
+15. IMPORTANT VISUAL RULE
+==================================================
+
+The website must NOT become a generic responsive ecommerce website.
+
+MiLAEDiA is a luxury Persian rug / private gallery experience.
+
+The visual hierarchy must remain:
+
+CINEMATIC
+EDITORIAL
+ARCHITECTURAL
+LUXURIOUS
+DARK
+GOLD
+PERSIAN
+TACTILE
+THREE-DIMENSIONAL
+
+==================================================
+16. DO NOT REMOVE EXISTING FEATURES
+==================================================
+
+Before changing code:
+
+Inspect the current project.
+
+Identify:
+
+- existing Hero implementation
+- existing animation library
+- existing CSS
+- existing asset mapping
+- existing rug selector
+- existing responsive logic
+
+Preserve anything that already works.
+
+If an animation was removed during a previous responsive change, restore it.
+
+Do not rewrite working components unnecessarily.
+
+==================================================
+17. VISUAL QA
+==================================================
+
+After implementation, test at minimum:
+
+320px
+375px
+390px
+430px
+768px
+1024px
+1280px
+1440px
+1920px
+2560px
+
+Check:
+
+- no horizontal scrolling
+- no clipped CTA
+- no overlapping header
+- no broken typography
+- no cropped primary subject
+- no broken 3D transform
+- no animation overflow
+- no inaccessible controls
+
+==================================================
+18. FINAL REQUIREMENT
+==================================================
+
+The final result must combine BOTH:
+
+A) FULL RESPONSIVENESS
+
+AND
+
+B) THE ORIGINAL CINEMATIC 3D EXPERIENCE
+
+Do NOT sacrifice B to achieve A.
+
+Do NOT simplify the Hero.
+
+Do NOT remove animation.
+
+Do NOT flatten the scene.
+
+Do NOT replace the 3D rug selector with a normal image carousel.
+
+Make the responsive system adapt around the visual experience.
+
+First inspect the existing implementation and explain briefly what caused the 3D/animation to disappear.
+
+Then implement the correction.
+
+After implementation, verify the Hero and rug selector on mobile and desktop.

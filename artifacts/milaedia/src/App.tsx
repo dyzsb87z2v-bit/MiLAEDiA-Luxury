@@ -37,7 +37,7 @@ function Header({ cartCount }: { cartCount: number }) {
   return (
     <header className="absolute inset-x-0 top-0 z-30 border-b border-[#b99763]/25 bg-[#060506]/65 backdrop-blur-md">
       <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-3 sm:px-5 md:px-10">
-        <Link href="/" onClick={() => setOpen(false)} className="group flex items-center gap-2 sm:gap-3" data-testid="link-brand">
+        <Link href="/" onClick={() => setOpen(false)} className={`group flex items-center gap-2 sm:gap-3 ${location === '/' ? 'hero-intro-brand' : ''}`} data-testid="link-brand">
           <span className="grid h-9 w-9 place-items-center border border-[#b99763]/70 text-[#b99763] transition-colors group-hover:bg-[#b99763] group-hover:text-[#060506]">✦</span>
           <span className="font-display text-[22px] leading-none tracking-[.12em] text-[#e7ca9c] sm:text-[25px] sm:tracking-[.16em]">MiLAEDiA</span>
         </Link>
@@ -120,13 +120,22 @@ function useSceneParallax() {
       start();
     };
     const reset = () => { target.x = 0; target.y = 0; start(); };
+    const scroll = () => {
+      const rect = node.getBoundingClientRect();
+      const viewportCenter = window.innerHeight / 2;
+      target.y = Math.max(-0.65, Math.min(0.65, (viewportCenter - (rect.top + rect.height / 2)) / Math.max(rect.height, window.innerHeight)));
+      start();
+    };
     node.addEventListener('pointermove', move);
     node.addEventListener('pointerleave', reset);
     node.addEventListener('pointercancel', reset);
+    window.addEventListener('scroll', scroll, { passive: true });
+    scroll();
     return () => {
       node.removeEventListener('pointermove', move);
       node.removeEventListener('pointerleave', reset);
       node.removeEventListener('pointercancel', reset);
+      window.removeEventListener('scroll', scroll);
       if (frame) cancelAnimationFrame(frame);
     };
   }, []);
@@ -141,16 +150,48 @@ function HeroScene() {
     '--scene-y': `${point.y * 8}px`,
   } as CSSProperties;
   return <div ref={ref} className="hero-scene absolute inset-0 overflow-hidden" style={style} aria-hidden="true">
-    <div className="hero-layer hero-base-layer">
+    <div className="hero-layer hero-city-layer">
+      <img src="/assets/01_hero_berlin_skyline.png" alt="" className="h-full w-full object-cover object-left" />
+    </div>
+    <div className="hero-layer hero-architecture-layer" />
+    <div className="hero-layer hero-interior-layer">
       <picture>
         <source media="(max-width: 767px)" srcSet="/assets/02_hero_persian_rug.png" />
         <img src="/assets/hero-reference.jpg" alt="" className="h-full w-full object-cover" fetchPriority="high" />
       </picture>
     </div>
+    <div className="hero-layer hero-wall-rug-layer"><img src="/assets/02_hero_persian_rug.png" alt="" className="h-full w-full object-cover object-center" /></div>
+    <div className="hero-layer hero-floor-rug-layer"><img src="/assets/09_antique_rug.png" alt="" className="h-full w-full object-cover object-center" /></div>
     <div className="hero-layer hero-city-detail-layer"><img src="/assets/01_hero_berlin_skyline.png" alt="" className="h-full w-full object-cover object-left" /></div>
     <div className="hero-layer hero-weaver-layer"><img src="/assets/03_hero_weaving_woman.png" alt="" className="h-full w-full object-cover object-right-bottom" /></div>
     <div className="hero-light-layer" />
+    <div className="hero-atmosphere-layer" />
   </div>;
+}
+
+function useScrollReveals() {
+  const rootRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('[data-reveal]'));
+    if (!targets.length) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      targets.forEach((target) => target.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+  return rootRef;
 }
 
 function RugSelector() {
@@ -257,22 +298,32 @@ function RugSelector() {
 }
 
 function HomePage({ onAdd }: { onAdd: (id: string) => void }) {
-  return <>
-    <section className="hero-section relative flex items-end overflow-hidden border-b border-[#b99763]/25 pt-24">
+  const revealRoot = useScrollReveals();
+  return <main ref={revealRoot}>
+    <section className="hero-section hero-cinematic relative flex items-end overflow-hidden border-b border-[#b99763]/25 pt-24">
       <HeroScene />
       <div className="absolute inset-0 bg-gradient-to-r from-[#060506]/90 via-[#060506]/25 to-[#060506]/10" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#060506] via-transparent to-[#060506]/35" />
-      <div className="relative z-[2] mx-auto w-full max-w-[1440px] px-5 pb-16 md:px-10 md:pb-24">
-        <div className="max-w-sm reveal"><h1 className="sr-only">MiLAEDiA — Persian Heritage. European Vision. Worldwide.</h1><Eyebrow>Private gallery · Berlin</Eyebrow><p className="mt-4 max-w-xs font-display text-3xl leading-[1.05] text-[#e7ca9c] md:text-4xl">Objects with a past.</p><p className="mt-5 max-w-xs text-sm leading-7 text-[#c9c7c3]/78">Rare Persian rugs and tapestries, gathered for rooms that understand the value of time.</p><Link href="/collections" className="mt-7 inline-flex items-center gap-4 border border-[#b99763]/65 px-5 py-3 font-meta text-[10px] uppercase tracking-[.2em] text-[#e7ca9c] transition-colors hover:bg-[#b99763] hover:text-[#060506]" data-testid="link-enter-collections">Enter the collection <ArrowRight size={14} strokeWidth={1.2} /></Link></div>
+      <div className="hero-intro-curtain absolute inset-0 z-[4]" aria-hidden="true" />
+      <div className="hero-content relative z-[2] mx-auto w-full max-w-[1440px] px-5 pb-16 md:px-10 md:pb-24">
+        <div className="max-w-sm">
+          <h1 className="sr-only">MiLAEDiA — Persian Heritage. European Vision. Worldwide.</h1>
+          <div className="hero-intro-eyebrow"><Eyebrow>Private gallery · Berlin</Eyebrow></div>
+          <p className="hero-intro-headline mt-4 max-w-xs font-display text-3xl leading-[1.05] text-[#e7ca9c] md:text-4xl">Objects with a past.</p>
+          <p className="hero-intro-description mt-5 max-w-xs text-sm leading-7 text-[#c9c7c3]/78">Rare Persian rugs and tapestries, gathered for rooms that understand the value of time.</p>
+          <div className="hero-intro-cta">
+            <Link href="/collections" className="mt-7 inline-flex items-center gap-4 border border-[#b99763]/65 px-5 py-3 font-meta text-[10px] uppercase tracking-[.2em] text-[#e7ca9c] transition-colors hover:bg-[#b99763] hover:text-[#060506]" data-testid="link-enter-collections">Enter the collection <ArrowRight size={14} strokeWidth={1.2} /></Link>
+          </div>
+        </div>
       </div>
       <div className="absolute bottom-7 right-5 z-[3] hidden font-meta text-[9px] uppercase tracking-[.22em] text-[#c9c7c3]/55 md:block"><span className="text-[#b99763]">01</span> / 05 — Berlin salon</div>
     </section>
-    <section className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36"><SectionIntro kicker="A house of pieces" title={<>Collected,<br /><i className="text-[#b99763]">not produced.</i></>} copy="MiLAEDiA is a private gallery for Persian rugs and tapestries. We look for the small, unrepeatable things: a particular red, a softened edge, the trace of a hand." /><div className="mt-16 grid gap-4 md:grid-cols-[1.15fr_.85fr]"><div className="relative min-h-[460px] overflow-hidden border border-[#b99763]/25"><img src="/assets/06_gallery_luxury_rug_room.png" alt="MiLAEDiA Berlin gallery interior" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] p-6 pt-24"><Eyebrow>01 — The Berlin gallery</Eyebrow><p className="mt-2 font-display text-3xl text-[#e7ca9c]">A room for looking slowly.</p></div></div><div className="flex flex-col justify-end border border-[#b99763]/25 bg-[#0c0a07] p-7 md:p-10"><div className="font-display text-[100px] leading-none text-[#7b311d]">“</div><p className="max-w-sm font-display text-3xl leading-[1.08] text-[#e7ca9c]">The best rugs do not decorate a room. They alter its sense of time.</p><div className="mt-10 flex items-center gap-3"><div className="h-px w-8 bg-[#b99763]" /><span className="font-meta text-[9px] uppercase tracking-[.18em] text-[#c9c7c3]/55">MiLAEDiA archive note 04</span></div></div></div></section>
+    <section data-reveal className="reveal-on-scroll mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36"><SectionIntro kicker="A house of pieces" title={<>Collected,<br /><i className="text-[#b99763]">not produced.</i></>} copy="MiLAEDiA is a private gallery for Persian rugs and tapestries. We look for the small, unrepeatable things: a particular red, a softened edge, the trace of a hand." /><div className="mt-16 grid gap-4 md:grid-cols-[1.15fr_.85fr]"><div className="relative min-h-[460px] overflow-hidden border border-[#b99763]/25"><img src="/assets/06_gallery_luxury_rug_room.png" alt="MiLAEDiA Berlin gallery interior" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] p-6 pt-24"><Eyebrow>01 — The Berlin gallery</Eyebrow><p className="mt-2 font-display text-3xl text-[#e7ca9c]">A room for looking slowly.</p></div></div><div className="flex flex-col justify-end border border-[#b99763]/25 bg-[#0c0a07] p-7 md:p-10"><div className="font-display text-[100px] leading-none text-[#7b311d]">“</div><p className="max-w-sm font-display text-3xl leading-[1.08] text-[#e7ca9c]">The best rugs do not decorate a room. They alter its sense of time.</p><div className="mt-10 flex items-center gap-3"><div className="h-px w-8 bg-[#b99763]" /><span className="font-meta text-[9px] uppercase tracking-[.18em] text-[#c9c7c3]/55">MiLAEDiA archive note 04</span></div></div></div></section>
     <RugSelector />
-    <section className="border-y border-[#b99763]/25 bg-[#0c0a07]"><div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10"><div className="flex items-end justify-between gap-6"><SectionIntro kicker="The edit" title={<>Five ways<br /><i className="text-[#b99763]">to enter.</i></>} /><Link href="/collections" className="hidden items-center gap-3 font-meta text-[10px] uppercase tracking-[.2em] text-[#b99763] md:flex" data-testid="link-all-collections">View all <ArrowUpRight size={14} /></Link></div><div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">{collections.map((item, i) => <Link href={`/collections/${item.slug}`} key={item.slug} className={`collection-card group relative overflow-hidden border border-[#b99763]/25 ${i === 0 ? 'lg:translate-y-10' : i === 3 ? 'lg:-translate-y-6' : ''}`} data-testid={`card-collection-${item.slug}`}><div className="aspect-[.78]"><img src={item.image} alt={item.title} className="collection-card-image h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" /></div><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] p-4 pt-16"><div className="font-display text-2xl text-[#e7ca9c]">{item.title}</div><div className="mt-1 font-meta text-[8px] uppercase tracking-[.14em] text-[#b99763]">{item.subtitle}</div></div></Link>)}</div></div></section>
-    <section className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36"><SectionIntro kicker="Available now" title={<>The quiet<br /><i className="text-[#b99763]">standouts.</i></>} copy="A small selection of works currently in the gallery. Every piece is one of one; availability is confirmed personally." /><div className="mt-14 grid gap-x-5 gap-y-14 md:grid-cols-3">{products.slice(0, 3).map((product) => <ProductCard key={product.id} product={product} onAdd={onAdd} />)}</div></section>
-    <section className="relative min-h-[490px] overflow-hidden border-y border-[#b99763]/25"><img src="/assets/07_berlin_city_about.png" alt="Berlin architecture" className="absolute inset-0 h-full w-full object-cover opacity-55" /><div className="absolute inset-0 bg-[#060506]/35" /><div className="relative mx-auto flex min-h-[490px] max-w-[1440px] items-center justify-between gap-10 px-5 md:px-10"><div><Eyebrow>For a particular room</Eyebrow><h2 className="mt-5 max-w-xl font-display text-6xl leading-[.86] text-[#e7ca9c] md:text-8xl">Make it<br /><i className="text-[#b99763]">yours.</i></h2></div><div className="max-w-xs"><p className="text-sm leading-7 text-[#c9c7c3]/70">Tell us about the space, the light and the feeling you are after. We will make a considered edit from our network in Iran and Europe.</p><Link href="/custom-order" className="mt-7 inline-flex items-center gap-4 border-b border-[#b99763] pb-2 font-meta text-[10px] uppercase tracking-[.2em] text-[#e7ca9c]" data-testid="link-custom-home">Begin a custom conversation <ArrowUpRight size={14} /></Link></div></div></section>
-  </>;
+    <section data-reveal className="reveal-on-scroll border-y border-[#b99763]/25 bg-[#0c0a07]"><div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10"><div className="flex items-end justify-between gap-6"><SectionIntro kicker="The edit" title={<>Five ways<br /><i className="text-[#b99763]">to enter.</i></>} /><Link href="/collections" className="hidden items-center gap-3 font-meta text-[10px] uppercase tracking-[.2em] text-[#b99763] md:flex" data-testid="link-all-collections">View all <ArrowUpRight size={14} /></Link></div><div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">{collections.map((item, i) => <Link href={`/collections/${item.slug}`} key={item.slug} className={`collection-card group relative overflow-hidden border border-[#b99763]/25 ${i === 0 ? 'lg:translate-y-10' : i === 3 ? 'lg:-translate-y-6' : ''}`} data-testid={`card-collection-${item.slug}`}><div className="aspect-[.78]"><img src={item.image} alt={item.title} className="collection-card-image h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" /></div><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] p-4 pt-16"><div className="font-display text-2xl text-[#e7ca9c]">{item.title}</div><div className="mt-1 font-meta text-[8px] uppercase tracking-[.14em] text-[#b99763]">{item.subtitle}</div></div></Link>)}</div></div></section>
+    <section data-reveal className="reveal-on-scroll mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36"><SectionIntro kicker="Available now" title={<>The quiet<br /><i className="text-[#b99763]">standouts.</i></>} copy="A small selection of works currently in the gallery. Every piece is one of one; availability is confirmed personally." /><div className="mt-14 grid gap-x-5 gap-y-14 md:grid-cols-3">{products.slice(0, 3).map((product) => <ProductCard key={product.id} product={product} onAdd={onAdd} />)}</div></section>
+    <section data-reveal className="reveal-on-scroll relative min-h-[490px] overflow-hidden border-y border-[#b99763]/25"><img src="/assets/07_berlin_city_about.png" alt="Berlin architecture" className="absolute inset-0 h-full w-full object-cover opacity-55" /><div className="absolute inset-0 bg-[#060506]/35" /><div className="relative mx-auto flex min-h-[490px] max-w-[1440px] items-center justify-between gap-10 px-5 md:px-10"><div><Eyebrow>For a particular room</Eyebrow><h2 className="mt-5 max-w-xl font-display text-6xl leading-[.86] text-[#e7ca9c] md:text-8xl">Make it<br /><i className="text-[#b99763]">yours.</i></h2></div><div className="max-w-xs"><p className="text-sm leading-7 text-[#c9c7c3]/70">Tell us about the space, the light and the feeling you are after. We will make a considered edit from our network in Iran and Europe.</p><Link href="/custom-order" className="mt-7 inline-flex items-center gap-4 border-b border-[#b99763] pb-2 font-meta text-[10px] uppercase tracking-[.2em] text-[#e7ca9c]" data-testid="link-custom-home">Begin a custom conversation <ArrowUpRight size={14} /></Link></div></div></section>
+  </main>;
 }
 
 function WorkshopPage() {
