@@ -25,13 +25,14 @@ An editorial online gallery and demo commerce experience for Persian rugs and ta
 - `artifacts/milaedia/src/App.tsx` — public routes, local cart, custom-order flow, checkout demo, and admin demo routes.
 - `artifacts/milaedia/src/data/catalog.ts` — local product, collection, and gallery content.
 - `artifacts/milaedia/src/index.css` — MiLAEDiA palette, typography, motion, and shared visual tokens.
-- `artifacts/milaedia/public/assets/` — verified supplied imagery plus hero reference crop and optional hero film.
+- `artifacts/milaedia/public/assets/` — verified supplied imagery, reference crop, poster fallback, and the exact uploaded hero opening video.
 
 ## Architecture decisions
 
 - The first release is a frontend-first presentation build with local typed data and localStorage for cart/custom-order draft state; live commerce and admin services are intentionally not claimed.
 - The public shell and admin shell are separate; admin routes are not included in public navigation.
-- The supplied composite reference crop is the primary hero fallback because the generated film contains malformed embedded lettering; the film remains available as optional media for a later cinematic intro.
+- The exact uploaded `hero-opening.mov` is the first/source-of-truth hero media. WebM/VP9 and MP4/H.264 visual derivatives cover browsers that cannot decode the supplied HEVC MOV, with `hero-reference.jpg` as the poster fallback.
+- Asset filenames are not semantic: the verified map treats `04`/`05` as Berlin window compositions, `03` as the weaving detail, `06` as rug detail, `07`/`14` as lamp studies, `15` as the armchair, and `08` as a non-public project-brief screenshot.
 - Hero depth uses nine restrained layered planes, pointer/scroll interpolation, a 1–2 second CSS entrance sequence, and CSS 3D rather than WebGL, prioritizing mobile performance and reduced-motion support.
 - Home sections below the hero use IntersectionObserver reveals with opacity, translate, scale, and minute rotateY motion; normal scrolling remains untouched.
 - The living archive is a reusable, catalog-backed 3D rug selector: it keeps the active frame centered, flips around the Y axis, and exposes keyboard, arrow, indicator, and swipe controls.

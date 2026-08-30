@@ -31,11 +31,11 @@ export const collections = [
 ];
 
 export const galleryImages = [
-  { src: '/assets/06_gallery_luxury_rug_room.png', title: 'The Berlin salon', note: 'Gallery view, Mitte' },
-  { src: '/assets/02_hero_persian_rug.png', title: 'A field of memory', note: 'Detail, Kerman' },
-  { src: '/assets/05_folded_silk_rugs.png', title: 'Folded light', note: 'Silk study' },
-  { src: '/assets/04_workshop_weaving_woman.png', title: 'At the loom', note: 'Workshop, Yazd' },
-  { src: '/assets/07_berlin_city_about.png', title: 'Berlin / Tehran', note: 'Two cities, one thread' },
+  { src: '/assets/06_gallery_luxury_rug_room.png', title: 'A field of memory', note: 'Rug detail, Kerman' },
+  { src: '/assets/03_hero_weaving_woman.png', title: 'At the loom', note: 'Weaving study' },
+  { src: '/assets/04_workshop_weaving_woman.png', title: 'Berlin at dusk', note: 'Window view, Mitte' },
+  { src: '/assets/05_folded_silk_rugs.png', title: 'Two cities, one thread', note: 'Interior study' },
+  { src: '/assets/14_luxury_lamp.png', title: 'Warm light', note: 'Private interior' },
   { src: '/assets/15_luxury_armchair.png', title: 'The reading room', note: 'Private interior' },
 ];
 
