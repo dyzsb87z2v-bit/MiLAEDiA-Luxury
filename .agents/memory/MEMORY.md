@@ -1,0 +1,1 @@
+- [Mobile carousel interaction](mobile-carousel.md) — use a contained scroll-snap track with card-local 3D animation for reliable touch and partial-next behavior.

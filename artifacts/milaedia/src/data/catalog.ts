@@ -23,10 +23,14 @@ export type Product = {
   status: ProductStatus;
 };
 
-export const normalizeProduct = (product: Product): Product => ({
-  ...product,
-  stock: product.status === 'available' ? 1 : 0,
-});
+export const normalizeProduct = (product: Product): Product => {
+  const stock = Math.max(0, Math.min(1, Number(product.stock) || 0));
+  return {
+    ...product,
+    status: product.status === 'available' && stock === 0 ? 'reserved' : product.status,
+    stock: product.status === 'available' && stock > 0 ? 1 : stock,
+  };
+};
 
 export const canAcquireProduct = (product: Product) =>
   product.status === 'available' && product.stock === 1;
