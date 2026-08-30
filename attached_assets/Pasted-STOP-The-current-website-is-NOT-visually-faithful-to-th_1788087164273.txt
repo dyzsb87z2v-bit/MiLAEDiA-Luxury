@@ -1,0 +1,498 @@
+STOP.
+
+The current website is NOT visually faithful to the supplied MiLAEDiA references.
+
+Do not continue polishing the current design.
+
+The current implementation must be treated as an incorrect approximation.
+
+I need you to rebuild the visual presentation based on the ACTUAL supplied reference images, ZIP assets, and the supplied MP4 video.
+
+IMPORTANT:
+The supplied visual references are the source of truth.
+The supplied MP4 is the source of truth for the cinematic opening.
+Do not invent a different Hero.
+Do not create a generic luxury rug website.
+Do not replace the supplied video with CSS animation.
+Do not replace it with another video.
+Do not create a different visual concept.
+
+==================================================
+CRITICAL: USE THE SUPPLIED VIDEO
+==================================================
+
+I supplied a Gemini-generated MP4 specifically for the MiLAEDiA Hero.
+
+USE THAT EXACT MP4 FILE.
+
+The opening experience must begin with the supplied video.
+
+It must NOT be replaced by:
+
+- a static JPEG
+- a random video
+- a CSS-only animation
+- a generated background
+- a generic cinematic animation
+
+The actual MP4 must be integrated into the Hero/intro.
+
+Use:
+
+- autoplay
+- muted
+- playsInline
+- loop where appropriate
+- preload="metadata"
+
+The video must start automatically when browser policies allow it.
+
+Provide a poster fallback using the supplied reference imagery.
+
+The video must visually occupy the Hero composition, not appear as a tiny video element inside a normal website section.
+
+==================================================
+OPENING EXPERIENCE
+==================================================
+
+The first screen should feel like entering a private luxury gallery.
+
+The sequence should be:
+
+1. Black / near-black opening state
+2. Supplied MP4 begins
+3. Cinematic Berlin/interior/rug scene becomes visible
+4. MiLAEDiA branding appears elegantly
+5. Editorial text appears
+6. "ENTER THE COLLECTION" / primary CTA appears
+7. User enters the main interactive website
+
+The supplied video is the visual foundation.
+
+Do not invent a completely different intro.
+
+==================================================
+REFERENCE MATCHING
+==================================================
+
+I supplied reference images showing the intended design.
+
+You must inspect the actual pixels/composition of those references and reproduce their visual hierarchy.
+
+Do not interpret the references as vague inspiration.
+
+Treat them as a visual specification.
+
+Match:
+
+- composition
+- proportions
+- typography
+- spacing
+- colors
+- image placement
+- borders
+- navigation
+- hierarchy
+- darkness
+- gold accents
+- architectural feeling
+- rug presentation
+- editorial typography
+- cinematic atmosphere
+
+The website should immediately look like it belongs to the supplied MiLAEDiA reference board.
+
+==================================================
+USE THE ZIP ASSET LIBRARY
+==================================================
+
+Inspect every image inside the supplied ZIP.
+
+Do NOT trust filenames blindly.
+
+The previous analysis established that some filenames do not match their actual image content.
+
+Therefore:
+
+1. Open/inspect every asset.
+2. Create a verified asset map.
+3. Use images according to their ACTUAL visual content.
+4. Do not assign an image to a page simply because its filename says "workshop", "gallery", "about", etc.
+
+IMPORTANT:
+
+Asset 08 is a screenshot/text artifact and must NOT be used as a public website photograph.
+
+==================================================
+HERO COMPOSITION
+==================================================
+
+The Hero must reproduce the supplied cinematic composition.
+
+It should contain the visual relationship between:
+
+- Berlin skyline
+- architectural windows
+- warm interior
+- Persian rug
+- floor rug
+- weaving woman
+- luxury furniture
+- lighting
+- MiLAEDiA branding
+- editorial text
+
+Do not turn this into a normal centered hero with one background image.
+
+The scene needs depth.
+
+Use layered positioning where the supplied assets allow it.
+
+==================================================
+3D EXPERIENCE
+==================================================
+
+The Hero must feel three-dimensional.
+
+Implement subtle:
+
+- perspective
+- depth planes
+- parallax
+- mouse movement
+- touch movement
+- scroll movement
+- foreground/background separation
+- subtle lighting movement
+
+Use CSS 3D transforms where appropriate.
+
+The effect must be elegant and restrained.
+
+NOT:
+
+- gaming-style 3D
+- excessive rotation
+- huge movement
+- particle effects
+- neon effects
+
+The target feeling is:
+
+PRIVATE LUXURY GALLERY
++
+FASHION HOUSE
++
+PERSIAN CRAFT
++
+CINEMATIC ARCHITECTURE
+
+==================================================
+RUG SELECTOR — IMPORTANT
+==================================================
+
+The rug selection interaction must be genuinely 3D.
+
+Do NOT create a normal horizontal image carousel.
+
+Each rug should appear inside a physical-looking framed presentation.
+
+When the user changes the rug:
+
+CURRENT RUG
+      ↓
+3D ROTATE
+      ↓
+NEW RUG
+
+Use:
+
+perspective
+rotateY
+translateZ
+scale
+opacity
+
+The frame itself should rotate.
+
+The transition should feel like turning a physical framed rug/object.
+
+Desktop:
+
+- click
+- drag
+- pointer interaction
+
+Mobile:
+
+- swipe left/right
+- touch interaction
+
+The selected rug should rotate into position.
+
+==================================================
+RESPONSIVE DESIGN
+==================================================
+
+The site must work correctly at:
+
+320
+375
+390
+430
+768
+1024
+1280
+1440
+1920
+2560
+
+BUT:
+
+Responsive design must NOT destroy the cinematic composition.
+
+Do not solve responsiveness by:
+
+- removing video
+- removing 3D
+- removing animation
+- replacing the Hero
+- flattening the scene
+- hiding important assets
+- converting everything into cards
+
+Mobile needs its own carefully composed crop and positioning.
+
+==================================================
+MOBILE HERO
+==================================================
+
+The mobile Hero must still contain the cinematic experience.
+
+It should preserve:
+
+- supplied MP4
+- Berlin atmosphere
+- rug
+- architectural depth
+- MiLAEDiA identity
+- editorial text
+- CTA
+- subtle 3D/parallax
+
+Reduce animation intensity on mobile if necessary.
+
+DO NOT remove it.
+
+Use:
+
+100svh
+100dvh
+
+and responsive focal-point positioning.
+
+Never allow the browser viewport/address bar to destroy the composition.
+
+==================================================
+TYPOGRAPHY
+==================================================
+
+Use the intended typography system:
+
+Cormorant Garamond
+for:
+
+- MiLAEDiA wordmark
+- hero headings
+- editorial titles
+- collection titles
+
+Vazirmatn
+for Persian content.
+
+IBM Plex Mono
+for:
+
+- dimensions
+- technical metadata
+- labels
+- product specifications
+
+Do not substitute generic fonts if the intended fonts can be loaded.
+
+==================================================
+COLORS
+==================================================
+
+Use the established MiLAEDiA visual tokens:
+
+--ink: #060506
+--panel: #0C0A07
+--gold: #B99763
+--gold-hi: #E7CA9C
+--bronze: #8D5E37
+--crimson: #7B311D
+--twilight: #344E7D
+--silver: #C9C7C3
+
+The interface must remain dark and restrained.
+
+Gold should be used selectively.
+
+==================================================
+IMPORTANT: NO GENERIC ECOMMERCE DESIGN
+==================================================
+
+Do NOT create:
+
+- standard ecommerce navbar
+- generic hero
+- generic product cards
+- Shopify-style grids
+- large rounded cards
+- glassmorphism
+- excessive box shadows
+- bright backgrounds
+- generic gradients
+- generic luxury template
+
+The reference feels like a PRIVATE GALLERY / ART HOUSE.
+
+The website must communicate that immediately.
+
+==================================================
+HEADER
+==================================================
+
+Reproduce the visual character of the supplied reference.
+
+Desktop:
+
+- elegant MiLAEDiA wordmark
+- restrained navigation
+- bag/cart
+- menu/utility controls
+
+Mobile:
+
+- compact elegant header
+- MiLAEDiA branding
+- menu
+- bag/cart
+
+Do not make the header visually dominate the Hero.
+
+==================================================
+ANIMATION
+==================================================
+
+Restore cinematic entrance animations.
+
+Use staggered:
+
+opacity
+translate
+scale
+3D transform
+
+for:
+
+- branding
+- eyebrow
+- heading
+- description
+- CTA
+
+Animation should be slow, elegant and premium.
+
+No bouncing.
+
+No excessive motion.
+
+The supplied MP4 remains the primary cinematic motion.
+
+==================================================
+BEFORE CODING
+==================================================
+
+First inspect the project and supplied assets.
+
+Then answer internally:
+
+1. Where is the supplied MP4?
+2. What is its exact filename/path?
+3. Where are the ZIP assets?
+4. Which image corresponds to which visual?
+5. Which components currently implement the Hero?
+6. Why does the current Hero not match the reference?
+7. Which existing code should be replaced rather than patched?
+
+Then implement.
+
+Do NOT ask me to redesign the website.
+
+The design has already been specified by the supplied references.
+
+==================================================
+IMPLEMENTATION PRIORITY
+==================================================
+
+Priority order:
+
+1. EXACT SUPPLIED MP4 HERO
+2. REFERENCE-MATCHED HERO COMPOSITION
+3. MiLAEDiA typography
+4. Cinematic opening
+5. Layered 3D depth
+6. Responsive behavior
+7. 3D rug selector
+8. Collections
+9. Gallery
+10. Workshop
+11. About
+12. Custom Order
+13. Commerce
+14. Admin
+
+The first screen is the most important part.
+
+==================================================
+FINAL QA
+==================================================
+
+After implementation, compare the website directly against the supplied references.
+
+Ask:
+
+"Would someone looking at the reference and the website immediately recognize them as the same design?"
+
+If the answer is no, continue correcting it.
+
+Do not stop simply because the website technically works.
+
+Technical correctness is NOT sufficient.
+
+The final result must be:
+
+VISUALLY FAITHFUL
++
+CINEMATIC
++
+3D
++
+RESPONSIVE
++
+INTERACTIVE
++
+LUXURIOUS
+
+The supplied MP4 MUST be visible in the actual opening experience.
+
+Do not replace it.
+
+Do not simplify it.
+
+Do not remove it.
+
+Do not finish until the Hero visually matches the supplied reference direction.
