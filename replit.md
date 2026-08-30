@@ -32,7 +32,8 @@ An editorial online gallery and demo commerce experience for Persian rugs and ta
 - The first release is a frontend-first presentation build with local typed data and localStorage for cart/custom-order draft state; live commerce and admin services are intentionally not claimed.
 - The public shell and admin shell are separate; admin routes are not included in public navigation.
 - The supplied composite reference crop is the primary hero fallback because the generated film contains malformed embedded lettering; the film remains available as optional media for a later cinematic intro.
-- Hero depth uses restrained CSS motion and imagery rather than WebGL, prioritizing mobile performance and reduced-motion support.
+- Hero depth uses restrained layered imagery, pointer interpolation, and CSS 3D rather than WebGL, prioritizing mobile performance and reduced-motion support.
+- The living archive is a reusable, catalog-backed 3D rug selector: it keeps the active frame centered, flips around the Y axis, and exposes keyboard, arrow, indicator, and swipe controls.
 - The brand is online-only; public copy must not imply a showroom, physical visit, or appointment address.
 
 ## Product
@@ -43,6 +44,7 @@ An editorial online gallery and demo commerce experience for Persian rugs and ta
 - Complete a clearly labeled demo checkout flow.
 - Submit a custom rug inquiry with reference-image selection.
 - Explore the workshop, gallery lightbox, about, contact, legal, and search routes.
+- Turn through the five-piece living archive with pointer tilt, keyboard arrows, touch swipe, and accessible controls.
 - Open a local demo admin login/dashboard without exposing it in public navigation.
 
 ## User preferences
