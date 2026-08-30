@@ -1,0 +1,676 @@
+MiLAEDiA — COMPLETE REPLIT BUILD INSTRUCTIONS
+
+You are building the MiLAEDiA website.
+
+IMPORTANT:
+I am working from a mobile phone and using Replit with a free/limited workflow.
+
+DO NOT start coding immediately.
+
+First inspect the project and all files/assets I provide.
+
+I will provide:
+1. MiLAEDiA MASTER HANDOFF
+2. Original visual reference images
+3. ZIP containing image assets
+4. Gemini cinematic / 3D website reveal video
+
+Treat these as the primary visual references.
+
+==================================================
+BRAND
+==================================================
+
+Brand:
+MiLAEDiA
+
+Tagline:
+Persian Heritage. European Vision. Worldwide.
+
+Business:
+ONLINE-ONLY luxury Persian rug house / art gallery.
+
+There is NO physical showroom or store.
+
+The website must feel like:
+
+PRIVATE LUXURY PERSIAN RUG GALLERY
++
+HIGH-END EUROPEAN FASHION HOUSE
++
+FINE-ART GALLERY
++
+PERSIAN HERITAGE
+
+It must NOT look like:
+
+- SaaS
+- startup
+- generic ecommerce
+- Shopify-style template
+- generic AI website
+- cheap luxury template
+
+==================================================
+VISUAL DIRECTION
+==================================================
+
+Luxury European
+Persian heritage
+Dark premium interior
+Fine-art gallery
+Warm antique gold
+Near-black
+Deep brown
+Elegant typography
+Cinematic depth
+Extremely clean composition
+
+Color system extracted from the references:
+
+--ink: #060506
+--panel: #0C0A07
+--gold: #B99763
+--gold-hi: #E7CA9C
+--bronze: #8D5E37
+--crimson: #7B311D
+--twilight: #344E7D
+--silver: #C9C7C3
+
+Typography:
+
+Cormorant Garamond
+for Latin display typography.
+
+Vazirmatn
+for Persian typography.
+
+IBM Plex Mono
+for measurements / technical labels.
+
+Do not randomly invent a different visual identity.
+
+==================================================
+REFERENCE ANALYSIS RULE
+==================================================
+
+The reference images are the source of truth.
+
+DO NOT approximate them from memory.
+
+Analyze:
+
+- composition
+- spacing
+- proportions
+- typography hierarchy
+- lighting
+- color
+- borders
+- image positioning
+- visual depth
+- panel structure
+- navigation
+- sidebar
+- hero composition
+- card proportions
+- responsive behavior where inferable
+
+IMPORTANT:
+
+Do NOT trust asset filenames.
+
+Previous analysis discovered that the supplied ZIP contains multiple 2x crops of the same composite screenshot.
+
+Some filenames do NOT correspond to the actual visual content.
+
+Therefore inspect the ACTUAL IMAGE CONTENT before assigning an asset to a page.
+
+One supplied file may actually be a screenshot containing the project brief rather than a usable website image.
+
+Do not build the asset system from filenames alone.
+
+==================================================
+DESIGN SYSTEM
+==================================================
+
+The layout is a panel-based luxury interface.
+
+Use:
+
+- 1px hairline borders
+- approximately 10px radius
+- near-zero fill difference between panels and background
+- asymmetric proportions
+- precise alignment
+
+IMPORTANT:
+
+The reference does NOT rely on generic box shadows.
+
+Avoid conventional card shadows.
+
+Create depth using:
+
+- lighting
+- reflections
+- layered images
+- perspective
+- parallax
+- subtle camera movement
+- borders
+- controlled contrast
+
+Do not use excessive gradients.
+
+Do not use excessive glow.
+
+==================================================
+HERO
+==================================================
+
+The Hero is the most important visual area.
+
+Create a luxury Persian rug gallery interior.
+
+Scene:
+
+- floor-to-ceiling windows
+- modern city skyline
+- evening / sunset / night atmosphere
+- dark black and brown interior
+- Persian rug on wall
+- Persian rug on floor
+- luxury objects
+- warm lighting
+- realistic floor reflections
+- deep spatial composition
+
+A beautiful photorealistic Persian woman is weaving a handmade rug.
+
+IMPORTANT:
+
+She must be part of the environment.
+
+She must NOT dominate the Hero.
+
+She should be relatively small compared with the complete architectural scene.
+
+Her clothing should harmonize with the rug.
+
+The overall scene must remain focused on:
+
+RUG
++
+ARCHITECTURE
++
+LIGHT
++
+PERSIAN HERITAGE
+
+==================================================
+3D / IMMERSIVE EXPERIENCE
+==================================================
+
+The site must NOT feel flat.
+
+Use controlled premium effects:
+
+- layered backgrounds
+- parallax
+- subtle mouse movement
+- subtle device movement where supported
+- scroll animation
+- perspective cards
+- subtle 3D hover
+- floating elements
+- depth of field
+- lighting movement
+- cinematic transitions
+
+Animations must be:
+
+SLOW
+ELEGANT
+SMOOTH
+CINEMATIC
+PREMIUM
+
+Never use:
+
+- bouncing UI
+- excessive spinning
+- childish animations
+- excessive glow
+- cheap transitions
+
+==================================================
+HERO LAYER SYSTEM
+==================================================
+
+Structure the Hero conceptually as:
+
+Layer 1:
+Window / city
+
+Layer 2:
+Interior
+
+Layer 3:
+Wall rug
+
+Layer 4:
+Floor rug
+
+Layer 5:
+Woman weaving
+
+Layer 6:
+Lighting
+
+Layer 7:
+Typography / UI
+
+Each layer should have very subtle movement.
+
+Do not destroy the composition with excessive parallax.
+
+==================================================
+GEMINI VIDEO
+==================================================
+
+The Gemini video should primarily be treated as:
+
+CINEMATIC INTRO / ENTER THE EXPERIENCE
+
+NOT automatically as a permanent background video.
+
+Preferred experience:
+
+Cinematic opening
+↓
+ENTER THE EXPERIENCE
+↓
+Main website Hero
+
+If technically appropriate, a lightweight muted Hero video can later be used.
+
+But performance is more important than forcing video.
+
+On mobile:
+reduce effects and video workload.
+
+Respect:
+
+prefers-reduced-motion
+
+==================================================
+WEBSITE STRUCTURE
+==================================================
+
+Public website:
+
+HOME
+COLLECTIONS
+WORKSHOP
+GALLERY
+ABOUT US
+CUSTOM ORDER
+CONTACT
+
+E-commerce:
+
+PRODUCT LISTING
+PRODUCT DETAIL
+CART
+CHECKOUT
+ORDER CONFIRMATION
+
+Collections:
+
+Antique Rugs
+Handmade Rugs
+Handwoven Rugs
+Handwoven Silk Rugs
+Luxury Rugs
+Machine-made Luxury Rugs
+Persian Rugs
+Silk Tapestries
+Antique Silk Tapestries
+Modern Luxury Rugs
+Custom Rugs
+Personalized Rugs
+
+==================================================
+PRODUCT SYSTEM
+==================================================
+
+Each product supports:
+
+- product name
+- images
+- category
+- price
+- dimensions
+- material
+- weaving type
+- country / region
+- description
+- stock
+- availability
+- order status
+
+Product pages must feel like luxury art/product presentation,
+NOT generic ecommerce cards.
+
+==================================================
+CUSTOM ORDER
+==================================================
+
+Create a premium custom-rug ordering experience.
+
+User can provide:
+
+- dimensions
+- color
+- pattern
+- style
+- rug type
+- reference image
+- custom description
+
+Include:
+
+UPLOAD YOUR OWN IMAGE
+CREATE YOUR CUSTOM RUG
+
+The flow should be visually premium and simple.
+
+==================================================
+GALLERY
+==================================================
+
+Gallery should support:
+
+- luxury masonry/grid
+- fullscreen viewing
+- zoom
+- smooth transitions
+- 3D hover
+- cinematic lightbox
+
+==================================================
+WORKSHOP
+==================================================
+
+Workshop should communicate:
+
+- hand weaving
+- craftsmanship
+- Persian heritage
+- artists
+- process
+- materials
+- detailed rug texture
+
+If reference material is missing,
+DO NOT pretend a specific reference exists.
+
+Clearly separate real assets from derived design.
+
+==================================================
+ABOUT
+==================================================
+
+Tell the MiLAEDiA story:
+
+Persian heritage
++
+European vision
++
+modern luxury
+
+==================================================
+CONTACT
+==================================================
+
+Online contact only.
+
+Support:
+
+WhatsApp
+Instagram
+Email
+Contact form
+
+No physical showroom should be implied.
+
+==================================================
+ADMIN
+==================================================
+
+ADMIN MUST NOT APPEAR IN PUBLIC NAVIGATION.
+
+Protected routes:
+
+/admin/login
+/admin/dashboard
+
+Admin functionality should eventually support:
+
+Products
+Orders
+Custom Orders
+Categories
+Pricing
+Inventory
+Customers
+Messages
+Website Content
+Gallery
+
+Order statuses:
+
+New
+Pending
+Paid
+Processing
+Shipped
+Completed
+Cancelled
+
+==================================================
+RESPONSIVE
+==================================================
+
+Must work on:
+
+iPhone
+Android
+Tablet
+Laptop
+Desktop
+Ultrawide
+TV
+
+Mobile is especially important because I am testing from a phone.
+
+Do not simply shrink desktop.
+
+Create a real responsive composition.
+
+On mobile:
+
+- simplify parallax
+- reduce 3D
+- optimize images
+- reduce animation workload
+- maintain luxury visual hierarchy
+- maintain readable typography
+- preserve Hero composition
+
+==================================================
+TECHNOLOGY
+==================================================
+
+Preferred:
+
+React
+TypeScript
+Tailwind CSS
+Framer Motion
+
+Use Three.js / React Three Fiber only where it provides meaningful visual value.
+
+Use GSAP only where necessary.
+
+Do not install unnecessary packages.
+
+Keep the project:
+
+Clean
+Modular
+Maintainable
+Fast
+SEO-friendly
+Production-ready
+
+==================================================
+IMPORTANT REPLIT WORKFLOW
+==================================================
+
+PHASE 1 — INSPECTION
+
+Before coding:
+
+1. Inspect current repository.
+2. Identify framework.
+3. Identify package manager.
+4. Identify existing files.
+5. Identify existing routes.
+6. Identify existing components.
+7. Identify existing dependencies.
+8. Inspect all supplied assets.
+9. Inspect image dimensions.
+10. Identify duplicate/cropped assets.
+11. Identify mislabeled assets.
+12. Identify missing assets.
+13. Inspect the supplied video.
+14. Determine how the video should be integrated.
+15. Check whether the current project is blank or existing.
+
+DO NOT modify existing code during Phase 1.
+
+==================================================
+PHASE 2 — ARCHITECTURE
+==================================================
+
+After inspection, produce:
+
+A. Project architecture
+B. Folder structure
+C. Route map
+D. Component map
+E. Data model
+F. Asset structure
+G. Responsive strategy
+H. Animation strategy
+I. 3D strategy
+J. Ecommerce architecture
+K. Custom order architecture
+L. Admin architecture
+M. Performance strategy
+N. SEO strategy
+O. Implementation order
+
+Clearly mark information as:
+
+VERIFIED
+OBSERVED
+DERIVED
+MISSING
+UNRELIABLE
+
+Do not invent missing references.
+
+==================================================
+PHASE 3 — WAIT
+==================================================
+
+After giving the architecture:
+
+STOP.
+
+Do NOT start coding.
+
+Wait until I explicitly send:
+
+START IMPLEMENTATION
+
+==================================================
+PHASE 4 — IMPLEMENTATION
+==================================================
+
+Only after I say:
+
+START IMPLEMENTATION
+
+begin implementation.
+
+Build the complete website, not just the homepage.
+
+Do not stop after Hero.
+
+Implement:
+
+Home
+Collections
+Collection detail
+Product pages
+Gallery
+Workshop
+About
+Custom Order
+Contact
+Cart
+Checkout
+Order confirmation
+Protected Admin
+
+Use the supplied references and assets as the visual source of truth.
+
+==================================================
+FINAL QUALITY STANDARD
+==================================================
+
+The final result must feel like:
+
+A PRIVATE LUXURY PERSIAN RUG GALLERY
+
+It should feel:
+
+Elegant
+Dark
+Warm
+Expensive
+Authentic
+Modern
+Persian
+European
+Immersive
+
+The user should feel like they entered a private luxury gallery,
+not an ordinary online store.
+
+FINAL RULE:
+
+DO NOT CODE YET.
+
+FIRST:
+INSPECT → ANALYZE → ARCHITECTURE → WAIT.
+
+I will explicitly say:
+
+START IMPLEMENTATION
+
+when coding should begin.

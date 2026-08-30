@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "MiLAEDiA Luxury Rug House"
+description = "A cinematic online gallery and commerce experience for MiLAEDiA, a luxury Persian rug and tapestry house combining Persian heritage, European vision, and modern craftsmanship."
+version = "1.0.0"
+id = "artifacts/milaedia"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21259
+
+[services.development]
+run = "pnpm --filter @workspace/milaedia run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/milaedia", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/milaedia/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21259"
+BASE_PATH = "/"

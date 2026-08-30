@@ -1,0 +1,415 @@
+PROJECT: MiLAEDiA — Luxury Persian Rug House
+
+IMPORTANT:
+I am building this project from a mobile phone, so keep the workflow simple, stable, and suitable for Replit.
+
+I am providing:
+1. MiLAEDiA MASTER HANDOFF / project requirements
+2. Visual reference images
+3. A ZIP containing project assets
+4. Gemini-generated cinematic/3D reference video
+
+These files are the SOURCE OF TRUTH for the visual direction.
+
+DO NOT start by creating a generic ecommerce website.
+DO NOT approximate the references.
+DO NOT replace the visual identity with a standard template.
+DO NOT use random stock imagery when a supplied asset/reference should be used.
+
+FIRST PHASE — ANALYSIS ONLY
+
+Before writing or modifying application code:
+
+1. Inspect the entire existing Replit project.
+2. Identify:
+   - current framework
+   - package manager
+   - existing files
+   - existing components
+   - current routes
+   - current dependencies
+   - existing assets
+   - current configuration
+3. Inspect ALL supplied reference images.
+4. Inspect the ZIP and determine what every asset actually contains.
+5. Do NOT trust filenames blindly. Identify assets by their actual visual content.
+6. Inspect the supplied Gemini video and determine:
+   - camera movement
+   - scene structure
+   - transitions
+   - lighting
+   - depth
+   - animation direction
+   - hero composition
+   - UI presentation
+7. Compare all supplied material with the MiLAEDiA MASTER HANDOFF.
+
+IMPORTANT:
+The previous visual analysis found that several ZIP files are crops from the same composite reference image. Therefore, do not treat filenames as authoritative. Analyze the actual image content before assigning assets to pages.
+
+VISUAL DIRECTION
+
+MiLAEDiA must feel like:
+
+PRIVATE LUXURY PERSIAN RUG GALLERY
++
+HIGH-END EUROPEAN FASHION HOUSE
++
+FINE ART GALLERY
++
+PERSIAN HERITAGE
+
+Visual characteristics:
+
+- extremely premium
+- dark
+- warm
+- sophisticated
+- authentic
+- European
+- Persian
+- artistic
+- cinematic
+- immersive
+- restrained
+- realistic
+
+Avoid:
+
+- SaaS appearance
+- startup-template appearance
+- generic Shopify appearance
+- generic AI-generated luxury website
+- excessive gradients
+- excessive glowing effects
+- excessive shadows
+- childish animations
+- excessive spinning
+- cheap glassmorphism
+- oversized UI controls
+- generic ecommerce cards
+
+DESIGN SYSTEM FROM THE VISUAL ANALYSIS
+
+Use the established visual system rather than inventing a new one:
+
+Background / ink:
+#060506
+
+Panel:
+#0C0A07
+
+Gold:
+#B99763
+
+Gold highlight:
+#E7CA9C
+
+Bronze:
+#8D5E37
+
+Crimson rug accent:
+#7B311D
+
+Twilight:
+#344E7D
+
+Body silver:
+#C9C7C3
+
+Typography:
+
+Cormorant Garamond
+for major Latin display typography.
+
+Vazirmatn
+for Persian text.
+
+IBM Plex Mono
+for measurements, dimensions, technical/product metadata and small data labels.
+
+Visual grammar:
+
+- near-black background
+- 1px hairline borders
+- approximately 10px corner radius
+- minimal panel filling
+- elegant spacing
+- no unnecessary box shadows
+- depth created through imagery, reflections, lighting, perspective and movement
+- gold indicates interaction/accent
+- silver indicates neutral information
+
+HOMEPAGE HERO
+
+The hero is the most important visual element.
+
+Create a luxury Persian rug gallery/interior:
+
+- floor-to-ceiling windows
+- sophisticated modern city view
+- evening/night lighting
+- dark black/brown interior
+- Persian rug on wall
+- Persian rug on floor
+- luxury objects
+- vitrines
+- warm architectural lighting
+- realistic reflections
+- deep spatial perspective
+
+A realistic Persian woman should be present weaving a handmade rug.
+
+She must:
+
+- look photorealistic
+- wear an elegant luxury outfit inspired by the rug
+- visually harmonize with the rug
+- remain relatively small in the composition
+- feel like part of the environment
+- NOT become the main character of the website
+
+The rug and architecture remain the visual focus.
+
+3D / IMMERSIVE EXPERIENCE
+
+Do not turn the website into a game.
+
+Use subtle luxury 3D:
+
+- layered depth
+- parallax
+- perspective
+- mouse movement on desktop
+- device-motion-compatible behavior where appropriate
+- scroll-based animation
+- subtle camera movement
+- 3D hover
+- depth-of-field feeling
+- light/shadow movement
+- cinematic transitions
+
+Desktop can use stronger depth.
+
+Mobile must use lighter effects for performance.
+
+HERO LAYERS
+
+Where technically practical, structure the hero into layers:
+
+Layer 1 — city / windows
+Layer 2 — interior
+Layer 3 — wall rug
+Layer 4 — floor rug
+Layer 5 — woman weaving
+Layer 6 — lighting
+Layer 7 — typography / interface
+
+The layers should move subtly relative to each other to create realistic depth.
+
+Do NOT move them so much that the composition breaks.
+
+PAGES
+
+Build the architecture for:
+
+HOME
+
+WORKSHOP
+
+COLLECTIONS
+
+GALLERY
+
+ABOUT US
+
+CUSTOM ORDER
+
+CONTACT
+
+PRODUCT DETAIL
+
+ADMIN LOGIN
+
+ADMIN DASHBOARD
+
+COLLECTIONS must support:
+
+- Antique Rugs
+- Handwoven Rugs
+- Handwoven Silk Rugs
+- Luxury Rugs
+- Handmade Rugs
+- Machine-made Luxury Rugs
+- Persian Rugs
+- Silk Tapestries
+- Antique Silk Tapestries
+- Modern Luxury Rugs
+- Custom Rugs
+- Personalized Rugs
+
+ECOMMERCE
+
+Every product should support:
+
+- product images
+- product name
+- category
+- price
+- dimensions
+- material
+- weaving type
+- origin / region
+- description
+- stock
+- availability
+- order status
+
+CUSTOM ORDER
+
+Create a premium custom-rug ordering experience.
+
+Customer should be able to submit:
+
+- desired dimensions
+- colors
+- pattern/style
+- rug type
+- reference image
+- custom description
+- additional requirements
+
+Include:
+
+"Upload your own image"
+and
+"Create your custom rug"
+
+ADMIN
+
+Admin must NOT appear in public navigation.
+
+Protected routes:
+
+/admin/login
+/admin/dashboard
+
+Admin should eventually support:
+
+Products
+Orders
+Custom Orders
+Categories
+Pricing
+Inventory
+Customers
+Messages
+Website Content
+Gallery
+
+Order statuses:
+
+New
+Pending
+Paid
+Processing
+Shipped
+Completed
+Cancelled
+
+RESPONSIVE
+
+The website must work properly on:
+
+- iPhone
+- Android
+- Tablet
+- Laptop
+- Desktop
+- Ultrawide
+- TV
+
+Mobile is especially important because I am building and testing from a phone.
+
+The mobile design must not simply shrink the desktop design.
+
+Create a deliberate mobile composition.
+
+PERFORMANCE
+
+3D must not destroy performance.
+
+Use:
+
+- lazy loading
+- optimized images
+- responsive image sizes
+- code splitting where appropriate
+- reduced animation on mobile
+- prefers-reduced-motion support
+- efficient WebGL usage
+- avoid unnecessary Three.js scenes
+
+Use Three.js / React Three Fiber only where it provides meaningful visual value.
+
+TECHNOLOGY
+
+Prefer:
+
+React / Next.js if compatible with the existing project
+TypeScript
+Tailwind CSS
+Framer Motion
+Three.js / React Three Fiber when useful
+GSAP only when genuinely needed
+
+Do NOT unnecessarily rewrite an existing working project.
+
+First understand the existing Replit structure.
+
+IMPORTANT WORKFLOW
+
+Do NOT start full implementation immediately.
+
+First produce a report containing:
+
+1. Current project structure
+2. Current framework
+3. Existing dependencies
+4. Existing routes
+5. Existing components
+6. Existing assets
+7. Supplied asset inventory
+8. Reference-image analysis
+9. Video analysis
+10. Final visual design system
+11. Complete sitemap
+12. Component architecture
+13. Data model
+14. Ecommerce architecture
+15. Custom-order architecture
+16. Admin architecture
+17. Responsive strategy
+18. 3D / animation strategy
+19. Performance strategy
+20. Implementation phases
+
+Then STOP.
+
+Do not build the complete website yet.
+
+Do not replace files yet.
+
+Do not delete existing files.
+
+Do not invent missing visual assets.
+
+If an asset is missing, clearly identify it as MISSING rather than silently replacing it with an unrelated image.
+
+At the end say exactly:
+
+"ANALYSIS COMPLETE — WAITING FOR START IMPLEMENTATION."
+
+Do not begin implementation until I explicitly send:
+
+START IMPLEMENTATION
