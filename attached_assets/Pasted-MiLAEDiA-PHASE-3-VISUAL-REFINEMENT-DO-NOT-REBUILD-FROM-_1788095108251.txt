@@ -1,0 +1,626 @@
+MiLAEDiA — PHASE 3 VISUAL REFINEMENT / DO NOT REBUILD FROM SCRATCH
+
+The website is already implemented.
+
+DO NOT rebuild the entire website.
+DO NOT replace the existing architecture.
+DO NOT remove existing functionality.
+
+This task is a HIGH-END VISUAL REFINEMENT focused on:
+1. improving the Hero entrance quality
+2. restoring cinematic animation/video
+3. fixing the large empty black area in the middle of the mobile page
+4. creating a premium visual gallery section inside that empty area
+5. adding Persian carpet heritage, Iran, Berlin and Hungary visual storytelling
+6. improving image quality and transitions
+7. maintaining responsive behavior
+8. preserving the current approved visual identity
+
+==================================================
+CRITICAL RULE — HOME HERO
+==================================================
+
+DO NOT redesign the Hero.
+
+The current Hero composition is the approved foundation.
+
+However, the current Hero feels visually weak because:
+- image/video quality is not strong enough
+- animation is too weak
+- cinematic entrance is missing/weak
+- depth/3D is insufficient
+- supplied Gemini MP4 is not being presented correctly
+
+FIX THIS WITHOUT CHANGING THE HERO'S CORE DESIGN.
+
+The supplied Gemini MP4 MUST be used as the Hero video.
+
+Do NOT replace the supplied video with:
+- a stock video
+- a CSS fake animation
+- a static image
+- a newly generated generic video
+
+Hero behavior:
+
+DESKTOP:
+- cinematic video background
+- autoplay
+- muted
+- playsInline
+- loop
+- smooth cinematic entrance
+- subtle camera/parallax movement
+- layered depth
+- elegant light movement
+- subtle 3D perspective
+- slow premium motion
+
+MOBILE:
+- use the same supplied video when supported
+- correct responsive crop
+- intelligent object-position
+- preserve the important Berlin / rug / interior composition
+- never stretch the video
+- never create horizontal overflow
+- poster fallback if autoplay is unavailable
+
+Use:
+object-fit: cover
+
+But do NOT use a single hardcoded object-position for every device.
+
+Create responsive focal positioning.
+
+==================================================
+IMPORTANT — FIX THE LARGE BLACK EMPTY AREA
+==================================================
+
+There is currently a very large empty black section in the middle of the website when scrolling on mobile.
+
+THIS IS NOT ACCEPTABLE.
+
+Do NOT leave this area empty.
+
+Transform this area into a cinematic editorial gallery.
+
+It should feel like walking through the windows of a private MiLAEDiA gallery.
+
+Create a section:
+
+/heritage-gallery
+
+or integrate it naturally into the homepage if routing is not necessary.
+
+The section must occupy the currently empty visual area.
+
+==================================================
+NEW SECTION — "THE COLLECTION THROUGH WINDOWS"
+==================================================
+
+Create several large architectural "window" panels.
+
+These are NOT normal cards.
+
+Each window should look like a real gallery window / exhibition frame.
+
+Visual structure:
+
+------------------------------------------------
+|                                              |
+|              IMAGE / VIDEO                   |
+|                                              |
+|                                              |
+|        small editorial caption               |
+------------------------------------------------
+
+Use:
+- thin gold/bronze frame
+- dark architectural frame
+- subtle depth
+- realistic perspective
+- slight 3D rotation
+- soft parallax
+- cinematic reveal
+- no box-shadow-heavy UI
+
+Each window should contain a different visual story.
+
+Create approximately 5–7 windows.
+
+==================================================
+WINDOW 01 — ANCIENT PERSIA
+==================================================
+
+Visual:
+
+Ancient Persian carpet weaving.
+
+Show:
+- traditional Persian loom
+- hand weaving
+- threads
+- Persian ornaments
+- historical craftsmanship
+- close-up carpet details
+
+Animation:
+- slow reveal
+- subtle camera movement
+- slight parallax
+
+Title:
+
+ANCIENT PERSIA
+
+Subtitle:
+
+THE ART OF HANDWEAVING
+
+==================================================
+WINDOW 02 — HANDWOVEN CARPET
+==================================================
+
+Show a premium handwoven Persian rug.
+
+The viewer should be able to see:
+- fibers
+- knots
+- texture
+- pile
+- woven details
+
+Use a slow macro zoom animation.
+
+Title:
+
+HANDWOVEN
+
+Subtitle:
+
+CRAFTED THREAD BY THREAD
+
+==================================================
+WINDOW 03 — IRAN
+==================================================
+
+Show an elegant visual representing Iran and Persian heritage.
+
+Do NOT make it look like a tourism website.
+
+Use:
+- Persian architectural elements
+- ancient Persian ornament
+- subtle historical motifs
+- rug craftsmanship
+
+Title:
+
+IRAN
+
+Subtitle:
+
+WHERE THE THREAD BECOMES MEMORY
+
+==================================================
+WINDOW 04 — BERLIN
+==================================================
+
+Show Berlin in the same sophisticated visual language as the Hero.
+
+Use:
+- Berlin skyline
+- evening architecture
+- warm interior lighting
+- contemporary gallery atmosphere
+
+The Berlin visual should connect naturally to the current Hero.
+
+Title:
+
+BERLIN
+
+Subtitle:
+
+A CONTEMPORARY HOME FOR HERITAGE
+
+==================================================
+WINDOW 05 — HUNGARY
+==================================================
+
+Create a refined Central European visual representing Hungary.
+
+Do NOT use excessive flags.
+
+Use:
+- Hungarian architectural atmosphere
+- historical European interiors
+- refined cultural details
+- warm evening light
+
+Title:
+
+HUNGARY
+
+Subtitle:
+
+A EUROPEAN CULTURAL BRIDGE
+
+==================================================
+WINDOW 06 — THE RUG
+==================================================
+
+Large luxury Persian rug image.
+
+Create a slow cinematic camera movement.
+
+The rug should feel like a museum object.
+
+Title:
+
+OBJECTS WITH A PAST.
+
+==================================================
+WINDOW 07 — THE WEAVE
+==================================================
+
+Create an extreme close-up / macro textile experience.
+
+This window should transition into the dedicated weave viewer.
+
+CTA:
+
+EXAMINE THE WEAVE →
+
+==================================================
+3D WINDOW INTERACTION
+==================================================
+
+The windows should have subtle 3D depth.
+
+Desktop:
+- mouse movement creates very small perspective movement
+- image moves at a different depth from the frame
+- subtle parallax
+- maximum rotation around 2–4 degrees
+
+Mobile:
+- use scroll-based parallax
+- do NOT require hover
+- reduce motion
+- keep interaction smooth
+
+Do NOT make the windows spin aggressively.
+
+This must look like luxury art direction, not a gaming website.
+
+==================================================
+VIDEO WINDOWS
+==================================================
+
+At least 2 of the windows should support video.
+
+Use the supplied video assets where appropriate.
+
+Video:
+- autoplay
+- muted
+- playsInline
+- loop
+- lazy-load below fold
+- poster fallback
+- reduced-motion fallback
+
+Videos should blend naturally into the dark gallery environment.
+
+==================================================
+IMAGE QUALITY
+==================================================
+
+The current images appear too soft / low-quality.
+
+Improve image presentation.
+
+Requirements:
+- never upscale tiny images excessively
+- use the highest-resolution supplied asset available
+- use responsive srcset
+- use WebP/AVIF where appropriate
+- preserve aspect ratio
+- avoid blurry CSS background images
+- preload only Hero-critical media
+- lazy-load gallery media
+
+IMPORTANT:
+
+Do not invent image content based only on filenames.
+
+Inspect actual supplied assets before assigning them.
+
+If a supplied image is insufficient for a specific scene, create a clearly separated asset slot so a high-resolution image can be added later.
+
+Do NOT use random low-quality stock images.
+
+==================================================
+COLLECTION MOBILE EXPERIENCE
+==================================================
+
+The rug collection section must remain a horizontal premium carousel on mobile.
+
+Mobile:
+- one main rug
+- partial next rug visible
+- swipe
+- snap
+- smooth transition
+- pagination
+- previous/next controls
+
+Desktop:
+- editorial asymmetric gallery
+- subtle 3D hover
+- premium transitions
+
+==================================================
+3D RUG SWITCH
+==================================================
+
+When changing rugs:
+
+The selected rug should transition with a subtle 3D rotation.
+
+Sequence:
+
+Current rug
+↓
+rotate / depth transition
+↓
+new rug appears
+↓
+metadata updates
+
+Use CSS perspective and Framer Motion.
+
+Do NOT rotate the entire page.
+
+Only the rug object/card should transition.
+
+==================================================
+WEAVE VIEWER
+==================================================
+
+Keep the dedicated weave experience.
+
+Create:
+
+/weave
+
+Features:
+- high-resolution textile image
+- pinch zoom
+- mouse wheel zoom
+- drag/pan
+- reset
+- fullscreen
+- smooth zoom
+- optional magnifier
+
+Show labels:
+
+WARP
+WEFT
+KNOT
+PILE
+
+The interface should feel like a luxury textile laboratory.
+
+==================================================
+HERITAGE STORYTELLING
+==================================================
+
+Add a visual storytelling section:
+
+ANCIENT PERSIA
+↓
+LOOM
+↓
+WARP
+↓
+WEFT
+↓
+KNOT
+↓
+NATURAL DYES
+↓
+PATTERN
+↓
+MASTERPIECE
+
+Use scroll-triggered transitions.
+
+Each stage should appear gradually.
+
+Use:
+- subtle image movement
+- typography reveal
+- gold line drawing
+- slow fade
+- small parallax
+
+==================================================
+VISUAL CONNECTION
+==================================================
+
+Create a visual narrative:
+
+IRAN
+   ↓
+CRAFT
+
+BERLIN
+   ↓
+GALLERY
+
+HUNGARY
+   ↓
+EUROPEAN CULTURAL BRIDGE
+
+Do not use large country flags.
+
+Use sophisticated architectural/cultural imagery instead.
+
+==================================================
+MOBILE FIX
+==================================================
+
+This is extremely important.
+
+Test at approximately:
+
+375px
+390px
+414px
+
+There must be:
+
+NO:
+- horizontal scrolling
+- huge empty black areas
+- cropped text
+- oversized cards
+- broken video
+- elements extending outside viewport
+- fixed-width desktop layouts
+
+Every section must intentionally recompose for mobile.
+
+The new window gallery on mobile should become:
+
+vertical cinematic sequence
+
+rather than a desktop grid.
+
+Each window:
+- full-width
+- approximately 75–90vh depending on content
+- image/video fills frame
+- text overlays or sits in a controlled lower panel
+- swipe/scroll naturally
+
+==================================================
+TYPOGRAPHY
+==================================================
+
+Maintain:
+
+Cormorant Garamond
+Vazirmatn
+IBM Plex Mono
+
+Use:
+- Cormorant for editorial headings
+- Vazirmatn for Persian
+- IBM Plex Mono for labels and technical information
+
+Do not introduce generic modern SaaS typography.
+
+==================================================
+COLOR
+==================================================
+
+Maintain:
+
+--ink: #060506
+--panel: #0C0A07
+--gold: #B99763
+--gold-hi: #E7CA9C
+--bronze: #8D5E37
+--crimson: #7B311D
+--twilight: #344E7D
+--silver: #C9C7C3
+
+==================================================
+ANIMATION QUALITY
+==================================================
+
+Current animation is too weak.
+
+Increase quality, NOT quantity.
+
+Animations must feel:
+
+cinematic
+slow
+expensive
+architectural
+editorial
+
+Use:
+- Framer Motion
+- CSS perspective
+- transform3d
+- parallax
+- scroll reveal
+- image scale
+- opacity
+- clip-path reveals
+- subtle lighting movement
+
+Avoid:
+- bounce
+- excessive rotation
+- generic fade-everything
+- cheap card animations
+- particle effects
+- aggressive zoom
+- excessive blur
+
+==================================================
+FINAL RESULT
+==================================================
+
+The website should feel like:
+
+A PRIVATE PERSIAN RUG GALLERY IN BERLIN
+
+with:
+
+Persian heritage
++
+handwoven craftsmanship
++
+Berlin architecture
++
+European cultural atmosphere
++
+cinematic video
++
+3D depth
++
+interactive textile experiences
+
+The large empty black middle section MUST disappear and become the new cinematic window gallery.
+
+Do NOT modify the approved Hero structure unnecessarily.
+
+Do NOT rebuild the website from scratch.
+
+Do NOT remove existing functionality.
+
+Do NOT replace the supplied Gemini video.
+
+Implement this as a professional visual refinement.
+
+After implementation:
+1. test mobile
+2. test desktop
+3. test video
+4. test animations
+5. test carousel
+6. test 3D rug switching
+7. test weave zoom
+8. verify no horizontal overflow
+9. verify there is no large empty black section
+10. verify all images are sharp and correctly positioned
+
+Then report exactly what was changed.
