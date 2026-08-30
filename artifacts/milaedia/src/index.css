@@ -158,6 +158,14 @@
 .rug-art { display: block; width: 100%; height: 100%; object-fit: cover; border: 1px solid rgba(231,202,156,.34); }
 .rug-frame-line { position: absolute; inset: 12%; border: 1px solid rgba(231,202,156,.22); pointer-events: none; }
 .rug-frame-caption { position: absolute; inset-inline: clamp(22px, 5vw, 45px); bottom: clamp(22px, 5vw, 45px); display: flex; justify-content: space-between; gap: 12px; font: 9px/1.2 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: rgba(231,202,156,.72); }
+.mobile-rug-track { display: flex; gap: 16px; width: 100%; overflow-x: auto; padding: 4px 48px 18px 4px; scroll-snap-type: x mandatory; scroll-padding-left: 4px; scrollbar-width: none; touch-action: pan-y; overscroll-behavior-x: contain; cursor: grab; }
+.mobile-rug-track:active { cursor: grabbing; }
+.mobile-rug-track:focus-visible { outline: 1px solid #e7ca9c; outline-offset: 4px; }
+.mobile-rug-track::-webkit-scrollbar { display: none; }
+.mobile-rug-card { position: relative; flex: 0 0 calc(100% - 44px); aspect-ratio: 3 / 4; scroll-snap-align: start; overflow: hidden; border: 1px solid rgba(185,151,99,.55); background: #080706; transform: perspective(1300px) rotateY(0); transform-origin: center right; transition: transform .65s cubic-bezier(.22,1,.36,1), opacity .45s ease; opacity: .7; }
+.mobile-rug-card.is-active { animation: mobile-rug-arrive .65s cubic-bezier(.22,1,.36,1) both; opacity: 1; }
+.mobile-rug-card .rug-art { padding: 14px; background: #080706; }
+@keyframes mobile-rug-arrive { from { transform: perspective(1300px) rotateY(11deg) translateX(8px); } to { transform: perspective(1300px) rotateY(0) translateX(0); } }
 
 @media (hover: hover) and (pointer: fine) {
   .archive-card:hover { transform: perspective(900px) rotateX(1.5deg) rotateY(-2.2deg) scale(1.012); }

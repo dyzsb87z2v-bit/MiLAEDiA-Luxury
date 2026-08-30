@@ -1,0 +1,153 @@
+STOP THE CURRENT REGRESSION PASS AND FIX THE FAILURES.
+
+The current run shows 37 actions with 17 failed.
+Do NOT simply report the failures.
+Do NOT mark the project complete.
+
+First inspect the 17 failed actions and determine which failures are:
+- real application bugs
+- stale test assumptions
+- browser automation limitations
+- expected behavior that was already changed intentionally
+
+Fix every REAL application bug.
+
+IMPORTANT:
+Do not remove or weaken any of the following features to make tests pass:
+- Hero video
+- cinematic Hero entrance
+- Hero animation
+- 3D/parallax effects
+- mobile responsive layout
+- Heritage Window Gallery
+- mobile rug carousel
+- 3D rug switching
+- /weave zoom and pan
+- admin product management
+- admin pricing
+- inventory
+- orders
+- custom orders
+- gallery lightbox
+
+DO NOT rebuild the project.
+
+After fixing the real failures, run a fresh browser regression test.
+
+Then perform a separate VISUAL QA pass.
+
+VISUAL QA IS REQUIRED:
+
+Test the website at:
+- 375px
+- 390px
+- 414px
+- tablet
+- desktop
+- ultrawide
+
+Specifically inspect:
+
+1. HOME HERO
+- supplied Gemini MP4 is actually being used
+- autoplay
+- muted
+- playsInline
+- loop
+- cinematic entrance
+- correct responsive crop
+- no stretching
+- no black gaps
+- no horizontal overflow
+- subtle 3D/parallax depth
+- premium animation
+
+2. MOBILE HOMEPAGE
+- there must be NO giant empty black area
+- the Heritage Window Gallery must occupy that area
+- no desktop-width containers
+- no broken sections
+- no clipped text
+
+3. HERITAGE WINDOW GALLERY
+Verify:
+ANCIENT PERSIA
+HANDWOVEN
+IRAN
+BERLIN
+HUNGARY
+OBJECTS WITH A PAST
+THE WEAVE
+
+Each window must feel like an architectural gallery exhibition frame, not a generic card.
+
+4. COLLECTION
+Mobile must behave as:
+- one main rug
+- partial next rug visible
+- swipe
+- snap
+- pagination
+- previous/next controls
+
+5. 3D RUG SWITCH
+Only the rug/card should rotate in 3D.
+Do not rotate the page.
+Metadata must update with the selected rug.
+
+6. WEAVE VIEWER
+Verify:
+- pinch zoom
+- wheel zoom
+- drag/pan
+- reset
+- fullscreen
+- WARP
+- WEFT
+- KNOT
+- PILE
+
+7. ADMIN
+Verify protected admin access and:
+- products
+- prices
+- stock
+- availability
+- orders
+- order status
+- custom orders
+- gallery/content
+
+8. VIDEO
+Confirm the actual supplied Gemini MP4 file is referenced by the application.
+Do not replace it with a static image or fake CSS animation.
+
+9. IMAGE QUALITY
+Inspect the actual supplied assets.
+Do not trust filenames.
+Do not use low-resolution images where a better supplied asset exists.
+Do not randomly substitute stock images.
+
+10. FINAL MOBILE CHECK
+There must be:
+NO horizontal scrolling
+NO huge empty black areas
+NO fixed-width desktop layouts
+NO broken video
+NO cropped headings
+NO overflowing buttons
+NO oversized cards
+
+After all of this, report:
+
+A. Number of real bugs found
+B. Number of real bugs fixed
+C. Tests that still fail only because of automation/environment limitations
+D. Visual improvements completed
+E. Mobile improvements completed
+F. Hero/video status
+G. 3D/animation status
+H. Admin status
+I. Any remaining problems
+
+Do not say "complete" until the real application bugs are fixed and the visual QA has been performed.

@@ -1,0 +1,104 @@
+STOP RUNNING THE SAME FAILED TEST LOOP.
+
+The regression currently reports 19 failures.
+Do NOT keep retrying the same test without diagnosing the failures.
+
+I want you to switch from "test only" to "diagnose → fix → verify".
+
+1. Inspect all 19 failed actions individually.
+2. Group them into:
+   A. REAL APPLICATION BUGS
+   B. AUTOMATION/BROWSER TEST LIMITATIONS
+   C. TEST ASSUMPTION / EXPECTED-BEHAVIOR MISMATCH
+3. Fix every REAL APPLICATION BUG.
+4. Do NOT modify working features just to make an automated test pass.
+5. Do NOT rebuild the application.
+6. Do NOT remove Hero video, animations, 3D effects, carousel, weave viewer, Heritage Gallery or Admin functionality.
+
+VERY IMPORTANT:
+
+Before running another large regression suite, manually verify the actual website in a real browser.
+
+Check:
+
+HOME
+- Gemini MP4 is the actual Hero video
+- video autoplay/muted/playsInline/loop
+- cinematic entrance
+- 3D/parallax
+- correct mobile crop
+
+MOBILE 375 / 390 / 414
+- no horizontal overflow
+- no giant empty black area
+- Heritage Window Gallery appears in the middle section
+- text is not cropped
+- cards do not overflow
+- video does not break
+
+COLLECTION
+- mobile swipe carousel
+- partial next rug visible
+- snap
+- pagination
+- previous/next
+- 3D rug transition
+
+WEAVE
+- zoom
+- pinch
+- drag/pan
+- reset
+- fullscreen
+- WARP / WEFT / KNOT / PILE
+
+ADMIN
+- products
+- prices
+- inventory
+- orders
+- custom orders
+- gallery/content
+
+Only after the real application is confirmed, run the regression tests again.
+
+If some tests still fail because of browser automation limitations, DO NOT rewrite working application code.
+
+Instead report them clearly as automation limitations.
+
+FINAL REPORT MUST CONTAIN:
+
+REAL BUGS:
+[number]
+
+REAL BUGS FIXED:
+[number]
+
+AUTOMATION-ONLY FAILURES:
+[number]
+
+VISUAL ISSUES FOUND:
+[list]
+
+VISUAL ISSUES FIXED:
+[list]
+
+HERO VIDEO:
+PASS/FAIL
+
+MOBILE:
+PASS/FAIL
+
+HERITAGE GALLERY:
+PASS/FAIL
+
+3D RUG SWITCH:
+PASS/FAIL
+
+WEAVE VIEWER:
+PASS/FAIL
+
+ADMIN:
+PASS/FAIL
+
+Do not claim the website is complete until the real bugs are fixed.
