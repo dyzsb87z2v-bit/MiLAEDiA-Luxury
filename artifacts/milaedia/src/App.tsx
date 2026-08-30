@@ -354,6 +354,15 @@ function RugSelector() {
 function HomePage({ onAdd }: { onAdd: (id: string) => void }) {
   const revealRoot = useScrollReveals();
   const { collections, products } = useCatalog();
+  const heritageWindows = [
+    { title: 'Ancient Persia', note: 'Pattern / memory', image: '/assets/09_antique_rug.png', alt: 'Antique Persian rug detail' },
+    { title: 'Handwoven', note: 'The human measure', image: '/assets/10_handwoven_silk_rug.png', alt: 'Handwoven silk rug detail' },
+    { title: 'Iran', note: 'Origin / atelier', image: '/assets/03_hero_weaving_woman.png', alt: 'Hand-weaving detail from the atelier' },
+    { title: 'Berlin', note: 'A contemporary room', image: '/assets/04_workshop_weaving_woman.png', alt: 'Berlin interior at dusk' },
+    { title: 'Hungary', note: 'European context', image: '/assets/15_luxury_armchair.png', alt: 'Refined European interior detail' },
+    { title: 'Objects with a Past', note: 'Collected / held', image: '/assets/12_antique_silk_tapestry.png', alt: 'Antique silk tapestry detail' },
+    { title: 'The Weave', note: 'Structure / touch', image: '/assets/06_gallery_luxury_rug_room.png', alt: 'Rug in a gallery interior' },
+  ];
   return <main ref={revealRoot}>
     <section className="hero-section hero-cinematic relative flex items-end overflow-hidden border-b border-[#b99763]/25 pt-24">
       <HeroScene />
@@ -374,6 +383,27 @@ function HomePage({ onAdd }: { onAdd: (id: string) => void }) {
       <div className="absolute bottom-7 right-5 z-[3] hidden font-meta text-[9px] uppercase tracking-[.22em] text-[#c9c7c3]/55 md:block"><span className="text-[#b99763]">01</span> / 05 — Berlin salon</div>
     </section>
     <section data-reveal className="reveal-on-scroll mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36"><SectionIntro kicker="A house of pieces" title={<>Collected,<br /><i className="text-[#b99763]">not produced.</i></>} copy="MiLAEDiA is a private gallery for Persian rugs and tapestries. We look for the small, unrepeatable things: a particular red, a softened edge, the trace of a hand." /><div className="mt-16 grid gap-4 md:grid-cols-[1.15fr_.85fr]"><div className="relative min-h-[460px] overflow-hidden border border-[#b99763]/25"><img src="/assets/06_gallery_luxury_rug_room.png" alt="MiLAEDiA Berlin gallery interior" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] p-6 pt-24"><Eyebrow>01 — The Berlin gallery</Eyebrow><p className="mt-2 font-display text-3xl text-[#e7ca9c]">A room for looking slowly.</p></div></div><div className="flex flex-col justify-end border border-[#b99763]/25 bg-[#0c0a07] p-7 md:p-10"><div className="font-display text-[100px] leading-none text-[#7b311d]">“</div><p className="max-w-sm font-display text-3xl leading-[1.08] text-[#e7ca9c]">The best rugs do not decorate a room. They alter its sense of time.</p><div className="mt-10 flex items-center gap-3"><div className="h-px w-8 bg-[#b99763]" /><span className="font-meta text-[9px] uppercase tracking-[.18em] text-[#c9c7c3]/55">MiLAEDiA archive note 04</span></div></div></div></section>
+    <section data-reveal className="reveal-on-scroll border-y border-[#b99763]/25 bg-[#0c0a07]">
+      <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36">
+        <div className="flex flex-col gap-5 border-b border-[#b99763]/20 pb-10 md:flex-row md:items-end md:justify-between">
+          <SectionIntro kicker="Heritage window gallery" title={<>Seven windows<br /><i className="text-[#b99763]">into the house.</i></>} />
+          <p className="max-w-sm text-sm leading-7 text-[#c9c7c3]/60">An architectural edit of origin, material and the rooms in which these objects continue to live.</p>
+        </div>
+        <div className="heritage-window-grid mt-12 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-12 md:gap-6">
+          {heritageWindows.map((window, index) => (
+            <figure key={window.title} className={`heritage-window ${index === 0 ? 'md:col-span-3 md:translate-y-8' : index === 1 ? 'md:col-span-3 md:-translate-y-5' : index === 2 ? 'md:col-span-2 md:translate-y-14' : index === 3 ? 'md:col-span-2 md:-translate-y-2' : index === 4 ? 'md:col-span-2 md:translate-y-10' : index === 5 ? 'md:col-span-3 md:-translate-y-8' : 'md:col-span-3 md:translate-y-5'}`}>
+              <div className="heritage-window-image aspect-[.72] overflow-hidden">
+                <img src={window.image} alt={window.alt} className="h-full w-full object-cover" loading="lazy" />
+              </div>
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] via-[#060506]/70 to-transparent px-3 pb-4 pt-14 sm:px-5 sm:pb-5">
+                <div className="font-display text-xl text-[#e7ca9c] sm:text-2xl">{window.title}</div>
+                <div className="mt-1 font-meta text-[8px] uppercase tracking-[.16em] text-[#b99763]">{window.note}</div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
     <RugSelector />
     <section data-reveal className="reveal-on-scroll border-y border-[#b99763]/25 bg-[#0c0a07]"><div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10"><div className="flex items-end justify-between gap-6"><SectionIntro kicker="The edit" title={<>Five ways<br /><i className="text-[#b99763]">to enter.</i></>} /><Link href="/collections" className="hidden items-center gap-3 font-meta text-[10px] uppercase tracking-[.2em] text-[#b99763] md:flex" data-testid="link-all-collections">View all <ArrowUpRight size={14} /></Link></div><div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">{collections.map((item, i) => <Link href={`/collections/${item.slug}`} key={item.slug} className={`collection-card group relative overflow-hidden border border-[#b99763]/25 ${i === 0 ? 'lg:translate-y-10' : i === 3 ? 'lg:-translate-y-6' : ''}`} data-testid={`card-collection-${item.slug}`}><div className="aspect-[.78]"><img src={item.image} alt={item.title} className="collection-card-image h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" /></div><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] p-4 pt-16"><div className="font-display text-2xl text-[#e7ca9c]">{item.title}</div><div className="mt-1 font-meta text-[8px] uppercase tracking-[.14em] text-[#b99763]">{item.subtitle}</div></div></Link>)}</div></div></section>
     <section data-reveal className="reveal-on-scroll mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36"><SectionIntro kicker="Available now" title={<>The quiet<br /><i className="text-[#b99763]">standouts.</i></>} copy="A small selection of works currently in the gallery. Every piece is one of one; availability is confirmed personally." /><div className="mt-14 grid gap-x-5 gap-y-14 md:grid-cols-3">{products.slice(0, 3).map((product) => <ProductCard key={product.id} product={product} onAdd={onAdd} />)}</div></section>
