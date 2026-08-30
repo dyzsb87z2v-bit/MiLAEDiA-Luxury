@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { useCatalog } from '../../context/CatalogContext';
 import { ZoomIn, ZoomOut, X, ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
 
@@ -62,11 +62,13 @@ export function GalleryPage() {
   }, [lightboxIndex, gallery.length, scale]);
 
   const lightboxOpen = lightboxIndex !== null;
+  useLayoutEffect(() => {
+    if (lightboxOpen) closeButtonRef.current?.focus();
+  }, [lightboxOpen]);
   useEffect(() => {
     if (!lightboxOpen) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    window.requestAnimationFrame(() => closeButtonRef.current?.focus());
     return () => {
       document.body.style.overflow = previousOverflow;
       previousFocusRef.current?.focus();
