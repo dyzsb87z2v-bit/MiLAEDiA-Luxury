@@ -28,3 +28,17 @@ mtime_ms = 1788095793511
 storage_uri = "gcs://replit-rams-assets-archer/rams/assets/repl:5ccfbcc8-68d5-47f2-aa39-1ff595a4550b/4c557429-0dd3-462c-921f-1ba6c6a7655a/067d70b4-1bdb-4d18-a0f3-2622c2735e94"
 storage_version_token = "1788095800472906"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "y8UGL7qPN3NQKLxo4EAbS"
+uri = "file://MiLAEDiA-Vercel-Production.zip"
+type = "unspecified"
+title = "MiLAEDiA Vercel Production source export"
+description = "Standalone current MiLAEDiA website source export with package.json at ZIP root, real React app source, public assets, supplied Gemini video files, Vercel API function, Vite configuration, lockfile, and README."
+logical_id = "c54cda21-b16b-4e22-b9aa-a7167828b0de"
+content_hash = "sha256:ebcf7c8a4f105abfa1077e54c7b677aa53f1b23ce7c78d0eefcc57d528f08b4e"
+size = 21092711
+mtime_ms = 1788097969101
+storage_uri = "gcs://replit-rams-assets-archer/rams/assets/repl:5ccfbcc8-68d5-47f2-aa39-1ff595a4550b/c54cda21-b16b-4e22-b9aa-a7167828b0de/c128e3b8-77b9-4c00-a4d4-415dc0577d59"
+storage_version_token = "1788097984622117"
+content_type = "application/octet-stream"
