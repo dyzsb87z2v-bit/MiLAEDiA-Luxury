@@ -1,0 +1,96 @@
+==================================================
+29. FINAL REQUIREMENT — FULL PROJECT EXPORT
+==================================================
+
+VERY IMPORTANT:
+
+After all requested changes are successfully implemented and tested, I need to EXPORT THE COMPLETE MiLAEDiA PROJECT.
+
+Do NOT leave the project dependent on Replit-specific files, services, or runtime features unless absolutely necessary.
+
+Prepare the project so it can be downloaded/exported and moved to another hosting provider.
+
+The final exported project must include:
+
+- complete source code
+- all React/TypeScript files
+- all components
+- all pages/routes
+- all CSS/styles
+- package.json
+- lockfile
+- configuration files
+- public assets
+- supplied images
+- supplied Gemini MP4 video
+- fonts or font configuration
+- product/collection data
+- admin interface code
+- weave viewer code
+- animation/3D code
+- responsive code
+- all required local assets
+
+IMPORTANT:
+
+Do not omit large media files.
+
+The supplied Gemini MP4 MUST be included in the export.
+
+All supplied MiLAEDiA image assets that are actually used by the website MUST also be included.
+
+If any asset is stored externally, clearly identify it and provide its exact path/reference so the project can be migrated correctly.
+
+Before finalizing, check that there are no broken local asset paths.
+
+==================================================
+EXPORT FORMAT
+==================================================
+
+At the end of the task:
+
+1. Verify the application builds successfully.
+2. Verify there are no critical build errors.
+3. Verify all important routes work.
+4. Verify media paths work.
+5. Verify the Hero video is included.
+6. Verify images are included.
+7. Verify the project can run independently.
+
+Then prepare a COMPLETE PROJECT EXPORT suitable for migration to another hosting provider.
+
+Prefer a single downloadable ZIP archive containing the complete project.
+
+Suggested filename:
+
+MiLAEDiA-production-final.zip
+
+The ZIP should contain the actual project files, NOT screenshots and NOT only the source snippets.
+
+Also include a README.md containing:
+
+- how to install dependencies
+- how to run locally
+- how to build
+- how to start production
+- required environment variables
+- where the Hero video is located
+- where image assets are located
+- available routes
+- admin routes
+- any external services that still need configuration
+- any remaining limitations
+
+IMPORTANT:
+
+Do NOT delete or unpublish the currently deployed website while preparing the export.
+
+The existing deployed version must remain untouched until I have successfully downloaded and verified the exported ZIP.
+
+FINAL RESPONSE:
+
+After completing the implementation, tell me clearly:
+
+"MiLAEDiA project is ready for export."
+
+Then provide the ZIP/export option if the platform supports it, and summarize any files or external services that I must configure after migration.

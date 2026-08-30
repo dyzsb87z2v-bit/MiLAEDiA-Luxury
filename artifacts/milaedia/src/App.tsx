@@ -221,7 +221,7 @@ function useScrollReveals() {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.01, rootMargin: '0px 0px -8% 0px' });
     targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
   }, []);
@@ -354,14 +354,14 @@ function RugSelector() {
 function HomePage({ onAdd }: { onAdd: (id: string) => void }) {
   const revealRoot = useScrollReveals();
   const { collections, products } = useCatalog();
-  const heritageWindows = [
-    { title: 'Ancient Persia', note: 'Pattern / memory', image: '/assets/09_antique_rug.png', alt: 'Antique Persian rug detail' },
-    { title: 'Handwoven', note: 'The human measure', image: '/assets/10_handwoven_silk_rug.png', alt: 'Handwoven silk rug detail' },
-    { title: 'Iran', note: 'Origin / atelier', image: '/assets/03_hero_weaving_woman.png', alt: 'Hand-weaving detail from the atelier' },
-    { title: 'Berlin', note: 'A contemporary room', image: '/assets/04_workshop_weaving_woman.png', alt: 'Berlin interior at dusk' },
-    { title: 'Hungary', note: 'European context', image: '/assets/15_luxury_armchair.png', alt: 'Refined European interior detail' },
-    { title: 'Objects with a Past', note: 'Collected / held', image: '/assets/12_antique_silk_tapestry.png', alt: 'Antique silk tapestry detail' },
-    { title: 'The Weave', note: 'Structure / touch', image: '/assets/06_gallery_luxury_rug_room.png', alt: 'Rug in a gallery interior' },
+  const heritageWindows: Array<{ title: string; note: string; image: string; alt: string; video?: string; cta?: boolean }> = [
+    { title: 'ANCIENT PERSIA', note: 'THE ART OF HANDWEAVING', image: '/assets/09_antique_rug.png', alt: 'Antique Persian rug detail' },
+    { title: 'HANDWOVEN', note: 'CRAFTED THREAD BY THREAD', image: '/assets/10_handwoven_silk_rug.png', alt: 'Handwoven silk rug detail' },
+    { title: 'IRAN', note: 'WHERE THE THREAD BECOMES MEMORY', image: '/assets/03_hero_weaving_woman.png', alt: 'Hand-weaving detail from the atelier', video: '/assets/hero-presentation.mp4' },
+    { title: 'BERLIN', note: 'A CONTEMPORARY HOME FOR HERITAGE', image: '/assets/04_workshop_weaving_woman.png', alt: 'Berlin gallery atmosphere at dusk', video: '/assets/hero-opening-browser.mp4' },
+    { title: 'HUNGARY', note: 'A EUROPEAN CULTURAL BRIDGE', image: '/assets/15_luxury_armchair.png', alt: 'Refined Central European interior detail' },
+    { title: 'OBJECTS WITH A PAST.', note: 'THE RUG / COLLECTED / HELD', image: '/assets/12_antique_silk_tapestry.png', alt: 'Antique silk tapestry detail' },
+    { title: 'THE WEAVE', note: 'EXAMINE THE WEAVE →', image: '/assets/06_gallery_luxury_rug_room.png', alt: 'Rug in a gallery interior', cta: true },
   ];
   return <main ref={revealRoot}>
     <section className="hero-section hero-cinematic relative flex items-end overflow-hidden border-b border-[#b99763]/25 pt-24">
@@ -383,7 +383,7 @@ function HomePage({ onAdd }: { onAdd: (id: string) => void }) {
       <div className="absolute bottom-7 right-5 z-[3] hidden font-meta text-[9px] uppercase tracking-[.22em] text-[#c9c7c3]/55 md:block"><span className="text-[#b99763]">01</span> / 05 — Berlin salon</div>
     </section>
     <section data-reveal className="reveal-on-scroll mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36"><SectionIntro kicker="A house of pieces" title={<>Collected,<br /><i className="text-[#b99763]">not produced.</i></>} copy="MiLAEDiA is a private gallery for Persian rugs and tapestries. We look for the small, unrepeatable things: a particular red, a softened edge, the trace of a hand." /><div className="mt-16 grid gap-4 md:grid-cols-[1.15fr_.85fr]"><div className="relative min-h-[460px] overflow-hidden border border-[#b99763]/25"><img src="/assets/06_gallery_luxury_rug_room.png" alt="MiLAEDiA Berlin gallery interior" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] p-6 pt-24"><Eyebrow>01 — The Berlin gallery</Eyebrow><p className="mt-2 font-display text-3xl text-[#e7ca9c]">A room for looking slowly.</p></div></div><div className="flex flex-col justify-end border border-[#b99763]/25 bg-[#0c0a07] p-7 md:p-10"><div className="font-display text-[100px] leading-none text-[#7b311d]">“</div><p className="max-w-sm font-display text-3xl leading-[1.08] text-[#e7ca9c]">The best rugs do not decorate a room. They alter its sense of time.</p><div className="mt-10 flex items-center gap-3"><div className="h-px w-8 bg-[#b99763]" /><span className="font-meta text-[9px] uppercase tracking-[.18em] text-[#c9c7c3]/55">MiLAEDiA archive note 04</span></div></div></div></section>
-    <section data-reveal className="reveal-on-scroll border-y border-[#b99763]/25 bg-[#0c0a07]">
+    <section id="heritage-windows" data-reveal className="reveal-on-scroll border-y border-[#b99763]/25 bg-[#0c0a07]">
       <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36">
         <div className="flex flex-col gap-5 border-b border-[#b99763]/20 pb-10 md:flex-row md:items-end md:justify-between">
           <SectionIntro kicker="Heritage window gallery" title={<>Seven windows<br /><i className="text-[#b99763]">into the house.</i></>} />
@@ -391,15 +391,19 @@ function HomePage({ onAdd }: { onAdd: (id: string) => void }) {
         </div>
         <div className="heritage-window-grid mt-12 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-12 md:gap-6">
           {heritageWindows.map((window, index) => (
-            <figure key={window.title} className={`heritage-window ${index === 0 ? 'md:col-span-3 md:translate-y-8' : index === 1 ? 'md:col-span-3 md:-translate-y-5' : index === 2 ? 'md:col-span-2 md:translate-y-14' : index === 3 ? 'md:col-span-2 md:-translate-y-2' : index === 4 ? 'md:col-span-2 md:translate-y-10' : index === 5 ? 'md:col-span-3 md:-translate-y-8' : 'md:col-span-3 md:translate-y-5'}`}>
-              <div className="heritage-window-image aspect-[.72] overflow-hidden">
-                <img src={window.image} alt={window.alt} className="h-full w-full object-cover" loading="lazy" />
-              </div>
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] via-[#060506]/70 to-transparent px-3 pb-4 pt-14 sm:px-5 sm:pb-5">
-                <div className="font-display text-xl text-[#e7ca9c] sm:text-2xl">{window.title}</div>
-                <div className="mt-1 font-meta text-[8px] uppercase tracking-[.16em] text-[#b99763]">{window.note}</div>
-              </figcaption>
-            </figure>
+            (() => {
+              const frame = <figure key={window.title} className={`heritage-window ${index === 0 ? 'md:col-span-3 md:translate-y-8' : index === 1 ? 'md:col-span-3 md:-translate-y-5' : index === 2 ? 'md:col-span-2 md:translate-y-14' : index === 3 ? 'md:col-span-2 md:-translate-y-2' : index === 4 ? 'md:col-span-2 md:translate-y-10' : index === 5 ? 'md:col-span-3 md:-translate-y-8' : 'md:col-span-3 md:translate-y-5'}`}>
+                <div className="heritage-window-image aspect-[.72] overflow-hidden">
+                  <img src={window.image} alt={window.alt} className="h-full w-full object-cover" loading="lazy" />
+                  {window.video && <video className="heritage-window-video" autoPlay muted playsInline loop preload="none" poster="/assets/hero-poster.jpg" aria-hidden="true"><source src={window.video} type="video/mp4" /></video>}
+                </div>
+                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] via-[#060506]/75 to-transparent px-3 pb-4 pt-14 sm:px-5 sm:pb-5">
+                  <div className="font-display text-xl text-[#e7ca9c] sm:text-2xl">{window.title}</div>
+                  <div className="mt-1 font-meta text-[8px] uppercase tracking-[.16em] text-[#b99763]">{window.note}</div>
+                </figcaption>
+              </figure>;
+              return window.cta ? <Link key={window.title} href="/weave" className="heritage-window-link" aria-label="Examine the weave">{frame}</Link> : frame;
+            })()
           ))}
         </div>
       </div>
