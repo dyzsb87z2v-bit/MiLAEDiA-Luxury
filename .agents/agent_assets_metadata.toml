@@ -14,3 +14,17 @@ mtime_ms = 1788095699805
 storage_uri = "gcs://replit-rams-assets-archer/rams/assets/repl:5ccfbcc8-68d5-47f2-aa39-1ff595a4550b/05535e00-8bee-4bf6-a420-8dc8dd8ddc6b/32b70052-7dbf-45d6-871a-1ac46e21f6ce"
 storage_version_token = "1788095707897577"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "MdhhmPCKsthYxXqQNoaIB"
+uri = "file://exports/MiLAEDiA-production-final.zip"
+type = "unspecified"
+title = "Download MiLAEDiA production final export"
+description = "Verified 21 MB ZIP export containing the complete MiLAEDiA source workspace, public assets, supplied Hero media, admin interface, Weave viewer, and migration README."
+logical_id = "4c557429-0dd3-462c-921f-1ba6c6a7655a"
+content_hash = "sha256:4330103d2bc705b835411123c750da48b0a797238d19fa4d7a2ab0cfe9e9324a"
+size = 21224390
+mtime_ms = 1788095793511
+storage_uri = "gcs://replit-rams-assets-archer/rams/assets/repl:5ccfbcc8-68d5-47f2-aa39-1ff595a4550b/4c557429-0dd3-462c-921f-1ba6c6a7655a/067d70b4-1bdb-4d18-a0f3-2622c2735e94"
+storage_version_token = "1788095800472906"
+content_type = "application/octet-stream"
