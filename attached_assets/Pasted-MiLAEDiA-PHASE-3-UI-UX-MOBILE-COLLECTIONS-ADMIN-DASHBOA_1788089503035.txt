@@ -1,0 +1,890 @@
+MiLAEDiA — PHASE 3 UI/UX + MOBILE COLLECTIONS + ADMIN DASHBOARD
+
+IMPORTANT:
+The current HOME / HERO is now acceptable.
+
+DO NOT redesign, replace, simplify, or modify the existing first-page Hero.
+
+DO NOT touch the current Hero video, cinematic intro, Hero animation, 3D depth, parallax, typography, or opening experience unless absolutely necessary for shared infrastructure.
+
+This task is primarily about:
+1. PAGE 2 / COLLECTIONS MOBILE EXPERIENCE
+2. PRODUCT/COLLECTION INTERACTION
+3. PROFESSIONAL ECOMMERCE UX
+4. ADMIN DASHBOARD
+5. RESPONSIVE QUALITY
+
+==================================================
+1. PAGE 2 — COLLECTIONS
+==================================================
+
+The current mobile implementation shows the rug cards as very large vertical blocks.
+
+This is NOT acceptable for mobile.
+
+The supplied screenshot shows that the cards are too tall and force the user to scroll through huge fixed images.
+
+DO NOT simply make the cards smaller.
+
+Instead create a responsive collection presentation.
+
+==================================================
+2. MOBILE — 3D RUG CAROUSEL
+==================================================
+
+On mobile, convert the collection cards into a horizontal interactive carousel.
+
+Only one primary rug should be visually dominant.
+
+Example:
+
+        previous
+           ↓
+
+      ┌─────────────┐
+      │             │
+      │    RUG      │
+      │             │
+      └─────────────┘
+           ACTIVE
+
+      next →
+
+The user can:
+
+- swipe left → next rug
+- swipe right → previous rug
+- tap navigation arrows
+- tap the active card
+- optionally use pagination dots
+
+The carousel must NOT create horizontal page scrolling.
+
+The horizontal movement must be contained inside the carousel.
+
+==================================================
+3. 3D CARD TRANSITION
+==================================================
+
+Do NOT use a basic fade or standard slider.
+
+When changing rugs, create a subtle physical 3D rotation.
+
+Current rug:
+
+rotateY(0deg)
+
+→
+
+rotateY(90deg)
+
+→
+
+new rug:
+
+rotateY(0deg)
+
+The entire frame/card should participate in the transition.
+
+Use:
+
+perspective
+transform-style: preserve-3d
+rotateY
+translateZ
+scale
+opacity
+
+The effect should feel like turning a framed Persian rug artwork.
+
+Animation:
+
+600–900ms
+
+Use a premium easing curve.
+
+No bounce.
+
+No excessive rotation.
+
+No gaming-style effects.
+
+==================================================
+4. MOBILE CARD SIZE
+==================================================
+
+The active card must fit naturally inside the mobile viewport.
+
+Do not use fixed desktop heights.
+
+Use responsive sizing such as:
+
+width: min(...)
+height: auto
+aspect-ratio
+
+The image must remain fully visible.
+
+The user should be able to understand the rug and title without needing to scroll through a huge card.
+
+Maintain:
+
+- gold border
+- dark background
+- editorial typography
+- premium spacing
+- realistic rug imagery
+
+==================================================
+5. MOBILE COLLECTION NAVIGATION
+==================================================
+
+Add a compact collection navigation above the carousel.
+
+For example:
+
+ANTIQUE RUGS
+HANDWOVEN SILK
+LUXURY RUGS
+SILK TAPESTRIES
+
+On mobile this can be:
+
+- horizontally scrollable chips/tabs
+OR
+- compact dropdown
+
+But it must remain elegant and not look like a generic ecommerce filter.
+
+Selected state:
+
+gold
+
+Inactive:
+
+silver / muted
+
+==================================================
+6. DESKTOP COLLECTIONS
+==================================================
+
+Desktop can retain multiple cards simultaneously.
+
+Use an editorial asymmetric grid rather than a generic ecommerce grid.
+
+Possible structure:
+
+large feature rug
++
+two smaller rugs
++
+large editorial image
+
+Do not make every card identical.
+
+Preserve the MiLAEDiA private-gallery aesthetic.
+
+==================================================
+7. PRODUCT CARD
+==================================================
+
+Each rug card should contain:
+
+- image
+- collection/category
+- rug name
+- dimensions
+- material
+- weaving type
+- availability
+- price when appropriate
+- CTA
+
+But do not overload the visual design.
+
+Metadata should use IBM Plex Mono.
+
+Editorial title should use Cormorant Garamond.
+
+==================================================
+8. PRODUCT STATES
+==================================================
+
+Support:
+
+AVAILABLE
+RESERVED
+SOLD
+MADE TO ORDER
+
+For SOLD:
+
+Do not delete the product.
+
+Show:
+
+SOLD
+
+and provide:
+
+VIEW ARCHIVE
+or
+INQUIRE ABOUT A SIMILAR PIECE
+
+This is important because the site should feel like a gallery/archive rather than a disposable ecommerce catalog.
+
+==================================================
+9. PRODUCT DETAIL PAGE
+==================================================
+
+Create a premium product detail experience.
+
+Desktop:
+
+LEFT:
+large image/gallery
+
+RIGHT:
+product information
+
+Mobile:
+
+image first
+then title
+then price
+then dimensions
+then material
+then availability
+then description
+then CTA
+
+Include:
+
+- image gallery
+- zoom
+- dimensions
+- material
+- weaving type
+- origin if available
+- availability
+- price
+- inquiry button
+- add to cart where applicable
+- related pieces
+
+Do NOT invent product information.
+
+If information does not exist, use a neutral placeholder or "Available on request".
+
+==================================================
+10. PRODUCT IMAGE VIEWER
+==================================================
+
+On mobile, product images should support:
+
+- swipe
+- pinch zoom where appropriate
+- fullscreen viewing
+- smooth transitions
+
+The viewer must not break page scrolling.
+
+==================================================
+11. CART
+==================================================
+
+Create a professional Cart experience.
+
+Support:
+
+- product image
+- product name
+- quantity
+- price
+- subtotal
+- remove
+- continue shopping
+- checkout
+
+For one-of-one rugs:
+
+quantity must never exceed 1.
+
+If sold/reserved:
+
+disable purchase and show inquiry/reservation state.
+
+==================================================
+12. CHECKOUT
+==================================================
+
+Create a clean luxury checkout.
+
+Sections:
+
+Customer information
+Shipping information
+Order summary
+Payment
+
+Until real payment credentials/integration are provided:
+
+DO NOT pretend payment is real.
+
+Use a clearly labelled development/mock payment state.
+
+Structure the code so real payment can later be connected server-side.
+
+==================================================
+13. CUSTOM ORDER
+==================================================
+
+Create a professional custom rug inquiry flow.
+
+Fields:
+
+Rug type
+Width
+Length
+Unit
+Color direction
+Pattern/style
+Material
+Weaving type
+Reference image upload
+Additional requirements
+Name
+Email
+Phone
+Message
+
+Primary CTA:
+
+CREATE YOUR CUSTOM RUG
+
+Secondary:
+
+UPLOAD YOUR OWN IMAGE
+
+After submission:
+
+show confirmation state.
+
+Do not promise an automatic price unless pricing rules are actually configured.
+
+==================================================
+14. ADMIN DASHBOARD
+==================================================
+
+THIS IS REQUIRED.
+
+Create a completely separate protected Admin area.
+
+Public visitors must never see the admin sidebar.
+
+Admin routes:
+
+/admin/login
+/admin/dashboard
+/admin/products
+/admin/orders
+/admin/custom-orders
+/admin/categories
+/admin/inventory
+/admin/pricing
+/admin/customers
+/admin/messages
+/admin/content
+/admin/gallery
+/admin/settings
+
+==================================================
+15. ADMIN LOGIN
+==================================================
+
+Create:
+
+/admin/login
+
+Fields:
+
+Email
+Password
+
+Include:
+
+- validation
+- loading state
+- error state
+- logout
+- protected routes
+
+Do not put admin credentials in client-side code.
+
+Use environment variables/server-side authentication architecture.
+
+If authentication backend is not yet connected, clearly separate development authentication from production authentication.
+
+==================================================
+16. ADMIN DASHBOARD HOME
+==================================================
+
+Dashboard should show:
+
+Total Products
+Available Pieces
+Reserved Pieces
+Sold Pieces
+Pending Orders
+Pending Custom Orders
+Revenue
+Unread Messages
+
+Also show:
+
+Recent Orders
+Recent Custom Requests
+Low Stock / Availability alerts
+
+Design:
+
+dark
+gold
+editorial
+minimal
+professional
+
+Do NOT make it look like a generic SaaS dashboard.
+
+==================================================
+17. ADMIN PRODUCT MANAGEMENT
+==================================================
+
+Admin must be able to:
+
+CREATE PRODUCT
+EDIT PRODUCT
+DELETE PRODUCT
+ARCHIVE PRODUCT
+CHANGE PRICE
+CHANGE AVAILABILITY
+CHANGE STOCK
+UPLOAD IMAGES
+CHANGE FEATURED STATUS
+CHANGE CATEGORY
+CHANGE COLLECTION
+
+Product fields:
+
+Name
+Slug
+Category
+Collection
+Price
+Currency
+Dimensions
+Material
+Weaving Type
+Origin
+Region
+Description
+Stock
+Availability
+Featured
+Images
+
+Changes must be reflected on the public website through the shared data layer.
+
+Do not hardcode product data separately in multiple components.
+
+==================================================
+18. ADMIN IMAGE MANAGEMENT
+==================================================
+
+Admin should be able to:
+
+- upload product image
+- replace image
+- remove image
+- reorder gallery images
+- set primary image
+- add alt text
+
+Validate image types and sizes.
+
+Do not expose private upload paths unnecessarily.
+
+==================================================
+19. ADMIN PRICING
+==================================================
+
+Create pricing management.
+
+Allow admin to change:
+
+- product price
+- currency
+- sale/discount state if needed
+- custom-order pricing rules when configured
+
+Do not hardcode prices inside UI components.
+
+==================================================
+20. ADMIN ORDERS
+==================================================
+
+Admin order table:
+
+Order ID
+Customer
+Date
+Items
+Total
+Payment status
+Order status
+
+Order status:
+
+NEW
+PENDING
+PAID
+PROCESSING
+SHIPPED
+COMPLETED
+CANCELLED
+
+Admin can update status.
+
+Display status visually using restrained gold/silver states.
+
+==================================================
+21. ADMIN CUSTOM ORDERS
+==================================================
+
+Dashboard for custom rug requests.
+
+Display:
+
+Customer
+Requested dimensions
+Rug type
+Style
+Colors
+Reference image
+Date
+Status
+
+Statuses:
+
+NEW
+REVIEWING
+QUOTED
+APPROVED
+IN PRODUCTION
+COMPLETED
+
+Admin should be able to open the request and update its status.
+
+==================================================
+22. ADMIN CUSTOMERS
+==================================================
+
+Display:
+
+Name
+Email
+Phone
+Orders
+Custom requests
+Last activity
+
+Clicking a customer opens their history.
+
+==================================================
+23. ADMIN MESSAGES
+==================================================
+
+Create an inbox for:
+
+Contact messages
+Custom rug inquiries
+Order inquiries
+
+Support:
+
+unread
+read
+archived
+
+==================================================
+24. ADMIN CONTENT MANAGEMENT
+==================================================
+
+Allow future management of:
+
+Hero text
+Collection titles
+Editorial sections
+Workshop content
+About content
+Contact information
+
+IMPORTANT:
+
+Do NOT expose technical/admin functionality publicly.
+
+==================================================
+25. ADMIN GALLERY
+==================================================
+
+Admin can:
+
+- upload gallery image
+- delete image
+- reorder images
+- add title
+- add description
+- mark featured
+
+Public Gallery automatically reflects these changes.
+
+==================================================
+26. DATA ARCHITECTURE
+==================================================
+
+IMPORTANT:
+
+Do not duplicate product data inside React components.
+
+Use a centralized data layer.
+
+Development can initially use a local data store/API abstraction.
+
+The architecture must be ready to move to:
+
+PostgreSQL / Supabase / equivalent backend
+
+without rewriting the UI.
+
+Separate:
+
+UI
+data access
+authentication
+storage
+business logic
+
+==================================================
+27. RESPONSIVE ADMIN
+==================================================
+
+Admin must also work on mobile.
+
+Desktop:
+
+sidebar + content
+
+Tablet:
+
+collapsible sidebar
+
+Mobile:
+
+drawer navigation
+
+Tables must become responsive cards where necessary.
+
+Do not create horizontal page overflow.
+
+==================================================
+28. VISUAL SYSTEM
+==================================================
+
+Keep the established MiLAEDiA tokens:
+
+--ink: #060506;
+--panel: #0C0A07;
+--gold: #B99763;
+--gold-hi: #E7CA9C;
+--bronze: #8D5E37;
+--crimson: #7B311D;
+--twilight: #344E7D;
+--silver: #C9C7C3;
+
+Typography:
+
+Cormorant Garamond
+Vazirmatn
+IBM Plex Mono
+
+No:
+
+glassmorphism
+generic gradients
+large shadows
+bright ecommerce UI
+generic SaaS dashboard styling
+
+==================================================
+29. MICRO INTERACTIONS
+==================================================
+
+Add subtle professional interactions:
+
+- button hover
+- image reveal
+- card perspective
+- navigation transitions
+- loading indicators
+- skeleton states
+- success states
+- error states
+- image loading
+- cart updates
+
+Everything must remain restrained.
+
+==================================================
+30. ACCESSIBILITY
+==================================================
+
+Implement:
+
+- keyboard navigation
+- visible focus states
+- accessible buttons
+- labels
+- alt text
+- ARIA where appropriate
+- reduced motion
+- sufficient contrast
+- touch-friendly targets
+
+==================================================
+31. PERFORMANCE
+==================================================
+
+For mobile:
+
+- lazy load collection images
+- responsive image sizes
+- modern image formats where possible
+- avoid loading all large images at once
+- preload only critical Hero assets
+- avoid unnecessary JavaScript
+- keep 3D transforms GPU friendly
+
+IMPORTANT:
+
+Do NOT optimize by removing the visual experience.
+
+==================================================
+32. DO NOT TOUCH HOME HERO
+==================================================
+
+Again:
+
+The current first-page Hero is currently acceptable.
+
+DO NOT replace it.
+
+DO NOT simplify it.
+
+DO NOT remove its video.
+
+DO NOT remove its animation.
+
+DO NOT remove its 3D.
+
+DO NOT change its composition.
+
+Only fix shared responsive infrastructure if absolutely necessary.
+
+==================================================
+33. FINAL MOBILE TEST
+==================================================
+
+Test:
+
+320px
+375px
+390px
+430px
+
+The Collections page must show:
+
+- compact title section
+- collection navigation
+- one main rug card
+- swipe interaction
+- 3D transition
+- next/previous controls
+- no horizontal page overflow
+
+The user must NOT have to scroll through enormous vertical rug cards.
+
+==================================================
+34. FINAL QUALITY STANDARD
+==================================================
+
+The result should feel like:
+
+A PRIVATE PERSIAN RUG GALLERY
++
+LUXURY FASHION HOUSE
++
+EDITORIAL ART EXPERIENCE
++
+REAL ECOMMERCE
++
+PROFESSIONAL CMS
+
+Not:
+
+generic ecommerce template
+generic Shopify site
+generic admin dashboard
+
+==================================================
+IMPLEMENTATION ORDER
+==================================================
+
+1. Inspect current project.
+2. Preserve Home/Hero.
+3. Refactor Collections responsive layout.
+4. Build mobile 3D rug carousel.
+5. Build desktop editorial collection layout.
+6. Improve Product Detail.
+7. Improve Cart.
+8. Build Custom Order.
+9. Build protected Admin.
+10. Build Product Management.
+11. Build Order Management.
+12. Build Custom Order Management.
+13. Build Pricing.
+14. Build Inventory.
+15. Build Customers.
+16. Build Messages.
+17. Build Gallery management.
+18. Build Content management.
+19. Add loading/error/empty states.
+20. Test all breakpoints.
+21. Perform visual QA.
+
+Do not stop at "it works".
+
+The final requirement is:
+
+FUNCTIONAL
++
+RESPONSIVE
++
+VISUALLY PREMIUM
++
+3D
++
+EDITORIAL
++
+MOBILE FRIENDLY
++
+ADMIN MANAGEABLE
