@@ -10,8 +10,43 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { collections, galleryImages, money, products, type Product } from '@/data/catalog';
+
+// Data & Context
+import { money } from '@/data/catalog';
+import { CatalogProvider, useCatalog } from './context/CatalogContext';
+
+
+import { WeavePage } from './pages/weave/WeavePage';
+import { WorkshopPage } from './pages/workshop/WorkshopPage';
+import { GalleryPage } from './pages/gallery/GalleryPage';
+import { OrderConfirmationPage } from './pages/checkout/OrderConfirmationPage';
+import { AdminAuthProvider } from './context/AdminAuthContext';
+import { AboutPage, ContactPage, SearchPage } from './pages/misc';
+// Components
+import { ProductCard } from './components/ProductCard';
 import NotFound from '@/pages/not-found';
+
+// Pages
+import { CollectionsPage } from './pages/collections/CollectionsPage';
+import { CollectionDetailPage } from './pages/collections/CollectionDetailPage';
+import { ProductPage } from './pages/products/ProductPage';
+import { CartPage } from './pages/cart/CartPage';
+import { CheckoutPage } from './pages/checkout/CheckoutPage';
+import { CustomOrderPage } from './pages/custom-order/CustomOrderPage';
+
+
+import { AdminCategories } from './pages/admin/AdminCategories';
+import { AdminCustomers } from './pages/admin/AdminCustomers';
+import { AdminGallery } from './pages/admin/AdminGallery';
+import { AdminSettings } from './pages/admin/AdminSettings';
+import { AdminContent, AdminInventory, AdminMessages, AdminPricing } from './pages/admin/AdminOperations';
+// Admin
+import { AdminLayout } from './components/admin/AdminLayout';
+import { AdminLogin } from './pages/admin/AdminLogin';
+import { AdminDashboard } from './pages/admin/AdminDashboard';
+import { AdminProducts } from './pages/admin/AdminProducts';
+import { AdminOrders } from './pages/admin/AdminOrders';
+import { AdminCustomOrders } from './pages/admin/AdminCustomOrders';
 
 const queryClient = new QueryClient();
 type CartLine = { id: string; qty: number };
@@ -21,13 +56,17 @@ function useLocalCart() {
     try { return JSON.parse(localStorage.getItem('milaedia-cart') || '[]'); } catch { return []; }
   });
   useEffect(() => { localStorage.setItem('milaedia-cart', JSON.stringify(cart)); }, [cart]);
+
+  // Note: for one-of-one rugs, qty must never exceed 1. We enforce it here just in case.
   const add = (id: string) => setCart((items) => {
     const found = items.find((item) => item.id === id);
-    return found ? items.map((item) => item.id === id ? { ...item, qty: item.qty + 1 } : item) : [...items, { id, qty: 1 }];
+    return found ? items : [...items, { id, qty: 1 }];
   });
-  const update = (id: string, qty: number) => setCart((items) => qty < 1 ? items.filter((item) => item.id !== id) : items.map((item) => item.id === id ? { ...item, qty } : item));
+  const update = (id: string, qty: number) => setCart((items) => qty < 1 ? items.filter((item) => item.id !== id) : items.map((item) => item.id === id ? { ...item, qty: 1 } : item));
   const remove = (id: string) => setCart((items) => items.filter((item) => item.id !== id));
-  return { cart, add, update, remove };
+  const clear = () => setCart([]);
+
+  return { cart, add, update, remove, clear };
 }
 
 function Header({ cartCount }: { cartCount: number }) {
@@ -80,20 +119,6 @@ function Shell({ children, cartCount }: { children: ReactNode; cartCount: number
 function Eyebrow({ children }: { children: ReactNode }) { return <div className="font-meta text-[9px] uppercase tracking-[.32em] text-[#b99763]">{children}</div>; }
 function Rule() { return <div className="h-px w-full bg-[#b99763]/25" />; }
 function SectionIntro({ kicker, title, copy }: { kicker: string; title: ReactNode; copy?: string }) { return <div className="grid gap-5 md:grid-cols-[.8fr_1.5fr] md:items-end"><div><Eyebrow>{kicker}</Eyebrow><h2 className="mt-3 font-display text-5xl leading-[.92] text-[#e7ca9c] md:text-7xl">{title}</h2></div>{copy && <p className="max-w-md text-sm leading-7 text-[#c9c7c3]/65">{copy}</p>}</div>; }
-
-function ProductCard({ product, onAdd }: { product: Product; onAdd: (id: string) => void }) {
-  return <article className="archive-card group" data-testid={`card-product-${product.id}`}>
-    <Link href={`/products/${product.slug}`} className="block" data-testid={`link-product-${product.id}`}>
-      <div className="relative aspect-[4/5] overflow-hidden border border-[#b99763]/25 bg-[#0c0a07]">
-        <img src={product.image} alt={product.name} className="archive-card-image h-full w-full object-cover transition duration-700 group-hover:scale-[1.035]" loading="lazy" />
-        <div className="absolute left-3 top-3 border border-[#e7ca9c]/45 bg-[#060506]/70 px-2 py-1 font-meta text-[8px] uppercase tracking-[.15em] text-[#e7ca9c]">{product.available ? 'Available' : 'Reserved'}</div>
-        <div className="absolute bottom-3 right-3 grid h-9 w-9 translate-y-2 place-items-center border border-[#e7ca9c]/0 bg-[#060506]/80 text-[#e7ca9c] opacity-0 transition group-hover:translate-y-0 group-hover:border-[#e7ca9c]/50 group-hover:opacity-100"><ArrowUpRight size={15} strokeWidth={1.2} /></div>
-      </div>
-    </Link>
-    <div className="flex items-start justify-between gap-4 pt-4"><div><div className="font-display text-2xl text-[#e7ca9c]">{product.name}</div><div className="mt-1 font-meta text-[9px] uppercase tracking-[.12em] text-[#c9c7c3]/45">{product.material} · {product.dimensions}</div></div><button onClick={() => onAdd(product.id)} type="button" className="mt-1 text-[#b99763] transition-colors hover:text-[#e7ca9c]" data-testid={`button-add-${product.id}`}><Plus size={17} strokeWidth={1.2} /></button></div>
-    <div className="mt-3 font-meta text-xs text-[#b99763]">{money(product.price)}</div>
-  </article>;
-}
 
 function useSceneParallax() {
   const ref = useRef<HTMLDivElement>(null);
@@ -204,6 +229,7 @@ function useScrollReveals() {
 }
 
 function RugSelector() {
+  const { products } = useCatalog();
   const [activeIndex, setActiveIndex] = useState(0);
   const [pendingIndex, setPendingIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState<1 | -1>(1);
@@ -211,14 +237,21 @@ function RugSelector() {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const startX = useRef<number | null>(null);
   const timeoutRef = useRef<number | null>(null);
-  const active = products[activeIndex];
   const count = products.length;
+  const displayIndex = Math.min(activeIndex, Math.max(0, count - 1));
+  const active = products[displayIndex];
 
   useEffect(() => () => { if (timeoutRef.current) window.clearTimeout(timeoutRef.current); }, []);
+  useEffect(() => {
+    if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    setActiveIndex((index) => Math.min(index, Math.max(0, products.length - 1)));
+    setPendingIndex(null);
+    setTurning(false);
+  }, [products]);
 
   const turnTo = (nextIndex: number) => {
-    if (turning || nextIndex === activeIndex) return;
-    const forwardDistance = (nextIndex - activeIndex + count) % count;
+    if (count === 0 || turning || nextIndex === displayIndex) return;
+    const forwardDistance = (nextIndex - displayIndex + count) % count;
     setDirection(forwardDistance <= count / 2 ? 1 : -1);
     setPendingIndex(nextIndex);
     setTurning(true);
@@ -228,7 +261,9 @@ function RugSelector() {
       setTurning(false);
     }, 820);
   };
-  const turnBy = (amount: number) => turnTo((activeIndex + amount + count) % count);
+  const turnBy = (amount: number) => {
+    if (count > 0) turnTo((displayIndex + amount + count) % count);
+  };
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'ArrowRight') { event.preventDefault(); turnBy(1); }
     if (event.key === 'ArrowLeft') { event.preventDefault(); turnBy(-1); }
@@ -244,16 +279,26 @@ function RugSelector() {
     const rect = event.currentTarget.getBoundingClientRect();
     setTilt({ x: ((event.clientX - rect.left) / rect.width - 0.5) * 3, y: -((event.clientY - rect.top) / rect.height - 0.5) * 2 });
   };
+  if (!active) {
+    return <section className="rug-selector border-y border-[#b99763]/25 bg-[#0c0a07]">
+      <div className="mx-auto max-w-[1440px] px-5 py-24 text-center md:px-10">
+        <Eyebrow>The living archive</Eyebrow>
+        <h2 className="mt-4 font-display text-5xl text-[#e7ca9c]">The next edit is being prepared.</h2>
+        <p className="mx-auto mt-5 max-w-md text-sm leading-7 text-[#c9c7c3]/60">No works are currently listed. Please return as the archive evolves.</p>
+      </div>
+    </section>;
+  }
+
   const faces = [
     <div key={`active-${active.id}`} className={`rug-face current ${turning ? (direction === 1 ? 'turn-forward' : 'turn-back') : ''}`}>
       <img src={active.image} alt="" className="rug-art" />
       <div className="rug-frame-line" />
-      <div className="rug-frame-caption"><span>MiLAEDiA / {String(activeIndex + 1).padStart(2, '0')}</span><span>{active.collection.replaceAll('-', ' ')}</span></div>
+      <div className="rug-frame-caption"><span>MiLAEDiA / {String(displayIndex + 1).padStart(2, '0')}</span><span>{active.collection.replaceAll('-', ' ')}</span></div>
     </div>,
   ];
   if (pendingIndex !== null) {
     const incoming = products[pendingIndex];
-    faces.push(<div key={`pending-${incoming.id}`} className={`rug-face incoming ${direction === 1 ? 'from-forward' : 'from-back'}`}>
+    if (incoming) faces.push(<div key={`pending-${incoming.id}`} className={`rug-face incoming ${direction === 1 ? 'from-forward' : 'from-back'}`}>
       <img src={incoming.image} alt="" className="rug-art" />
       <div className="rug-frame-line" />
       <div className="rug-frame-caption"><span>MiLAEDiA / {String(pendingIndex + 1).padStart(2, '0')}</span><span>{incoming.collection.replaceAll('-', ' ')}</span></div>
@@ -298,8 +343,8 @@ function RugSelector() {
           <span className="shrink-0 font-meta text-sm text-[#b99763]">{money(active.price)}</span>
         </div>
         <div className="mt-7 flex items-center gap-2" aria-label="Rug selection">
-          {products.map((product, index) => <button key={product.id} type="button" aria-label={`Show ${product.name}`} aria-current={index === activeIndex ? 'true' : undefined} onClick={() => turnTo(index)} className={`h-px transition-all duration-500 ${index === activeIndex ? 'w-10 bg-[#e7ca9c]' : 'w-5 bg-[#b99763]/35 hover:bg-[#b99763]'}`} data-testid={`button-rug-indicator-${index}`} />)}
-          <span className="ml-2 font-meta text-[9px] text-[#c9c7c3]/35">{String(activeIndex + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}</span>
+          {products.map((product, index) => <button key={product.id} type="button" aria-label={`Show ${product.name}`} aria-current={index === displayIndex ? 'true' : undefined} onClick={() => turnTo(index)} className={`h-px transition-all duration-500 ${index === displayIndex ? 'w-10 bg-[#e7ca9c]' : 'w-5 bg-[#b99763]/35 hover:bg-[#b99763]'}`} data-testid={`button-rug-indicator-${index}`} />)}
+          <span className="ml-2 font-meta text-[9px] text-[#c9c7c3]/35">{String(displayIndex + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}</span>
         </div>
       </div>
     </div>
@@ -308,6 +353,7 @@ function RugSelector() {
 
 function HomePage({ onAdd }: { onAdd: (id: string) => void }) {
   const revealRoot = useScrollReveals();
+  const { collections, products } = useCatalog();
   return <main ref={revealRoot}>
     <section className="hero-section hero-cinematic relative flex items-end overflow-hidden border-b border-[#b99763]/25 pt-24">
       <HeroScene />
@@ -331,82 +377,54 @@ function HomePage({ onAdd }: { onAdd: (id: string) => void }) {
     <RugSelector />
     <section data-reveal className="reveal-on-scroll border-y border-[#b99763]/25 bg-[#0c0a07]"><div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10"><div className="flex items-end justify-between gap-6"><SectionIntro kicker="The edit" title={<>Five ways<br /><i className="text-[#b99763]">to enter.</i></>} /><Link href="/collections" className="hidden items-center gap-3 font-meta text-[10px] uppercase tracking-[.2em] text-[#b99763] md:flex" data-testid="link-all-collections">View all <ArrowUpRight size={14} /></Link></div><div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">{collections.map((item, i) => <Link href={`/collections/${item.slug}`} key={item.slug} className={`collection-card group relative overflow-hidden border border-[#b99763]/25 ${i === 0 ? 'lg:translate-y-10' : i === 3 ? 'lg:-translate-y-6' : ''}`} data-testid={`card-collection-${item.slug}`}><div className="aspect-[.78]"><img src={item.image} alt={item.title} className="collection-card-image h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" /></div><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#060506] p-4 pt-16"><div className="font-display text-2xl text-[#e7ca9c]">{item.title}</div><div className="mt-1 font-meta text-[8px] uppercase tracking-[.14em] text-[#b99763]">{item.subtitle}</div></div></Link>)}</div></div></section>
     <section data-reveal className="reveal-on-scroll mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36"><SectionIntro kicker="Available now" title={<>The quiet<br /><i className="text-[#b99763]">standouts.</i></>} copy="A small selection of works currently in the gallery. Every piece is one of one; availability is confirmed personally." /><div className="mt-14 grid gap-x-5 gap-y-14 md:grid-cols-3">{products.slice(0, 3).map((product) => <ProductCard key={product.id} product={product} onAdd={onAdd} />)}</div></section>
-    <section data-reveal className="reveal-on-scroll relative min-h-[490px] overflow-hidden border-y border-[#b99763]/25"><img src="/assets/07_berlin_city_about.png" alt="Berlin architecture" className="absolute inset-0 h-full w-full object-cover opacity-55" /><div className="absolute inset-0 bg-[#060506]/35" /><div className="relative mx-auto flex min-h-[490px] max-w-[1440px] items-center justify-between gap-10 px-5 md:px-10"><div><Eyebrow>For a particular room</Eyebrow><h2 className="mt-5 max-w-xl font-display text-6xl leading-[.86] text-[#e7ca9c] md:text-8xl">Make it<br /><i className="text-[#b99763]">yours.</i></h2></div><div className="max-w-xs"><p className="text-sm leading-7 text-[#c9c7c3]/70">Tell us about the space, the light and the feeling you are after. We will make a considered edit from our network in Iran and Europe.</p><Link href="/custom-order" className="mt-7 inline-flex items-center gap-4 border-b border-[#b99763] pb-2 font-meta text-[10px] uppercase tracking-[.2em] text-[#e7ca9c]" data-testid="link-custom-home">Begin a custom conversation <ArrowUpRight size={14} /></Link></div></div></section>
+    <section data-reveal className="reveal-on-scroll relative min-h-[490px] overflow-hidden border-y border-[#b99763]/25"><img src="/assets/05_folded_silk_rugs.png" alt="Berlin interior at dusk" className="absolute inset-0 h-full w-full object-cover opacity-55" /><div className="absolute inset-0 bg-[#060506]/35" /><div className="relative mx-auto flex min-h-[490px] max-w-[1440px] items-center justify-between gap-10 px-5 md:px-10"><div><Eyebrow>For a particular room</Eyebrow><h2 className="mt-5 max-w-xl font-display text-6xl leading-[.86] text-[#e7ca9c] md:text-8xl">Make it<br /><i className="text-[#b99763]">yours.</i></h2></div><div className="max-w-xs"><p className="text-sm leading-7 text-[#c9c7c3]/70">Tell us about the space, the light and the feeling you are after. We will make a considered edit from our network in Iran and Europe.</p><Link href="/custom-order" className="mt-7 inline-flex items-center gap-4 border-b border-[#b99763] pb-2 font-meta text-[10px] uppercase tracking-[.2em] text-[#e7ca9c]" data-testid="link-custom-home">Begin a custom conversation <ArrowUpRight size={14} /></Link></div></div></section>
   </main>;
 }
 
-function WorkshopPage() {
-  return <main className="pt-[76px]"><section className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 md:grid-cols-[.8fr_1.2fr] md:px-10 md:py-24"><div><Eyebrow>The workshop</Eyebrow><h1 className="mt-6 font-display text-7xl leading-[.8] text-[#e7ca9c] md:text-9xl">Hands<br /><i className="text-[#b99763]">remember.</i></h1><p className="mt-10 max-w-sm text-sm leading-7 text-[#c9c7c3]/65">In Iran, a rug is not made by machine or by schedule. It is made by thousands of decisions, held in the hands and the eye.</p></div><div className="relative aspect-[.9] overflow-hidden border border-[#b99763]/25 md:aspect-[1.1]"><img src="/assets/03_hero_weaving_woman.png" alt="Weaver at the loom" className="h-full w-full object-cover" /><div className="absolute bottom-4 left-4"><Eyebrow>Yazd, Iran · 2023</Eyebrow></div></div></section><section className="border-y border-[#b99763]/25 bg-[#0c0a07]"><div className="mx-auto grid max-w-[1440px] gap-14 px-5 py-24 md:grid-cols-3 md:px-10"><div><Eyebrow>01 — The knot</Eyebrow><h2 className="mt-4 font-display text-4xl text-[#e7ca9c]">Slow is a material.</h2></div><p className="text-sm leading-8 text-[#c9c7c3]/65">Each knot is a small act of attention. We work with ateliers whose methods have passed through generations, not because tradition is a badge, but because the hand leaves something the eye can feel.</p><p className="text-sm leading-8 text-[#c9c7c3]/65">Our role is to look closely, ask better questions, and bring these pieces into dialogue with contemporary rooms.</p></div></section><section className="mx-auto max-w-[1440px] px-5 py-24 md:px-10"><div className="grid gap-4 md:grid-cols-[1.35fr_.65fr]"><img src="/assets/06_gallery_luxury_rug_room.png" alt="Persian rug detail" className="h-[440px] w-full object-cover md:h-[620px]" /><div className="flex flex-col justify-between border border-[#b99763]/25 p-7 md:p-10"><div><Eyebrow>02 — The palette</Eyebrow><h2 className="mt-4 font-display text-5xl text-[#e7ca9c]">Colour is<br /><i className="text-[#b99763]">weather.</i></h2></div><p className="text-sm leading-7 text-[#c9c7c3]/65">Cochineal, indigo, walnut husk, saffron. Natural dyes age with a room; they do not simply match it.</p></div></div></section></main>;
-}
-
-function CollectionsPage({ onAdd }: { onAdd: (id: string) => void }) {
-  const [filter, setFilter] = useState('All');
-  const [search, setSearch] = useState('');
-  const filtered = products.filter((p) => (filter === 'All' || p.collection === filter) && `${p.name} ${p.material} ${p.origin}`.toLowerCase().includes(search.toLowerCase()));
-  return <main className="pt-[76px]"><div className="mx-auto max-w-[1440px] px-5 py-16 md:px-10 md:py-24"><SectionIntro kicker="The catalogue" title={<>Choose a<br /><i className="text-[#b99763]">direction.</i></>} copy="Five distinct chapters, one point of view. Use the edit below to move through the house." /><div className="mt-14 flex flex-col justify-between gap-4 border-y border-[#b99763]/25 py-4 md:flex-row md:items-center"><div className="flex flex-wrap gap-2">{['All', ...collections.map((c) => c.slug)].map((item) => <button key={item} type="button" onClick={() => setFilter(item === 'All' ? 'All' : item)} className={`px-3 py-2 font-meta text-[9px] uppercase tracking-[.12em] ${filter === item || (item === 'All' && filter === 'All') ? 'bg-[#b99763] text-[#060506]' : 'text-[#c9c7c3]/60 hover:text-[#e7ca9c]'}`} data-testid={`button-filter-${item}`}>{item === 'All' ? 'All works' : item.replaceAll('-', ' ')}</button>)}</div><label className="flex items-center gap-3 border-b border-[#b99763]/35 pb-2 text-[#c9c7c3]/65"><Search size={15} strokeWidth={1.2} /><input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search the archive" className="w-48 bg-transparent font-meta text-[10px] text-[#e7ca9c] outline-none placeholder:text-[#c9c7c3]/35" data-testid="input-search-collections" /></label></div>{filtered.length ? <div className="mt-16 grid gap-x-5 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">{filtered.map((p) => <ProductCard key={p.id} product={p} onAdd={onAdd} />)}</div> : <div className="border border-[#b99763]/25 py-24 text-center"><Filter className="mx-auto text-[#b99763]" size={20} strokeWidth={1.2} /><p className="mt-4 font-display text-3xl text-[#e7ca9c]">Nothing in this edit.</p><button type="button" onClick={() => { setFilter('All'); setSearch(''); }} className="mt-5 font-meta text-[10px] uppercase tracking-[.18em] text-[#b99763]" data-testid="button-reset-filter">Reset the edit</button></div>}</div></main>;
-}
-
-function CollectionDetailPage({ onAdd }: { onAdd: (id: string) => void }) {
-  const { collectionSlug } = useParams<{ collectionSlug: string }>();
-  const collection = collections.find((c) => c.slug === collectionSlug) || collections[0];
-  const list = products.filter((p) => p.collection === collection.slug);
-  return <main className="pt-[76px]"><section className="mx-auto grid max-w-[1440px] gap-10 px-5 py-14 md:grid-cols-[.9fr_1.1fr] md:px-10 md:py-24"><div className="flex flex-col justify-between"><div><Link href="/collections" className="inline-flex items-center gap-2 font-meta text-[9px] uppercase tracking-[.2em] text-[#b99763]" data-testid="link-back-collections"><ArrowLeft size={13} /> All collections</Link><div className="mt-16"><Eyebrow>Collection / 0{collections.indexOf(collection) + 1}</Eyebrow><h1 className="mt-5 font-display text-7xl leading-[.82] text-[#e7ca9c] md:text-9xl">{collection.title.split(' ').map((word, i) => <span key={word} className={i % 2 ? 'text-[#b99763]' : ''}>{word}{' '}</span>)}</h1></div></div><p className="mt-12 max-w-sm text-sm leading-7 text-[#c9c7c3]/65">{collection.intro}</p></div><div className="relative aspect-[.9] overflow-hidden border border-[#b99763]/25 md:aspect-[.83]"><img src={collection.image} alt={collection.title} className="h-full w-full object-cover" /><div className="absolute bottom-4 left-4"><Eyebrow>{collection.subtitle}</Eyebrow></div></div></section><section className="border-t border-[#b99763]/25 bg-[#0c0a07]"><div className="mx-auto max-w-[1440px] px-5 py-20 md:px-10"><div className="flex items-end justify-between"><div><Eyebrow>Available works</Eyebrow><h2 className="mt-3 font-display text-5xl text-[#e7ca9c]">In this chapter.</h2></div><span className="font-meta text-[10px] text-[#c9c7c3]/45">0{list.length} works</span></div><div className="mt-12 grid gap-6 sm:grid-cols-2">{list.map((p) => <ProductCard key={p.id} product={p} onAdd={onAdd} />)}</div></div></section></main>;
-}
-
-function GalleryPage() {
-  const [active, setActive] = useState<number | null>(null);
-  return <main className="pt-[76px]"><div className="mx-auto max-w-[1440px] px-5 py-16 md:px-10 md:py-24"><SectionIntro kicker="The gallery" title={<>Rooms that<br /><i className="text-[#b99763]">hold stories.</i></>} copy="A visual record of pieces, spaces and the quiet details between them. Click any frame to look closer." /><div className="mt-16 grid auto-rows-[220px] gap-4 md:grid-cols-12 md:auto-rows-[180px]">{galleryImages.map((image, i) => <button type="button" key={image.src} onClick={() => setActive(i)} className={`group relative overflow-hidden border border-[#b99763]/25 text-left ${i === 0 ? 'md:col-span-7 md:row-span-3' : i === 1 ? 'md:col-span-5 md:row-span-2' : i === 2 ? 'md:col-span-5 md:row-span-2' : i === 3 ? 'md:col-span-4 md:row-span-2' : 'md:col-span-4 md:row-span-2'}`} data-testid={`button-gallery-${i}`}><img src={image.src} alt={image.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-[#060506]/80 via-transparent to-transparent opacity-70" /><div className="absolute bottom-4 left-4"><div className="font-display text-2xl text-[#e7ca9c]">{image.title}</div><div className="font-meta text-[8px] uppercase tracking-[.15em] text-[#b99763]">{image.note}</div></div><Maximize2 className="absolute right-4 top-4 text-[#e7ca9c] opacity-0 transition group-hover:opacity-100" size={15} strokeWidth={1.2} /></button>)}</div></div>{active !== null && <div className="fixed inset-0 z-50 grid place-items-center bg-[#060506]/95 p-5" onClick={() => setActive(null)}><button type="button" onClick={() => setActive(null)} className="absolute right-5 top-5 text-[#e7ca9c]" data-testid="button-close-lightbox"><X size={24} strokeWidth={1.2} /></button><img src={galleryImages[active].src} alt={galleryImages[active].title} className="max-h-[86vh] max-w-[94vw] object-contain" /><div className="absolute bottom-5 left-5 font-meta text-[10px] uppercase tracking-[.18em] text-[#b99763]">{galleryImages[active].title} · {active + 1} / {galleryImages.length}</div></div>}</main>;
-}
-
-function AboutPage() { return <main className="pt-[76px]"><section className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 md:grid-cols-[1.1fr_.9fr] md:items-end md:px-10 md:py-24"><div><Eyebrow>About MiLAEDiA</Eyebrow><h1 className="mt-6 max-w-4xl font-display text-7xl leading-[.78] text-[#e7ca9c] md:text-[10rem]">Between<br /><i className="ml-[.7em] text-[#b99763]">places.</i></h1></div><p className="max-w-sm text-sm leading-8 text-[#c9c7c3]/65">Born between Berlin and Tehran, MiLAEDiA exists to make a more patient kind of room: one where craft has space to speak.</p></section><section className="mx-auto max-w-[1440px] px-5 pb-24 md:px-10"><img src="/assets/04_workshop_weaving_woman.png" alt="Berlin window view" className="h-[360px] w-full object-cover opacity-80 md:h-[550px]" /></section><section className="border-y border-[#b99763]/25 bg-[#0c0a07]"><div className="mx-auto grid max-w-[1440px] gap-14 px-5 py-24 md:grid-cols-[.8fr_1.2fr] md:px-10"><div><Eyebrow>Our point of view</Eyebrow><h2 className="mt-4 font-display text-5xl leading-none text-[#e7ca9c]">Rarity is<br /><i className="text-[#b99763]">a feeling.</i></h2></div><div className="space-y-6 text-sm leading-8 text-[#c9c7c3]/65"><p>We do not believe in endless choice. We believe in the one piece that makes the room make sense.</p><p>Every work in our catalogue is personally sourced, inspected and photographed in our Berlin gallery. We share its age, its origin and its imperfections because those are the details that give it a life beyond fashion.</p><p className="font-display text-3xl leading-tight text-[#e7ca9c]">“A collected room is a form of autobiography.”</p></div></div></section></main>; }
-
-function CustomOrderPage() {
-  const [sent, setSent] = useState(false);
-  const [image, setImage] = useState('');
-  const [form, setForm] = useState({ name: '', email: '', room: '', dimensions: '', message: '' });
-  useEffect(() => { try { const saved = JSON.parse(localStorage.getItem('milaedia-custom-order') || '{}'); setForm((f) => ({ ...f, ...saved })); } catch {} }, []);
-  const change = (key: string, value: string) => { const next = { ...form, [key]: value }; setForm(next); localStorage.setItem('milaedia-custom-order', JSON.stringify(next)); };
-  if (sent) return <main className="grid min-h-[75vh] place-items-center px-5 pt-[76px]"><div className="max-w-xl text-center"><div className="mx-auto grid h-14 w-14 place-items-center border border-[#b99763] text-[#b99763]"><Check size={23} strokeWidth={1.1} /></div><Eyebrow>Conversation opened</Eyebrow><h1 className="mt-5 font-display text-6xl text-[#e7ca9c]">We will look<br /><i className="text-[#b99763]">closely.</i></h1><p className="mx-auto mt-6 max-w-sm text-sm leading-7 text-[#c9c7c3]/65">This demo request is saved locally. In a live gallery, a curator would reply within two working days.</p><Link href="/" className="mt-8 inline-flex items-center gap-3 border border-[#b99763]/60 px-5 py-3 font-meta text-[10px] uppercase tracking-[.18em] text-[#e7ca9c]" data-testid="link-custom-confirmation-home">Return home <ArrowRight size={14} /></Link></div></main>;
-  return <main className="pt-[76px]"><div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 md:grid-cols-[.8fr_1.2fr] md:px-10 md:py-24"><div><Eyebrow>Private sourcing</Eyebrow><h1 className="mt-6 font-display text-7xl leading-[.8] text-[#e7ca9c] md:text-9xl">A rug<br /><i className="text-[#b99763]">for here.</i></h1><p className="mt-10 max-w-sm text-sm leading-7 text-[#c9c7c3]/65">Share the room, and we will share a considered edit. Upload a reference if you like; this first conversation is simply about getting the feeling right.</p><div className="mt-12 flex gap-7 font-meta text-[9px] uppercase tracking-[.16em] text-[#c9c7c3]/45"><span><Clock3 size={15} className="mb-2 text-[#b99763]" strokeWidth={1.2} />2 day reply</span><span><MapPin size={15} className="mb-2 text-[#b99763]" strokeWidth={1.2} />Berlin based</span></div></div><form onSubmit={(e) => { e.preventDefault(); if (form.name && form.email && form.room) setSent(true); }} className="border border-[#b99763]/30 bg-[#0c0a07] p-6 md:p-10" data-testid="form-custom-order"><Eyebrow>Tell us a little</Eyebrow><div className="mt-8 grid gap-7 sm:grid-cols-2">{[['name','Your name'],['email','Email address'],['room','Room / setting'],['dimensions','Approx. dimensions']].map(([key, label]) => <label key={key} className="border-b border-[#b99763]/35 pb-2"><span className="font-meta text-[9px] uppercase tracking-[.14em] text-[#c9c7c3]/45">{label}{(key === 'name' || key === 'email' || key === 'room') && ' *'}</span><input required={key === 'name' || key === 'email' || key === 'room'} type={key === 'email' ? 'email' : 'text'} value={form[key as keyof typeof form]} onChange={(e) => change(key, e.target.value)} className="mt-2 w-full bg-transparent text-sm text-[#e7ca9c] outline-none" data-testid={`input-custom-${key}`} /></label>)}</div><label className="mt-8 block border-b border-[#b99763]/35 pb-2"><span className="font-meta text-[9px] uppercase tracking-[.14em] text-[#c9c7c3]/45">The feeling / anything useful</span><textarea value={form.message} onChange={(e) => change('message', e.target.value)} rows={4} className="mt-2 w-full resize-none bg-transparent text-sm leading-6 text-[#e7ca9c] outline-none" data-testid="textarea-custom-message" /></label><label className="mt-8 flex cursor-pointer items-center justify-between border border-dashed border-[#b99763]/35 p-4"><span className="font-meta text-[9px] uppercase tracking-[.14em] text-[#c9c7c3]/55">{image || 'Add a room image (optional)'}</span><input type="file" accept="image/*" className="hidden" onChange={(e) => setImage(e.target.files?.[0]?.name || '')} data-testid="input-custom-image" /><span className="text-[#b99763]"><Plus size={17} /></span></label><button type="submit" className="mt-10 flex w-full items-center justify-between bg-[#b99763] px-5 py-4 font-meta text-[10px] uppercase tracking-[.2em] text-[#060506] transition hover:bg-[#e7ca9c]" data-testid="button-submit-custom-order">Send the brief <Send size={15} strokeWidth={1.2} /></button><p className="mt-4 font-meta text-[9px] leading-5 text-[#c9c7c3]/35">Demo only — no message is delivered and no personal data leaves this browser.</p></form></div></main>;
-}
-
-function ContactPage() { const [sent, setSent] = useState(false); const [form, setForm] = useState({ name: '', email: '', note: '' }); return <main className="pt-[76px]"><div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 md:grid-cols-[.85fr_1.15fr] md:px-10 md:py-24"><div><Eyebrow>Come by</Eyebrow><h1 className="mt-6 font-display text-7xl leading-[.8] text-[#e7ca9c]">The door<br /><i className="text-[#b99763]">is open.</i></h1><div className="mt-14 space-y-7 text-sm text-[#c9c7c3]/65"><div className="flex gap-4"><MapPin className="mt-1 text-[#b99763]" size={17} strokeWidth={1.2} /><span>Linienstraße 154<br />10115 Berlin, Germany</span></div><div className="flex gap-4"><Clock3 className="mt-1 text-[#b99763]" size={17} strokeWidth={1.2} /><span>Tuesday—Saturday<br />11:00—18:00, by appointment</span></div><div className="flex gap-4"><Mail className="mt-1 text-[#b99763]" size={17} strokeWidth={1.2} /><span>hello@milaedia.com</span></div></div></div><div className="border border-[#b99763]/30 bg-[#0c0a07] p-6 md:p-10">{sent ? <div className="py-20 text-center"><Check className="mx-auto text-[#b99763]" size={28} strokeWidth={1} /><h2 className="mt-5 font-display text-4xl text-[#e7ca9c]">A note, received.</h2><p className="mt-3 text-sm text-[#c9c7c3]/60">Saved as a local demo inquiry.</p></div> : <form onSubmit={(e) => { e.preventDefault(); if (form.name && form.email && form.note) setSent(true); }} data-testid="form-contact"><Eyebrow>Write to the gallery</Eyebrow><div className="mt-8 space-y-7">{[['name','Name'],['email','Email']].map(([key, label]) => <label key={key} className="block border-b border-[#b99763]/35 pb-2"><span className="font-meta text-[9px] uppercase tracking-[.14em] text-[#c9c7c3]/45">{label} *</span><input required type={key === 'email' ? 'email' : 'text'} value={form[key as 'name' | 'email']} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="mt-2 w-full bg-transparent text-sm text-[#e7ca9c] outline-none" data-testid={`input-contact-${key}`} /></label>)}<label className="block border-b border-[#b99763]/35 pb-2"><span className="font-meta text-[9px] uppercase tracking-[.14em] text-[#c9c7c3]/45">Your note *</span><textarea required rows={5} value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} className="mt-2 w-full resize-none bg-transparent text-sm leading-6 text-[#e7ca9c] outline-none" data-testid="textarea-contact-note" /></label></div><button type="submit" className="mt-10 flex w-full items-center justify-between border border-[#b99763]/60 px-5 py-4 font-meta text-[10px] uppercase tracking-[.2em] text-[#e7ca9c] hover:bg-[#b99763] hover:text-[#060506]" data-testid="button-submit-contact">Send note <ArrowUpRight size={15} /></button></form>}</div></div></main>; }
-
-function ProductPage({ onAdd }: { onAdd: (id: string) => void }) {
-  const { productSlug } = useParams<{ productSlug: string }>();
-  const product = products.find((p) => p.slug === productSlug) || products[0];
-  const [added, setAdded] = useState(false);
-  return <main className="pt-[76px]"><div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-12 md:grid-cols-[1.05fr_.95fr] md:px-10 md:py-20"><div><Link href="/collections" className="mb-6 inline-flex items-center gap-2 font-meta text-[9px] uppercase tracking-[.2em] text-[#b99763]" data-testid="link-back-product"><ArrowLeft size={13} /> Back to collection</Link><div className="relative aspect-[.9] overflow-hidden border border-[#b99763]/25"><img src={product.image} alt={product.name} className="h-full w-full object-cover" /><button type="button" className="absolute right-4 top-4 grid h-9 w-9 place-items-center border border-[#e7ca9c]/50 bg-[#060506]/65 text-[#e7ca9c]" data-testid="button-product-favorite"><Heart size={15} strokeWidth={1.2} /></button></div></div><div className="flex flex-col justify-center md:pl-8"><Eyebrow>{product.collection.replaceAll('-', ' ')} · {product.era}</Eyebrow><h1 className="mt-5 font-display text-7xl leading-[.8] text-[#e7ca9c]">{product.name}</h1><p className="mt-9 max-w-md text-sm leading-7 text-[#c9c7c3]/65">{product.description}</p><Rule /><dl className="grid grid-cols-2 gap-y-5 py-7 font-meta text-[10px] uppercase tracking-[.08em]"><div><dt className="text-[#c9c7c3]/40">Origin</dt><dd className="mt-1 text-[#e7ca9c]">{product.origin}</dd></div><div><dt className="text-[#c9c7c3]/40">Material</dt><dd className="mt-1 text-[#e7ca9c]">{product.material}</dd></div><div><dt className="text-[#c9c7c3]/40">Dimensions</dt><dd className="mt-1 text-[#e7ca9c]">{product.dimensions}</dd></div><div><dt className="text-[#c9c7c3]/40">Edition</dt><dd className="mt-1 text-[#e7ca9c]">One of one</dd></div></dl><Rule /><div className="flex items-center justify-between py-7"><span className="font-meta text-sm text-[#b99763]">{money(product.price)}</span><span className="font-meta text-[9px] uppercase tracking-[.12em] text-[#c9c7c3]/45">Shipping calculated at inquiry</span></div><button type="button" onClick={() => { onAdd(product.id); setAdded(true); }} className="flex items-center justify-between bg-[#b99763] px-5 py-4 font-meta text-[10px] uppercase tracking-[.2em] text-[#060506] hover:bg-[#e7ca9c]" data-testid="button-product-add">{added ? 'Added to your selection' : 'Add to your selection'}<Plus size={15} /></button><p className="mt-4 text-center font-meta text-[9px] text-[#c9c7c3]/35">Demo catalogue — availability is confirmed personally.</p></div></div></main>;
-}
-
-function CartPage({ cart, update, remove }: { cart: CartLine[]; update: (id: string, qty: number) => void; remove: (id: string) => void }) {
-  const lines = cart.map((line) => ({ ...line, product: products.find((p) => p.id === line.id)! })).filter((line) => line.product);
-  const total = lines.reduce((sum, line) => sum + line.product.price * line.qty, 0);
-  if (!lines.length) return <main className="grid min-h-[70vh] place-items-center px-5 pt-[76px]"><div className="text-center"><ShoppingBag className="mx-auto text-[#b99763]" size={26} strokeWidth={1} /><h1 className="mt-5 font-display text-6xl text-[#e7ca9c]">Your selection<br /><i className="text-[#b99763]">is quiet.</i></h1><p className="mt-4 text-sm text-[#c9c7c3]/55">Begin with one piece from the collection.</p><Link href="/collections" className="mt-8 inline-flex items-center gap-3 border border-[#b99763]/55 px-5 py-3 font-meta text-[10px] uppercase tracking-[.18em] text-[#e7ca9c]" data-testid="link-empty-cart">Browse works <ArrowRight size={14} /></Link></div></main>;
-  return <main className="pt-[76px]"><div className="mx-auto max-w-[1100px] px-5 py-16 md:px-10 md:py-24"><Eyebrow>Your selection</Eyebrow><h1 className="mt-5 font-display text-7xl text-[#e7ca9c]">Held for<br /><i className="text-[#b99763]">you.</i></h1><div className="mt-14 grid gap-10 md:grid-cols-[1.5fr_.7fr]"><div>{lines.map((line) => <div key={line.id} className="flex gap-5 border-t border-[#b99763]/25 py-5"><img src={line.product.image} alt={line.product.name} className="h-28 w-24 object-cover" /><div className="flex flex-1 justify-between gap-4"><div><Link href={`/products/${line.product.slug}`} className="font-display text-2xl text-[#e7ca9c]" data-testid={`link-cart-product-${line.id}`}>{line.product.name}</Link><div className="mt-2 font-meta text-[9px] uppercase tracking-[.1em] text-[#c9c7c3]/45">{line.product.dimensions}</div><div className="mt-5 flex items-center border border-[#b99763]/30"><button type="button" onClick={() => update(line.id, line.qty - 1)} className="p-2 text-[#b99763]" data-testid={`button-minus-${line.id}`}><Minus size={13} /></button><span className="w-8 text-center font-meta text-[10px]">{line.qty}</span><button type="button" onClick={() => update(line.id, line.qty + 1)} className="p-2 text-[#b99763]" data-testid={`button-plus-${line.id}`}><Plus size={13} /></button></div></div><div className="text-right"><div className="font-meta text-xs text-[#b99763]">{money(line.product.price * line.qty)}</div><button type="button" onClick={() => remove(line.id)} className="mt-8 text-[#c9c7c3]/45 hover:text-[#e7ca9c]" data-testid={`button-remove-${line.id}`}><Trash2 size={15} strokeWidth={1.2} /></button></div></div></div>)}</div><div className="h-fit border border-[#b99763]/30 bg-[#0c0a07] p-6"><Eyebrow>Summary</Eyebrow><div className="mt-7 flex justify-between font-meta text-[10px] text-[#c9c7c3]/55"><span>Works</span><span>{money(total)}</span></div><div className="mt-4 flex justify-between font-meta text-[10px] text-[#c9c7c3]/55"><span>Delivery</span><span>Curated on request</span></div><Rule /><div className="mt-5 flex justify-between font-meta text-xs text-[#e7ca9c]"><span>Selection total</span><span>{money(total)}</span></div><Link href="/checkout" className="mt-8 flex items-center justify-between bg-[#b99763] px-4 py-4 font-meta text-[10px] uppercase tracking-[.18em] text-[#060506]" data-testid="link-checkout">Continue to details <ArrowRight size={15} /></Link><p className="mt-4 text-[11px] leading-5 text-[#c9c7c3]/35">No payment is taken in this demo. A curator confirms every order personally.</p></div></div></div></main>;
-}
-
-function CheckoutPage({ cart }: { cart: CartLine[] }) {
-  const [done, setDone] = useState(false); const [form, setForm] = useState({ name: '', email: '', address: '', city: '', country: '' }); const total = cart.reduce((sum, line) => sum + (products.find((p) => p.id === line.id)?.price || 0) * line.qty, 0);
-  if (done) return <RedirectToConfirmation total={total} />;
-  return <main className="pt-[76px]"><div className="mx-auto max-w-[1000px] px-5 py-16 md:px-10 md:py-24"><Eyebrow>Private order / demo</Eyebrow><h1 className="mt-5 font-display text-7xl text-[#e7ca9c]">A few<br /><i className="text-[#b99763]">details.</i></h1><form onSubmit={(e) => { e.preventDefault(); if (Object.values(form).every(Boolean)) setDone(true); }} className="mt-14 grid gap-12 md:grid-cols-[1fr_.7fr]" data-testid="form-checkout"><div className="border border-[#b99763]/30 bg-[#0c0a07] p-6 md:p-10"><Eyebrow>Collector details</Eyebrow><div className="mt-8 space-y-7">{[['name','Full name'],['email','Email address'],['address','Address'],['city','City'],['country','Country']].map(([key,label]) => <label key={key} className="block border-b border-[#b99763]/35 pb-2"><span className="font-meta text-[9px] uppercase tracking-[.14em] text-[#c9c7c3]/45">{label} *</span><input required type={key === 'email' ? 'email' : 'text'} value={form[key as keyof typeof form]} onChange={(e) => setForm({ ...form, [key]: e.target.value })} className="mt-2 w-full bg-transparent text-sm text-[#e7ca9c] outline-none" data-testid={`input-checkout-${key}`} /></label>)}</div></div><div><div className="border border-[#b99763]/30 p-6"><Eyebrow>Order total</Eyebrow><div className="mt-6 flex justify-between font-meta text-xs text-[#e7ca9c]"><span>Selection</span><span>{money(total)}</span></div><Rule /><div className="mt-5 flex justify-between font-meta text-xs text-[#e7ca9c]"><span>Total</span><span>{money(total)}</span></div><button type="submit" className="mt-8 flex w-full items-center justify-between bg-[#b99763] px-4 py-4 font-meta text-[10px] uppercase tracking-[.18em] text-[#060506]" data-testid="button-place-demo-order">Place demo order <LockKeyhole size={14} /></button></div><p className="mt-4 font-meta text-[9px] leading-5 text-[#c9c7c3]/35">Clearly labeled demo order. No payment, inventory hold or delivery is created.</p></div></form></div></main>;
-}
 function RedirectToConfirmation({ total }: { total: number }) { const id = `ML-${Date.now().toString().slice(-6)}`; return <ConfirmationContent id={id} total={total} />; }
 function ConfirmationContent({ id, total }: { id: string; total: number }) { return <main className="grid min-h-[75vh] place-items-center px-5 pt-[76px]"><div className="max-w-xl text-center"><div className="mx-auto grid h-14 w-14 place-items-center border border-[#b99763] text-[#b99763]"><Check size={23} strokeWidth={1.1} /></div><Eyebrow>Demo order confirmed</Eyebrow><h1 className="mt-5 font-display text-6xl text-[#e7ca9c]">A considered<br /><i className="text-[#b99763]">choice.</i></h1><p className="mt-5 text-sm leading-7 text-[#c9c7c3]/65">Your reference <span className="font-meta text-[#e7ca9c]">{id}</span> has been saved locally. Total: <span className="font-meta text-[#b99763]">{money(total)}</span>.</p><p className="mt-3 font-meta text-[9px] uppercase tracking-[.14em] text-[#c9c7c3]/35">No payment has been taken — this is a presentation demo.</p><Link href="/" className="mt-8 inline-flex items-center gap-3 border border-[#b99763]/55 px-5 py-3 font-meta text-[10px] uppercase tracking-[.18em] text-[#e7ca9c]" data-testid="link-order-confirmation-home">Return home <ArrowRight size={14} /></Link></div></main>; }
 
-function SearchPage({ onAdd }: { onAdd: (id: string) => void }) { const [query, setQuery] = useState(''); const results = products.filter((p) => `${p.name} ${p.collection} ${p.material}`.toLowerCase().includes(query.toLowerCase())); return <main className="pt-[76px]"><div className="mx-auto max-w-[1200px] px-5 py-16 md:px-10 md:py-24"><Eyebrow>Search the archive</Eyebrow><div className="mt-7 flex items-center gap-4 border-b border-[#b99763]/45 pb-4"><Search size={22} className="text-[#b99763]" strokeWidth={1.1} /><input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Try silk, Kerman, garden…" className="w-full bg-transparent font-display text-4xl text-[#e7ca9c] outline-none placeholder:text-[#c9c7c3]/25 md:text-6xl" data-testid="input-search-page" /></div><p className="mt-8 font-meta text-[10px] uppercase tracking-[.14em] text-[#c9c7c3]/45">{results.length} works in the archive</p><div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{results.map((p) => <ProductCard key={p.id} product={p} onAdd={onAdd} />)}</div></div></main>; }
-
-function AdminLogin() { const [, navigate] = useLocation(); const [email, setEmail] = useState(''); const [password, setPassword] = useState(''); return <main className="grid min-h-[100dvh] place-items-center bg-[#060506] px-5"><div className="w-full max-w-md border border-[#b99763]/35 bg-[#0c0a07] p-8 md:p-12"><Link href="/" className="flex items-center gap-3" data-testid="link-admin-brand"><span className="grid h-8 w-8 place-items-center border border-[#b99763] text-[#b99763]">✦</span><span className="font-display text-2xl tracking-[.14em] text-[#e7ca9c]">MiLAEDiA</span></Link><div className="mt-16"><Eyebrow>Private portal</Eyebrow><h1 className="mt-4 font-display text-5xl text-[#e7ca9c]">Gallery<br /><i className="text-[#b99763]">access.</i></h1><form onSubmit={(e) => { e.preventDefault(); if (email && password) { localStorage.setItem('milaedia-admin', 'true'); navigate('/admin/dashboard'); } }} className="mt-10 space-y-7" data-testid="form-admin-login"><label className="block border-b border-[#b99763]/35 pb-2"><span className="font-meta text-[9px] uppercase tracking-[.14em] text-[#c9c7c3]/45">Email</span><input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-2 w-full bg-transparent text-sm text-[#e7ca9c] outline-none" data-testid="input-admin-email" /></label><label className="block border-b border-[#b99763]/35 pb-2"><span className="font-meta text-[9px] uppercase tracking-[.14em] text-[#c9c7c3]/45">Password</span><input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="mt-2 w-full bg-transparent text-sm text-[#e7ca9c] outline-none" data-testid="input-admin-password" /></label><button type="submit" className="flex w-full items-center justify-between bg-[#b99763] px-4 py-4 font-meta text-[10px] uppercase tracking-[.18em] text-[#060506]" data-testid="button-admin-login">Enter portal <LogInIcon /></button></form><p className="mt-5 font-meta text-[9px] leading-5 text-[#c9c7c3]/35">Demo state only. Any email and password will open the local dashboard.</p></div></div></main>; }
-function LogInIcon() { return <ArrowRight size={15} strokeWidth={1.2} />; }
-function AdminDashboard() { const [, navigate] = useLocation(); const [logged] = useState(() => localStorage.getItem('milaedia-admin') === 'true'); if (!logged) return <AdminLogin />; return <main className="min-h-[100dvh] bg-[#060506] text-[#e7ca9c]"><div className="flex min-h-[100dvh]"><aside className="hidden w-64 border-r border-[#b99763]/25 p-7 md:block"><Link href="/" className="flex items-center gap-3" data-testid="link-dashboard-brand"><span className="grid h-8 w-8 place-items-center border border-[#b99763] text-[#b99763]">✦</span><span className="font-display text-2xl tracking-[.12em]">MiLAEDiA</span></Link><div className="mt-16 space-y-5 font-meta text-[10px] uppercase tracking-[.16em] text-[#b99763]"><div className="flex items-center gap-3"><LayoutDashboard size={15} />Dashboard</div><div className="flex items-center gap-3 text-[#c9c7c3]/45"><Package size={15} />Orders</div><div className="flex items-center gap-3 text-[#c9c7c3]/45"><UserRound size={15} />Collectors</div></div><button type="button" onClick={() => { localStorage.removeItem('milaedia-admin'); navigate('/admin/login'); }} className="mt-20 flex items-center gap-3 font-meta text-[10px] uppercase tracking-[.16em] text-[#c9c7c3]/45" data-testid="button-admin-logout"><X size={15} />Exit</button></aside><div className="flex-1"><div className="flex items-center justify-between border-b border-[#b99763]/25 px-5 py-6 md:px-10"><div><Eyebrow>Private portal</Eyebrow><h1 className="mt-2 font-display text-4xl">Good evening, curator.</h1></div><button type="button" onClick={() => { localStorage.removeItem('milaedia-admin'); navigate('/admin/login'); }} className="font-meta text-[9px] uppercase tracking-[.15em] text-[#b99763]" data-testid="button-admin-logout-mobile">Log out</button></div><div className="grid gap-5 p-5 md:grid-cols-3 md:p-10">{[['Works in archive','05','+ 01 this season'],['Open inquiries','07','2 awaiting reply'],['Gallery appointments','12','next 14 days']].map(([label,value,note]) => <div key={label} className="border border-[#b99763]/25 bg-[#0c0a07] p-6"><Eyebrow>{label}</Eyebrow><div className="mt-5 font-display text-6xl text-[#e7ca9c]">{value}</div><div className="mt-3 font-meta text-[9px] uppercase tracking-[.12em] text-[#c9c7c3]/45">{note}</div></div>)}</div><div className="m-5 border border-[#b99763]/25 md:m-10"><div className="flex items-center justify-between border-b border-[#b99763]/25 p-6"><div><Eyebrow>Recent activity</Eyebrow><h2 className="mt-2 font-display text-3xl">The archive, moving.</h2></div><Package className="text-[#b99763]" size={20} strokeWidth={1.2} /></div>{products.slice(0, 4).map((p, i) => <div key={p.id} className="flex items-center justify-between border-b border-[#b99763]/15 px-6 py-5 last:border-0"><div className="flex items-center gap-4"><img src={p.image} alt="" className="h-12 w-10 object-cover" /><div><div className="font-display text-xl text-[#e7ca9c]">{p.name}</div><div className="font-meta text-[9px] uppercase tracking-[.1em] text-[#c9c7c3]/40">{i === 0 ? 'Recently added' : 'In archive'} · {p.era}</div></div></div><span className="font-meta text-[10px] text-[#b99763]">{money(p.price)}</span></div>)}</div></div></div></main>; }
-
 function LegalPage({ title, label }: { title: ReactNode; label: string }) { return <main className="pt-[76px]"><div className="mx-auto max-w-3xl px-5 py-16 md:px-10 md:py-24"><Eyebrow>{label}</Eyebrow><h1 className="mt-6 font-display text-7xl text-[#e7ca9c]">{title}</h1><div className="mt-12 space-y-8 text-sm leading-8 text-[#c9c7c3]/65"><p>MiLAEDiA is a presentation-first gallery experience. This page outlines the principles that would guide a live service; no transaction, payment or message is processed in this demo.</p><p>All catalogue descriptions, availability notes and delivery estimates are for presentation only. Works are unique and would be confirmed personally before any purchase agreement.</p><Rule /><p>For questions about this page, contact the gallery at hello@milaedia.com.</p></div></div></main>; }
 
-function OrderConfirmationPage() { const { orderId } = useParams<{ orderId: string }>(); return <ConfirmationContent id={orderId || 'ML-DEMO'} total={0} />; }
+function Router({ cart, onAdd, update, remove, clearCart }: { cart: CartLine[]; onAdd: (id: string) => void; update: (id: string, qty: number) => void; remove: (id: string) => void; clearCart: () => void }) {
+  return (
+    <Switch>
+      <Route path="/" component={() => <HomePage onAdd={onAdd} />} />
+      <Route path="/workshop" component={WorkshopPage} />
+      <Route path="/weave" component={WeavePage} />
+      <Route path="/collections/:collectionSlug" component={() => <CollectionDetailPage onAdd={onAdd} />} />
+      <Route path="/collections" component={() => <CollectionsPage onAdd={onAdd} />} />
+      <Route path="/gallery" component={GalleryPage} />
+      <Route path="/about" component={AboutPage} />
+      <Route path="/custom-order" component={CustomOrderPage} />
+      <Route path="/contact" component={ContactPage} />
+      <Route path="/products/:productSlug" component={() => <ProductPage onAdd={onAdd} />} />
+      <Route path="/cart" component={() => <CartPage cart={cart} update={update} remove={remove} />} />
+      <Route path="/checkout" component={() => <CheckoutPage cart={cart} clearCart={clearCart} />} />
+      <Route path="/order-confirmation/:orderId" component={OrderConfirmationPage} />
+      <Route path="/search" component={() => <SearchPage onAdd={onAdd} />} />
+      <Route path="/privacy" component={() => <LegalPage title="Privacy" label="Notes / 01" />} />
+      <Route path="/terms" component={() => <LegalPage title="Terms" label="Notes / 02" />} />
+      <Route path="/shipping-returns" component={() => <LegalPage title={<>Shipping<br /><i className="text-[#b99763]">& returns.</i></>} label="Notes / 03" />} />
 
-function Router({ cart, onAdd, update, remove }: { cart: CartLine[]; onAdd: (id: string) => void; update: (id: string, qty: number) => void; remove: (id: string) => void }) {
-  return <Switch><Route path="/" component={() => <HomePage onAdd={onAdd} />} /><Route path="/workshop" component={WorkshopPage} /><Route path="/collections/:collectionSlug" component={() => <CollectionDetailPage onAdd={onAdd} />} /><Route path="/collections" component={() => <CollectionsPage onAdd={onAdd} />} /><Route path="/gallery" component={GalleryPage} /><Route path="/about" component={AboutPage} /><Route path="/custom-order" component={CustomOrderPage} /><Route path="/contact" component={ContactPage} /><Route path="/products/:productSlug" component={() => <ProductPage onAdd={onAdd} />} /><Route path="/cart" component={() => <CartPage cart={cart} update={update} remove={remove} />} /><Route path="/checkout" component={() => <CheckoutPage cart={cart} />} /><Route path="/order-confirmation/:orderId" component={OrderConfirmationPage} /><Route path="/search" component={() => <SearchPage onAdd={onAdd} />} /><Route path="/privacy" component={() => <LegalPage title="Privacy" label="Notes / 01" />} /><Route path="/terms" component={() => <LegalPage title="Terms" label="Notes / 02" />} /><Route path="/shipping-returns" component={() => <LegalPage title={<>Shipping<br /><i className="text-[#b99763]">& returns.</i></>} label="Notes / 03" />} /><Route path="/admin/login" component={AdminLogin} /><Route path="/admin/dashboard" component={AdminDashboard} /><Route component={NotFound} /></Switch>;
+      {/* Admin routes */}
+      <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin/dashboard" component={() => <AdminLayout><AdminDashboard /></AdminLayout>} />
+      <Route path="/admin/products" component={() => <AdminLayout><AdminProducts /></AdminLayout>} />
+      <Route path="/admin/orders" component={() => <AdminLayout><AdminOrders /></AdminLayout>} />
+      <Route path="/admin/categories" component={() => <AdminLayout><AdminCategories /></AdminLayout>} />
+      <Route path="/admin/custom-orders" component={() => <AdminLayout><AdminCustomOrders /></AdminLayout>} />
+      <Route path="/admin/inventory" component={() => <AdminLayout><AdminInventory /></AdminLayout>} />
+      <Route path="/admin/pricing" component={() => <AdminLayout><AdminPricing /></AdminLayout>} />
+      <Route path="/admin/customers" component={() => <AdminLayout><AdminCustomers /></AdminLayout>} />
+      <Route path="/admin/messages" component={() => <AdminLayout><AdminMessages /></AdminLayout>} />
+      <Route path="/admin/content" component={() => <AdminLayout><AdminContent /></AdminLayout>} />
+      <Route path="/admin/gallery" component={() => <AdminLayout><AdminGallery /></AdminLayout>} />
+      <Route path="/admin/settings" component={() => <AdminLayout><AdminSettings /></AdminLayout>} />
+
+      <Route component={NotFound} />
+    </Switch>
+  );
 }
-
-function App() { const { cart, add, update, remove } = useLocalCart(); const cartCount = cart.reduce((sum, item) => sum + item.qty, 0); return <QueryClientProvider client={queryClient}><TooltipProvider><ErrorBoundary><Shell cartCount={cartCount}><Router cart={cart} onAdd={add} update={update} remove={remove} /></Shell></ErrorBoundary></TooltipProvider><Toaster /></QueryClientProvider>; }
+function App() { const { cart, add, update, remove, clear } = useLocalCart(); const cartCount = cart.reduce((sum, item) => sum + item.qty, 0); return <QueryClientProvider client={queryClient}><TooltipProvider><ErrorBoundary><AdminAuthProvider><CatalogProvider><Shell cartCount={cartCount}><Router cart={cart} onAdd={add} update={update} remove={remove} clearCart={clear} /></Shell></CatalogProvider></AdminAuthProvider></ErrorBoundary></TooltipProvider><Toaster /></QueryClientProvider>; }
 export default App;
