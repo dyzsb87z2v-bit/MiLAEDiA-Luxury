@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "zHPdEZka5N5nmM24ZBrnJ"
+uri = "file://MiLAEDiA-production-final.zip"
+type = "unspecified"
+title = "MiLAEDiA production final export"
+description = "Complete migration-ready MiLAEDiA workspace export with source code, pnpm lockfile, React/Vite app, Express API, public image assets, supplied Hero MOV/MP4/WebM media, poster fallback, admin interface, Weave viewer, and README migration instructions."
+logical_id = "05535e00-8bee-4bf6-a420-8dc8dd8ddc6b"
+content_hash = "sha256:4330103d2bc705b835411123c750da48b0a797238d19fa4d7a2ab0cfe9e9324a"
+size = 21224390
+mtime_ms = 1788095699805
+storage_uri = "gcs://replit-rams-assets-archer/rams/assets/repl:5ccfbcc8-68d5-47f2-aa39-1ff595a4550b/05535e00-8bee-4bf6-a420-8dc8dd8ddc6b/32b70052-7dbf-45d6-871a-1ac46e21f6ce"
+storage_version_token = "1788095707897577"
+content_type = "application/octet-stream"
