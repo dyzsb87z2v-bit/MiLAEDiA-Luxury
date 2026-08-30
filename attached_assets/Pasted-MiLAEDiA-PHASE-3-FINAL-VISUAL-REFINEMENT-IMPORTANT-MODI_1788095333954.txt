@@ -1,0 +1,935 @@
+MiLAEDiA — PHASE 3 FINAL VISUAL REFINEMENT
+IMPORTANT: MODIFY THE EXISTING PROJECT — DO NOT REBUILD FROM SCRATCH
+
+The MiLAEDiA website is already implemented.
+
+Your job is to professionally refine the existing website.
+
+DO NOT rebuild the website from zero.
+DO NOT replace the existing architecture.
+DO NOT delete working functionality.
+DO NOT remove existing pages.
+DO NOT redesign the approved Hero composition.
+DO NOT replace the supplied Gemini MP4.
+DO NOT replace supplied visual assets with random stock images.
+
+FIRST:
+Inspect the existing project, routes, components, assets, video files, CSS, responsive behavior and current implementation.
+
+Before changing anything, identify:
+- current framework
+- current homepage structure
+- current Hero implementation
+- location of the Gemini MP4
+- image assets
+- collection/product components
+- existing animations
+- existing responsive CSS
+- existing admin functionality
+
+Then make targeted modifications only.
+
+==================================================
+1. CORE DESIGN DIRECTION
+==================================================
+
+MiLAEDiA must feel like:
+
+A PRIVATE LUXURY PERSIAN RUG GALLERY IN BERLIN
+
+Visual language:
+
+- luxury European
+- Persian heritage
+- dark premium interior
+- black / deep brown
+- warm antique gold
+- fine-art gallery
+- high-end fashion house
+- cinematic
+- architectural
+- immersive
+- sophisticated
+- expensive
+- authentic
+
+DO NOT make it look like:
+- SaaS
+- startup
+- generic ecommerce
+- Shopify template
+- generic AI website
+- gaming website
+
+Maintain the existing visual identity.
+
+Use these exact design tokens where applicable:
+
+--ink: #060506
+--panel: #0C0A07
+--gold: #B99763
+--gold-hi: #E7CA9C
+--bronze: #8D5E37
+--crimson: #7B311D
+--twilight: #344E7D
+--silver: #C9C7C3
+
+Typography:
+
+Cormorant Garamond
+Vazirmatn
+IBM Plex Mono
+
+==================================================
+2. HERO — DO NOT REDESIGN
+==================================================
+
+The current Hero composition is approved.
+
+KEEP:
+- composition
+- main positioning
+- branding
+- visual hierarchy
+- Berlin atmosphere
+- Persian rug
+- luxury interior
+- weaving woman
+
+Only improve quality, motion and presentation.
+
+CRITICAL:
+
+The supplied Gemini-generated MP4 MUST be used as the Hero video.
+
+Find the existing MP4 in the project/assets and use that exact file.
+
+DO NOT:
+- replace it
+- generate another video
+- use stock video
+- replace it with a CSS fake
+- remove it
+- permanently replace it with a static image
+
+Desktop Hero:
+
+- video background
+- autoplay
+- muted
+- playsInline
+- loop
+- object-fit: cover
+- cinematic entrance
+- subtle scale
+- subtle parallax
+- subtle depth
+- subtle light movement
+- slow premium camera feeling
+
+Mobile Hero:
+
+- use the same MP4 whenever browser/device allows
+- muted
+- playsInline
+- autoplay
+- loop
+- correct responsive crop
+- intelligent focal positioning
+- never stretch
+- never overflow horizontally
+- poster fallback when autoplay/video is unavailable
+
+Use responsive object positioning.
+
+Example strategy:
+
+desktop:
+object-position: center center
+
+tablet:
+object-position: center center
+
+mobile:
+object-position: 58% center
+
+BUT adjust these values after visually inspecting the actual supplied video so the important rug / Berlin / interior composition remains visible.
+
+Do not simply use one hardcoded crop for every device.
+
+Add:
+- cinematic fade/clip entrance
+- slow scale from approximately 1.03 → 1
+- subtle depth layers
+- subtle foreground/background movement
+
+Keep motion elegant.
+
+No aggressive effects.
+
+==================================================
+3. FIX THE LARGE EMPTY BLACK AREA
+==================================================
+
+There is currently a large empty black area in the middle of the homepage, especially on mobile.
+
+This MUST be fixed.
+
+Do not leave empty black space.
+
+Do not simply reduce the height and hide the problem.
+
+Replace the empty region with a new premium editorial section:
+
+THE COLLECTION THROUGH WINDOWS
+
+This section should feel like walking through a private MiLAEDiA gallery.
+
+==================================================
+4. THE COLLECTION THROUGH WINDOWS
+==================================================
+
+Create 5–7 large architectural exhibition windows.
+
+These are NOT normal ecommerce cards.
+
+Each should feel like:
+
+museum display
++
+architectural window
++
+luxury gallery frame
+
+Use:
+
+- thin 1px gold/bronze border
+- dark architectural frame
+- approximately 10px radius
+- subtle perspective
+- image depth
+- cinematic reveal
+- subtle parallax
+- no heavy box shadows
+
+Desktop:
+asymmetric editorial composition.
+
+Mobile:
+vertical cinematic sequence.
+
+Each window on mobile should occupy approximately:
+
+75–90vh
+
+depending on the content.
+
+Images/videos should fill the window.
+
+Text should remain readable and elegant.
+
+==================================================
+5. WINDOW 01 — ANCIENT PERSIA
+==================================================
+
+Title:
+
+ANCIENT PERSIA
+
+Subtitle:
+
+THE ART OF HANDWEAVING
+
+Visual direction:
+
+- traditional Persian loom
+- hand weaving
+- threads
+- Persian ornaments
+- historical craftsmanship
+- textile details
+
+Animation:
+
+- slow clip reveal
+- subtle image movement
+- small parallax
+- slow zoom
+
+If a suitable supplied asset does not exist, DO NOT invent a low-quality replacement.
+
+Create a clearly identified asset slot for a future high-resolution image.
+
+==================================================
+6. WINDOW 02 — HANDWOVEN
+==================================================
+
+Title:
+
+HANDWOVEN
+
+Subtitle:
+
+CRAFTED THREAD BY THREAD
+
+Show:
+
+- premium Persian handwoven rug
+- fibers
+- knots
+- pile
+- textile texture
+
+Use macro-style presentation.
+
+Animation:
+
+very slow zoom toward the textile.
+
+==================================================
+7. WINDOW 03 — IRAN
+==================================================
+
+Title:
+
+IRAN
+
+Subtitle:
+
+WHERE THE THREAD BECOMES MEMORY
+
+Do NOT make this look like a tourism website.
+
+Use sophisticated Persian heritage imagery:
+
+- Persian architecture
+- ancient ornament
+- historical patterns
+- craftsmanship
+- architectural details
+
+No giant flag.
+
+No generic travel imagery.
+
+==================================================
+8. WINDOW 04 — BERLIN
+==================================================
+
+Title:
+
+BERLIN
+
+Subtitle:
+
+A CONTEMPORARY HOME FOR HERITAGE
+
+Connect visually with the existing Hero.
+
+Use:
+
+- Berlin skyline
+- evening architecture
+- warm interior
+- contemporary gallery atmosphere
+
+The transition from Hero → Berlin window should feel intentional.
+
+==================================================
+9. WINDOW 05 — HUNGARY
+==================================================
+
+Title:
+
+HUNGARY
+
+Subtitle:
+
+A EUROPEAN CULTURAL BRIDGE
+
+Represent Hungary through sophisticated visual storytelling.
+
+Use:
+
+- historic architecture
+- Central European interior atmosphere
+- warm evening light
+- cultural details
+
+Do NOT use excessive flags.
+
+==================================================
+10. WINDOW 06 — THE RUG
+==================================================
+
+Title:
+
+OBJECTS WITH A PAST.
+
+Use the strongest available luxury Persian rug asset.
+
+Presentation:
+
+museum object
++
+architectural frame
++
+slow cinematic camera movement
+
+==================================================
+11. WINDOW 07 — THE WEAVE
+==================================================
+
+Title:
+
+THE WEAVE
+
+CTA:
+
+EXAMINE THE WEAVE →
+
+This must link to:
+
+/weave
+
+Use an extreme close-up textile visual.
+
+==================================================
+12. WINDOW 3D INTERACTION
+==================================================
+
+Desktop:
+
+On mouse movement, each window may have extremely subtle perspective.
+
+Maximum:
+
+2–4 degrees rotation.
+
+Use:
+
+perspective
+transform3d
+translate3d
+
+The frame and image should move at slightly different depths.
+
+The effect should feel architectural.
+
+NOT gaming.
+
+Mobile:
+
+No hover dependency.
+
+Use scroll-based parallax.
+
+Reduce movement for mobile.
+
+Respect:
+
+prefers-reduced-motion
+
+==================================================
+13. VIDEO WINDOWS
+==================================================
+
+At least two visual windows should support video if suitable video assets already exist.
+
+Use existing supplied video assets.
+
+Video behavior:
+
+autoplay
+muted
+playsInline
+loop
+lazy-load
+poster fallback
+reduced-motion fallback
+
+Do not force video on every device.
+
+Do not make the page heavy.
+
+==================================================
+14. IMAGE QUALITY
+==================================================
+
+Inspect the actual supplied assets before assigning them.
+
+IMPORTANT:
+
+Do not trust filenames blindly.
+
+Some supplied files have misleading names.
+
+Use actual visual content.
+
+Do not upscale tiny images excessively.
+
+Use:
+
+- responsive images
+- srcset
+- appropriate sizes
+- WebP/AVIF where practical
+- lazy loading
+- correct aspect ratio
+
+Hero-critical media may be preloaded.
+
+Below-fold gallery media should be lazy loaded.
+
+Do NOT use blurry CSS background images when an actual img/video element is more appropriate.
+
+Do NOT use random low-quality stock imagery.
+
+==================================================
+15. COLLECTION SECTION — MOBILE CAROUSEL
+==================================================
+
+The rug collection must work beautifully on mobile.
+
+Mobile:
+
+- one main rug
+- partial next rug visible
+- swipe
+- snap
+- pagination
+- previous/next controls
+- smooth transitions
+
+Desktop:
+
+- asymmetric editorial layout
+- subtle 3D hover
+- premium transition
+
+==================================================
+16. 3D RUG SWITCH
+==================================================
+
+When the user changes rugs:
+
+CURRENT RUG
+↓
+subtle 3D rotation
+↓
+depth transition
+↓
+NEW RUG
+↓
+metadata update
+
+Use:
+
+CSS perspective
+transform3d
+Framer Motion if already installed
+
+ONLY THE RUG should rotate.
+
+Never rotate the entire page.
+
+No aggressive spinning.
+
+==================================================
+17. WEAVE VIEWER
+==================================================
+
+Preserve/create:
+
+/weave
+
+It must provide a premium textile inspection experience.
+
+Features:
+
+- high-resolution textile image
+- pinch zoom on mobile
+- mouse wheel zoom on desktop
+- drag/pan
+- reset
+- fullscreen
+- smooth zoom
+- optional magnifier
+
+Labels:
+
+WARP
+WEFT
+KNOT
+PILE
+
+Visual feeling:
+
+luxury textile laboratory
++
+museum archive
++
+fine-art presentation
+
+==================================================
+18. HERITAGE STORYTELLING
+==================================================
+
+Create a storytelling sequence:
+
+ANCIENT PERSIA
+↓
+LOOM
+↓
+WARP
+↓
+WEFT
+↓
+KNOT
+↓
+NATURAL DYES
+↓
+PATTERN
+↓
+MASTERPIECE
+
+Use scroll-triggered transitions.
+
+Each stage should reveal gradually.
+
+Use:
+
+- typography reveal
+- gold line drawing
+- subtle image movement
+- opacity
+- clip-path
+- parallax
+
+Avoid generic fade-everything.
+
+==================================================
+19. VISUAL NARRATIVE
+==================================================
+
+The website should communicate:
+
+IRAN
+↓
+CRAFT
+
+BERLIN
+↓
+GALLERY
+
+HUNGARY
+↓
+EUROPEAN CULTURAL BRIDGE
+
+No oversized flags.
+
+Use architectural and cultural visual language.
+
+==================================================
+20. MOBILE RESPONSIVENESS — CRITICAL
+==================================================
+
+Test mentally and through responsive CSS at:
+
+375px
+390px
+414px
+
+Also test:
+
+768px
+1024px
+1440px
+1920px
+ultrawide
+
+There must be ZERO:
+
+- horizontal scrolling
+- huge empty black areas
+- cropped text
+- fixed-width desktop layouts
+- broken video
+- overflowing images
+- oversized cards
+- controls outside viewport
+
+Use:
+
+width: 100%
+max-width
+min-width: 0
+overflow-x: clip/hidden where appropriate
+
+BUT do not use overflow hidden as a lazy fix for broken layouts.
+
+Actually fix the layout.
+
+Mobile should be intentionally designed.
+
+==================================================
+21. MOBILE WINDOW LAYOUT
+==================================================
+
+Desktop:
+
+asymmetric gallery composition.
+
+Mobile:
+
+vertical cinematic sequence.
+
+Each window:
+
+- 75–90vh
+- full viewport width
+- controlled margins
+- image/video fills frame
+- elegant lower caption
+- no horizontal overflow
+
+Do NOT simply shrink the desktop grid.
+
+Recompose it for mobile.
+
+==================================================
+22. ANIMATION DIRECTION
+==================================================
+
+Animations must feel:
+
+slow
+cinematic
+expensive
+architectural
+editorial
+
+Use:
+
+- Framer Motion if available
+- CSS perspective
+- transform3d
+- parallax
+- clip-path reveal
+- scale
+- opacity
+- scroll-triggered animation
+
+Avoid:
+
+- bounce
+- excessive spinning
+- particles
+- aggressive glow
+- cheap transitions
+- excessive blur
+- gaming effects
+- scroll-jacking
+
+==================================================
+23. PERFORMANCE
+==================================================
+
+Do not destroy performance while adding visual effects.
+
+Rules:
+
+- lazy-load below-fold images
+- lazy-load non-critical videos
+- preload only Hero-critical media
+- avoid unnecessary WebGL
+- avoid Three.js unless absolutely necessary
+- reduce animation complexity on mobile
+- support prefers-reduced-motion
+- code split heavy pages where practical
+
+==================================================
+24. ADMIN DASHBOARD
+==================================================
+
+DO NOT expose Admin in the public navigation.
+
+Admin must remain separate.
+
+Required routes if they already exist:
+
+/admin/login
+/admin/dashboard
+/admin/products
+/admin/orders
+/admin/custom-orders
+/admin/categories
+/admin/pricing
+/admin/inventory
+/admin/customers
+/admin/messages
+/admin/content
+/admin/gallery
+
+Admin must allow management of:
+
+Products:
+- add
+- edit
+- delete
+- images
+- price
+- category
+- dimensions
+- materials
+- weaving type
+- stock
+- availability
+
+Orders:
+- new
+- pending
+- paid
+- processing
+- shipped
+- completed
+- cancelled
+
+Custom Orders:
+- customer
+- dimensions
+- colors
+- pattern
+- style
+- rug type
+- uploaded image
+- requirements
+- status
+
+IMPORTANT:
+
+Do not expose fake security claims.
+
+If backend/database/authentication is not currently implemented, do not pretend it is production secure.
+
+Keep the architecture ready for proper backend authentication and database integration.
+
+==================================================
+25. SEO / ACCESSIBILITY
+==================================================
+
+Preserve or improve:
+
+- semantic HTML
+- proper headings
+- alt text
+- keyboard navigation
+- focus states
+- accessible forms
+- reduced motion
+- touch-friendly controls
+- readable contrast
+
+Use structured data only for real product information.
+
+==================================================
+26. IMPORTANT ASSET RULE
+==================================================
+
+The supplied ZIP assets and Gemini MP4 are the visual source of truth.
+
+Inspect the actual files.
+
+Do not infer image content from filenames.
+
+Do not remove supplied assets.
+
+Do not replace the Gemini MP4.
+
+If an asset is too small or unsuitable for a requested scene:
+
+Create a clearly marked asset placeholder such as:
+
+/assets/REPLACE_WITH_HIRES_ANCIENT_PERSIA.webp
+
+and continue using the best available supplied asset where possible.
+
+Never fill the gap with random low-quality imagery.
+
+==================================================
+27. DO NOT BREAK EXISTING WORK
+==================================================
+
+Before editing:
+
+inspect current implementation.
+
+After editing:
+
+preserve all existing routes and functionality.
+
+Do not delete working components unless absolutely necessary.
+
+Do not change the existing approved Hero composition.
+
+Do not rewrite the whole application.
+
+This is a refinement pass.
+
+==================================================
+28. FINAL QA
+==================================================
+
+After implementation, verify:
+
+1. Hero still matches the approved design.
+2. Supplied Gemini MP4 is actually used.
+3. Video works on desktop.
+4. Video behaves correctly on mobile.
+5. Poster fallback exists.
+6. No large black empty section remains.
+7. Heritage gallery exists.
+8. 5–7 exhibition windows exist.
+9. Iran visual exists.
+10. Berlin visual exists.
+11. Hungary visual exists.
+12. Ancient Persian weaving story exists.
+13. Handwoven rug story exists.
+14. Weave viewer works.
+15. Rug carousel works on mobile.
+16. Rug switching has subtle 3D transition.
+17. No horizontal overflow exists.
+18. 375px layout works.
+19. 390px layout works.
+20. 414px layout works.
+21. Desktop layout works.
+22. Animations are smooth and premium.
+23. Reduced-motion is respected.
+24. Images are not unnecessarily blurry.
+25. Admin is not visible in public navigation.
+26. Existing functionality remains intact.
+
+IMPORTANT:
+
+Do not stop after changing only the homepage.
+
+Implement the requested refinement across the existing experience.
+
+At the end, provide a concise report containing:
+
+- files/components modified
+- Hero/video changes
+- mobile fixes
+- new gallery/windows
+- animation/3D changes
+- weave viewer changes
+- collection carousel changes
+- admin changes
+- any limitations caused by missing high-resolution assets
+- any remaining errors
+
+Do not rebuild from scratch.
+Do not remove existing functionality.
+Do not replace the supplied Gemini video.
+
+Start by inspecting the current project, then implement the refinement.
