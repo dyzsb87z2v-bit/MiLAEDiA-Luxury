@@ -64,7 +64,7 @@ function Footer() {
     <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:px-10">
       <div><div className="font-display text-3xl tracking-[.14em] text-[#e7ca9c]">MiLAEDiA</div><p className="mt-4 max-w-xs text-sm leading-7 text-[#c9c7c3]/60">Persian heritage.<br />European vision. Worldwide.</p><div className="mt-8 flex gap-4 text-[#b99763]"><Instagram size={16} strokeWidth={1.3} /><Mail size={16} strokeWidth={1.3} /></div></div>
       <div><div className="font-meta text-[10px] uppercase tracking-[.18em] text-[#8d5e37]">Explore</div><div className="mt-5 flex flex-col gap-3 text-sm text-[#c9c7c3]/70"><Link href="/collections" data-testid="link-footer-collections">Collections</Link><Link href="/gallery" data-testid="link-footer-gallery">Gallery</Link><Link href="/workshop" data-testid="link-footer-workshop">The Workshop</Link><Link href="/custom-order" data-testid="link-footer-custom">Custom order</Link></div></div>
-      <div><div className="font-meta text-[10px] uppercase tracking-[.18em] text-[#8d5e37]">Visit</div><div className="mt-5 text-sm leading-7 text-[#c9c7c3]/70">Linienstraße 154<br />10115 Berlin, Germany<br /><span className="text-[#b99763]">By appointment</span></div></div>
+      <div><div className="font-meta text-[10px] uppercase tracking-[.18em] text-[#8d5e37]">Online only</div><div className="mt-5 text-sm leading-7 text-[#c9c7c3]/70">Berlin · Tehran · Budapest<br />Private sourcing worldwide<br /><span className="text-[#b99763]">By message or email</span></div></div>
       <div><div className="font-meta text-[10px] uppercase tracking-[.18em] text-[#8d5e37]">Notes</div><div className="mt-5 flex flex-col gap-3 text-sm text-[#c9c7c3]/70"><Link href="/privacy" data-testid="link-footer-privacy">Privacy</Link><Link href="/terms" data-testid="link-footer-terms">Terms</Link><Link href="/shipping-returns" data-testid="link-footer-shipping">Shipping & returns</Link></div></div>
     </div>
     <div className="border-t border-[#b99763]/15 px-5 py-5 md:px-10"><div className="mx-auto flex max-w-[1440px] justify-between font-meta text-[9px] uppercase tracking-[.16em] text-[#c9c7c3]/35"><span>© 2024 MiLAEDiA</span><span>Berlin · Tehran · Budapest</span></div></div>
@@ -98,18 +98,7 @@ function ProductCard({ product, onAdd }: { product: Product; onAdd: (id: string)
 function HomePage({ onAdd }: { onAdd: (id: string) => void }) {
   return <>
     <section className="relative flex min-h-[740px] items-end overflow-hidden border-b border-[#b99763]/25 pt-24 md:min-h-[850px]">
-      <video
-        className="hero-drift absolute inset-0 h-full w-full object-cover object-center"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/assets/hero-poster.jpg"
-        aria-label="MiLAEDiA Berlin salon at dusk"
-      >
-        <source src="/assets/hero-presentation.mp4" type="video/mp4" />
-      </video>
+      <img src="/assets/hero-reference.jpg" alt="MiLAEDiA Berlin salon at dusk with a Persian rug and weaver" className="hero-drift absolute inset-0 h-full w-full object-cover object-[18%_center] sm:object-[24%_center] md:object-center" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#060506]/90 via-[#060506]/25 to-[#060506]/10" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#060506] via-transparent to-[#060506]/35" />
       <div className="relative z-[2] mx-auto w-full max-w-[1440px] px-5 pb-16 md:px-10 md:pb-24">

@@ -1,6 +1,6 @@
-# [Project name]
+# MiLAEDiA Luxury Rug House
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+An editorial online gallery and demo commerce experience for Persian rugs and tapestries, combining Persian heritage with a European point of view.
 
 ## Run & Operate
 
@@ -22,23 +22,38 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/milaedia/src/App.tsx` — public routes, local cart, custom-order flow, checkout demo, and admin demo routes.
+- `artifacts/milaedia/src/data/catalog.ts` — local product, collection, and gallery content.
+- `artifacts/milaedia/src/index.css` — MiLAEDiA palette, typography, motion, and shared visual tokens.
+- `artifacts/milaedia/public/assets/` — verified supplied imagery plus hero reference crop and optional hero film.
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The first release is a frontend-first presentation build with local typed data and localStorage for cart/custom-order draft state; live commerce and admin services are intentionally not claimed.
+- The public shell and admin shell are separate; admin routes are not included in public navigation.
+- The supplied composite reference crop is the primary hero fallback because the generated film contains malformed embedded lettering; the film remains available as optional media for a later cinematic intro.
+- Hero depth uses restrained CSS motion and imagery rather than WebGL, prioritizing mobile performance and reduced-motion support.
+- The brand is online-only; public copy must not imply a showroom, physical visit, or appointment address.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Browse editorial collections and products.
+- View product details and availability states.
+- Add, remove, and adjust items in a local cart.
+- Complete a clearly labeled demo checkout flow.
+- Submit a custom rug inquiry with reference-image selection.
+- Explore the workshop, gallery lightbox, about, contact, legal, and search routes.
+- Open a local demo admin login/dashboard without exposing it in public navigation.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Preserve the supplied MiLAEDiA visual identity and use actual supplied assets instead of generic stock imagery.
+- Keep the experience premium, dark, restrained, cinematic, and mobile-friendly.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Do not trust filenames in the supplied asset archive; several PNGs are crops from a composite reference and one is a project-brief screenshot.
+- The hero media is reference material, not a source of commercial claims; real payment, inventory, contact delivery, and authentication still need service integration.
 
 ## Pointers
 
